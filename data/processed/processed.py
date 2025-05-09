@@ -1,6 +1,0 @@
-# utils.py
-
-"""
-Módulo XXXXXXXX
-"""
-

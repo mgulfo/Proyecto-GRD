@@ -10139,3 +10139,82 @@ time
 2025-05-08 15:20:32 [INFO] GenRodApp: Series para AutoReg guardadas: 6020 anómalas, 6020 normales
 2025-05-08 15:20:38 [INFO] GenRodApp: ===== DETECCIÓN COMPLETADA =====
 2025-05-08 15:20:38 [INFO] GenRodApp: ==== FIN DEL PROCESO ====
+2025-05-09 12:23:59 [INFO] GenRodApp: ==== INICIO DEL PROCESO ====
+2025-05-09 12:24:00 [INFO] GenRodApp: Consultando InfluxDB 1.8 ...
+2025-05-09 12:24:00 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: voltage
+2025-05-09 12:24:04 [INFO] GenRodApp: Consulta voltage completada con 260175 registros
+2025-05-09 12:24:04 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: power
+2025-05-09 12:24:07 [INFO] GenRodApp: Consulta power completada con 260175 registros
+2025-05-09 12:24:07 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: energy
+2025-05-09 12:24:09 [INFO] GenRodApp: Consulta energy completada con 260175 registros
+2025-05-09 12:24:09 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: frequency
+2025-05-09 12:24:11 [INFO] GenRodApp: Consulta frequency completada con 260175 registros
+2025-05-09 12:24:11 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: current
+2025-05-09 12:24:14 [INFO] GenRodApp: Consulta current completada con 260175 registros
+2025-05-09 12:24:14 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (260175, 22)
+2025-05-09 12:24:14 [INFO] GenRodApp: Datos InfluxDB 1: (260175, 22)
+2025-05-09 12:24:14 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-05-09 12:24:14 [INFO] GenRodApp: Ejecutando consulta InfluxDB 2.0: voltage
+2025-05-09 12:24:15 [INFO] GenRodApp: Consulta voltage completada con 17279 registros
+2025-05-09 12:24:15 [INFO] GenRodApp: Ejecutando consulta InfluxDB 2.0: power
+2025-05-09 12:24:17 [INFO] GenRodApp: Consulta power completada con 17279 registros
+2025-05-09 12:24:17 [INFO] GenRodApp: Ejecutando consulta InfluxDB 2.0: energy
+2025-05-09 12:24:18 [INFO] GenRodApp: Consulta energy completada con 17279 registros
+2025-05-09 12:24:18 [INFO] GenRodApp: Ejecutando consulta InfluxDB 2.0: frequency
+2025-05-09 12:24:19 [INFO] GenRodApp: Consulta frequency completada con 17279 registros
+2025-05-09 12:24:19 [INFO] GenRodApp: Ejecutando consulta InfluxDB 2.0: current
+2025-05-09 12:24:21 [INFO] GenRodApp: Consulta current completada con 17279 registros
+2025-05-09 12:24:21 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (17279, 22)
+2025-05-09 12:24:21 [INFO] GenRodApp: Datos InfluxDB 2: (17279, 22)
+2025-05-09 12:24:21 [INFO] GenRodApp: 🕐 Fecha mínima: 2023-02-28 21:00:03 | Fecha máxima: 2023-03-31 00:00:23
+2025-05-09 12:24:21 [INFO] GenRodApp: 📥 InfluxDB 1 - Preview:
+2025-05-09 12:24:21 [INFO] GenRodApp: 📥 InfluxDB 2 - Preview:
+2025-05-09 12:24:21 [INFO] GenRodApp: Limpieza básica ...
+2025-05-09 12:24:21 [INFO] GenRodApp: Eliminadas 0 filas duplicadas por 'time'
+2025-05-09 12:24:21 [INFO] GenRodApp: Se eliminaron 0 filas con valores nulos
+2025-05-09 12:24:21 [INFO] GenRodApp: Eliminadas 0 filas duplicadas por 'time'
+2025-05-09 12:24:21 [INFO] GenRodApp: Se eliminaron 0 filas con valores nulos
+2025-05-09 12:24:24 [INFO] GenRodApp: Datos limpios InfluxDB 1 guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_clean_v1.csv
+2025-05-09 12:24:24 [INFO] GenRodApp: Datos limpios InfluxDB 2 guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_clean_v2.csv
+2025-05-09 12:24:24 [INFO] GenRodApp: Se normalizaron las columnas: ['Vrms_L1_Ins', 'Vrms_L2_Ins', 'Vrms_L3_Ins', 'THDV_L1_Ins', 'THDV_L2_Ins', 'THDV_L3_Ins', 'PowA_L1_Ins', 'PowA_L2_Ins', 'PowA_L3_Ins', 'PowS_L1_Ins', 'PowS_L2_Ins', 'PowS_L3_Ins', 'PowF_T_Ins', 'EA_I_IV_T', 'Fre_Ins', 'Irms_L1_Ins', 'Irms_L2_Ins', 'Irms_L3_Ins', 'THDI_L1_Ins', 'THDI_L2_Ins', 'THDI_L3_Ins']
+2025-05-09 12:24:29 [INFO] GenRodApp: Datos normalizados InfluxDB 1 guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_norm_v1.csv
+2025-05-09 12:24:29 [INFO] GenRodApp: ===== INICIANDO DETECCIÓN DE ANOMALÍAS =====
+2025-05-09 12:24:29 [INFO] GenRodApp: Filtrando columnas clave para análisis...
+2025-05-09 12:24:29 [INFO] GenRodApp: Creando serie temporal para ADTK...
+2025-05-09 12:24:29 [INFO] GenRodApp: Preview de serie creada para ADTK:
+                     PowA_L1_Ins  PowF_T_Ins  THDI_L1_Ins
+time                                                     
+2023-02-28 21:00:03     0.650767    0.944724     0.049818
+2023-02-28 21:00:14     0.696763    0.944724     0.058051
+2023-02-28 21:00:24     0.558773    0.939698     0.055024
+2023-02-28 21:00:33     0.553663    0.934673     0.059867
+2023-02-28 21:00:43     0.574106    0.939698     0.058172
+2025-05-09 12:24:29 [INFO] GenRodApp: Preview de serie creada para ADTK:
+                     PowA_L1_Ins  PowF_T_Ins  THDI_L1_Ins
+time                                                     
+2023-02-28 21:00:03     0.650767    0.944724     0.049818
+2023-02-28 21:00:14     0.696763    0.944724     0.058051
+2023-02-28 21:00:24     0.558773    0.939698     0.055024
+2023-02-28 21:00:33     0.553663    0.934673     0.059867
+2023-02-28 21:00:43     0.574106    0.939698     0.058172
+2025-05-09 12:24:29 [INFO] GenRodApp: Corriendo métodos de detección de anomalías (ADTK)...
+2025-05-09 12:24:29 [INFO] GenRodApp: Aplicando LevelShiftAD...
+2025-05-09 12:24:30 [INFO] GenRodApp: Aplicando VolatilityShiftAD...
+2025-05-09 12:24:31 [INFO] GenRodApp: Aplicando AutoregressionAD...
+2025-05-09 12:24:33 [INFO] GenRodApp: Guardando resultados de los 2 modelos de detección...
+2025-05-09 12:24:34 [INFO] GenRodApp: LevelShiftAD detectó 487 anomalías
+2025-05-09 12:24:34 [INFO] GenRodApp: AutoregressionAD detectó 308 anomalías en PowA_L1_Ins
+2025-05-09 12:24:34 [INFO] GenRodApp: AutoregressionAD detectó 327 anomalías en PowF_T_Ins
+2025-05-09 12:24:34 [INFO] GenRodApp: AutoregressionAD detectó 232 anomalías en THDI_L1_Ins
+2025-05-09 12:24:34 [INFO] GenRodApp: AutoregressionAD detectó 328 anomalías
+2025-05-09 12:24:34 [INFO] GenRodApp: AutoregressionAD detectó 39 anomalías en PowA_L1_Ins
+2025-05-09 12:24:34 [INFO] GenRodApp: AutoregressionAD detectó 276 anomalías en PowF_T_Ins
+2025-05-09 12:24:34 [INFO] GenRodApp: AutoregressionAD detectó 163 anomalías en THDI_L1_Ins
+2025-05-09 12:24:34 [INFO] GenRodApp: Generando series para LevelShift...
+2025-05-09 12:24:34 [INFO] GenRodApp: LevelShift: 12 eventos únicos seleccionados
+2025-05-09 12:24:34 [INFO] GenRodApp: Series para LevelShift guardadas: 3612 anómalas, 3612 normales
+2025-05-09 12:24:34 [INFO] GenRodApp: Generando series para AutoReg...
+2025-05-09 12:24:35 [INFO] GenRodApp: AutoReg: 20 eventos únicos seleccionados
+2025-05-09 12:24:35 [INFO] GenRodApp: Series para AutoReg guardadas: 6020 anómalas, 6020 normales
+2025-05-09 12:24:45 [INFO] GenRodApp: ===== DETECCIÓN COMPLETADA =====
+2025-05-09 12:24:45 [INFO] GenRodApp: ==== FIN DEL PROCESO ====
