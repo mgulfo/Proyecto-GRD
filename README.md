@@ -7,7 +7,7 @@ Este proyecto analiza series temporales provenientes de medidores industriales, 
 ## 📁 Estructura del Proyecto
 
 ```
-Deteccion-de-Perturbaciones-GRD/
+Proyecto-GRD/
 ├── data/
 │   ├── raw/             # Datos crudos y limpios
 │   └── images/          # Visualizaciones guardadas
