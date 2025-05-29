@@ -11,15 +11,24 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Configuraciones generales del proyecto
 EXECUTE_VISUALIZATION = True
-SHOW_GRAPHS = False
+SHOW_GRAPHS = True
 SAVE_OUTPUTS = True
 
 # Directorios de salida
 OUTPUT_DIR = os.path.join("data", "raw")
 IMAGES_DIR = os.path.join("data", "images")
 
-#Definición de Rango para generate_ts_anomalies()
+# Definición de Rango para generate_ts_anomalies()
 RANGE = 300
+
+# Definición de Rango de entradas de datos para empezar a calcular el MAE
+MAX_ST = 10
+
+# Ejecución análisis de anomaliás (False: X)
+EJECUTAR_ANALISIS_ANOMALIAS = False
+
+ # Poner en False si no querés ver el gráfico
+VISUALIZAR_MAE = False  
 
 # Configuración para InfluxDB 1.8
 INFLUXDB1_CONFIG = {
@@ -46,4 +55,7 @@ INFLUXDB2_CONFIG = {
 
 # Otros parámetros globales
 LOCAL_TIMEZONE = 'America/Argentina/Buenos_Aires'
+
+# Activar uso de InfluxDB 2 como base primaria
+USE_INFLUXDB_2 = True
 

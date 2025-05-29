@@ -8,19 +8,19 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..','src')))
 
 import pandas as pd
-from data_processing.data_cleaning import preprocess_data, normalize_all_numeric
+from data_processing.data_cleaning import preprocess_data, preprocess_data2, normalize_all_numeric
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 # 🔹 Carga de datos crudos
-raw_path = os.path.join("data", "raw", "df_v1_raw.csv")
+raw_path = os.path.join("data", "raw", "df_raw.csv")
 df_raw = pd.read_csv(raw_path, parse_dates=['time'])
 print("Datos crudos cargados:")
 print(df_raw.head())
 print(df_raw.tail())
 
 # 🔹 Eliminación de valores nulos y columnas duplicadas
-df_clean = preprocess_data(df_raw)
+df_clean = preprocess_data2(df_raw)
 print("\nDatos después de limpieza:")
 print(df_clean.head())
 
