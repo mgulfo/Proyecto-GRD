@@ -7,7 +7,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
-from query_engine import busqueda_influx1, merge_data
+from query_engine import busqueda_influx, merge_data
 from data_processing.data_cleaning import preprocess_data
 from visualization import plot_time_series
 import matplotlib.pyplot as plt
@@ -18,7 +18,7 @@ fecha_fin = '2023-08-02T00:00:00Z'
 location = 'MEDIA'
 
 # Consulta de datos desde InfluxDB 1.8
-data = busqueda_influx1(fecha_inicio, fecha_fin, location)
+data = busqueda_influx(fecha_inicio, fecha_fin, location)
 df = merge_data(data)
 
 # Previsualización de los datos crudos

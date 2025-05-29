@@ -12,7 +12,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
-from query_engine import busqueda_influx1, merge_data
+from query_engine import busqueda_influx, merge_data
 import pandas as pd
 
 # Parámetros de prueba (ajustar si es necesario)
@@ -21,7 +21,7 @@ fecha_fin = '2023-08-02T00:00:00Z'
 location = 'MEDIA'
 
 def test_merge_data_includes_time():
-    data = busqueda_influx1(fecha_inicio, fecha_fin, location)
+    data = busqueda_influx(fecha_inicio, fecha_fin, location) #ACAAAAAAAA
     df = merge_data(data)
     assert not df.empty, "La consulta no debe devolver un DataFrame vacío"
     assert 'time' in df.columns, "El DataFrame combinado debe contener la columna 'time'"
