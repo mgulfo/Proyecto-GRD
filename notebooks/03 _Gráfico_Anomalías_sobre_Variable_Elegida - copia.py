@@ -11,7 +11,7 @@ from models.anomaly_detection import filtrar_eventos_unicos
 warnings.simplefilter(action='ignore', category=pd.errors.DtypeWarning)
 
 # Cargar datos normales y resultados de anomalía
-df = pd.read_csv("data/raw/df_norm_v1.csv", low_memory=False)
+df = pd.read_csv("data/raw/df_norm.csv", low_memory=False)
 df['time'] = pd.to_datetime(df['time'])
 print(df.dtypes)
 print(df['PowA_L1_Ins'].unique()[:10])
@@ -23,14 +23,14 @@ anom = pd.read_csv("data/raw/anomalias_AutoReg.csv")
 anom.index = pd.to_datetime(anom['time'])
 
 # Seleccionar variable a analizar
-variable = "PowF_T_Ins"
+variable = "THDI_L1_Ins"
 
 # Asegurar que los índices estén alineados
 df.set_index('time', inplace=True)
 anom = anom.reindex(df.index, fill_value=False)
 
 # === NUEVO: aplicar filtrado de eventos únicos
-anom_filtradas = filtrar_eventos_unicos(anom[[variable]], min_sep=300, sample_rate_sec=5)
+anom_filtradas = filtrar_eventos_unicos(anom[[variable]], min_sep=300, sample_rate_sec=10)
 
 # Crear máscara de puntos anómalos
 mask_filtradas = df.index.isin(anom_filtradas.index)
