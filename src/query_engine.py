@@ -5,6 +5,7 @@ import os
 from db_connector import DBConnector
 from config import INFLUXDB2_CONFIG
 from data_processing.data_cleaning import clean_influx2_meta
+from datetime import datetime
 from utils.logger import logger
 import pandas as pd
 from functools import reduce
@@ -94,19 +95,58 @@ def busqueda_influx2(fecha_inicio, fecha_fin, location):
     return results
 
 def busqueda_influx(fecha_inicio, fecha_fin, location):
+    data = {}
+    fallback_data = {}
+
     if USE_INFLUXDB_2:
         try:
-            logger.info("🔍 Intentando consulta en InfluxDB Nuevo como fuente primaria...")
+            logger.info("🔍 Intentando consulta en InfluxDB 2.7 como fuente primaria...")
             data = busqueda_influx2(fecha_inicio, fecha_fin, location)
-            if all(df.empty for df in data.values()):
-                raise ValueError("Consulta vacía en InfluxDB Nuevo")
+
+            # Detectar si faltan datos importantes
+            from datetime import datetime
+
+            fecha_inicio_dt = pd.to_datetime(fecha_inicio)
+            fecha_fin_dt = pd.to_datetime(fecha_fin)
+
+            faltantes = []
+            for key in ["voltage", "power", "current", "frequency", "energy"]:
+                df = data.get(key, pd.DataFrame())
+                if df.empty:
+                    faltantes.append(key)
+                elif 'time' in df.columns:
+                    min_date = df['time'].min()
+                    if min_date > fecha_inicio_dt + pd.Timedelta(minutes=1):
+                        # Hay datos, pero no cubren la fecha de inicio
+                        faltantes.append(key)
+
+
+            if faltantes:
+                logger.warning(f"[Fallback parcial] Faltan datos en InfluxDB 2.7: {faltantes}")
+                logger.info("🔁 Complementando con InfluxDB 1.8...")
+                fallback_data = busqueda_influx1(fecha_inicio, fecha_fin, location)
+
+                # Fusionar por clave
+                for key in keys_importantes:
+                    df1 = data.get(key, pd.DataFrame())
+                    df2 = fallback_data.get(key, pd.DataFrame())
+
+                    if not df1.empty and not df2.empty:
+                        data[key] = pd.concat([df1, df2]).sort_values("time")
+                    elif df1.empty and not df2.empty:
+                        data[key] = df2
+                    # Si df1 ya tiene datos, no se toca
+
             return data
+
         except Exception as e:
-            logger.warning(f"[Fallback] Fallo en InfluxDB Nuevo : {e}")
-            logger.info("🔁 Reintentando con InfluxDB Viejo como respaldo...")
-    
-    logger.info("🔁 Ejecutando consulta directamente en InfluxDB Viejo...")
+            logger.warning(f"[Fallback total] Fallo InfluxDB 2.7: {e}")
+            logger.info("🔁 Reintentando con InfluxDB 1.8...")
+            return busqueda_influx1(fecha_inicio, fecha_fin, location)
+
+    logger.info("🔁 Ejecutando consulta directamente en InfluxDB 1.8...")
     return busqueda_influx1(fecha_inicio, fecha_fin, location)
+
 
 def merge_data(dict_data, silenciar_warning=False):
     def fix_time(df):
@@ -138,6 +178,16 @@ def consultar_datos_influx(fecha_inicio, fecha_fin, location, output_dir=None, g
         logger.info("Consultando InfluxDB ...")
         data = busqueda_influx(fecha_inicio, fecha_fin, location)
         df = merge_data(data)
+
+        # DEBUG: Verificar cuántas filas trajo cada fuente
+        for key, df_ind in data.items():
+            logger.info(f"📊 {key}: {len(df_ind)} filas")
+
+        # DEBUG: Fechas mínimas y máximas por fuente
+        for key, df_ind in data.items():
+            if not df_ind.empty and 'time' in df_ind.columns:
+                logger.info(f"📅 {key} - min: {df_ind['time'].min()} | max: {df_ind['time'].max()}")
+                
         logger.info(f"Datos InfluxDB: {df.shape}")
     except Exception as e:
         logger.error(f"Error en la consulta: {e}")
@@ -159,4 +209,3 @@ def consultar_datos_influx(fecha_inicio, fecha_fin, location, output_dir=None, g
         logger.info(f"Datos crudos InfluxDB guardados en {os.path.abspath(raw_path)}")
 
     return df
-

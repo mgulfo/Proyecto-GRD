@@ -317,7 +317,7 @@ def deteccion_anomalias_pipeline(df_norm, list_cols, output_dir, save_csv=True):
             logger.warning(f"[{nombre}] Error generando series: {e}")
 
     # Selección
-    SELECCION_DETECTOR = "AutoReg"
+    SELECCION_DETECTOR = "LevelShift"
     df_st_anom, df_st_norm, df_resumen_anomalias = series_generadas[SELECCION_DETECTOR]
 
     if save_csv:

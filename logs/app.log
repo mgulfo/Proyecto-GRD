@@ -1,0 +1,1580 @@
+2025-06-04 14:35:35 [INFO] GenRodApp: ==== INICIO DEL PROCESO ====
+2025-06-04 14:35:35 [INFO] GenRodApp: Consultando InfluxDB ...
+2025-06-04 14:35:35 [INFO] GenRodApp: 🔍 Intentando consulta en InfluxDB Nuevo como fuente primaria...
+2025-06-04 14:35:54 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (111930, 22)
+2025-06-04 14:35:54 [INFO] GenRodApp: Datos InfluxDB: (111930, 22)
+2025-06-04 14:35:54 [INFO] GenRodApp: 🕐 Fecha mínima: 2024-12-16 19:05:53 | Fecha máxima: 2024-12-31 23:58:53
+2025-06-04 14:35:54 [INFO] GenRodApp: 📥 InfluxDB - Preview:
+2025-06-04 14:35:56 [INFO] GenRodApp: Datos crudos InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_raw.csv
+2025-06-04 14:35:56 [INFO] GenRodApp: Limpieza básica ...
+2025-06-04 14:35:56 [INFO] GenRodApp: ===== INICIO DEL PREPROCESAMIENTO =====
+2025-06-04 14:35:56 [INFO] GenRodApp: Shape original: (111930, 22)
+2025-06-04 14:35:56 [INFO] GenRodApp: No se encontraron valores nulos.
+2025-06-04 14:35:56 [INFO] GenRodApp: Eliminadas 0 filas duplicadas por 'time'
+2025-06-04 14:35:56 [INFO] GenRodApp: Eliminadas 0 columnas duplicadas
+2025-06-04 14:35:56 [INFO] GenRodApp: Eliminadas 0 filas con valores nulos (0.00%)
+2025-06-04 14:35:56 [WARNING] GenRodApp: Outliers detectados en 'THDV_L1_Ins': 512 valores (z-score > 3)
+2025-06-04 14:35:56 [WARNING] GenRodApp: Outliers detectados en 'THDV_L2_Ins': 354 valores (z-score > 3)
+2025-06-04 14:35:56 [WARNING] GenRodApp: Outliers detectados en 'THDV_L3_Ins': 291 valores (z-score > 3)
+2025-06-04 14:35:56 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L1_Ins': 172 valores (z-score > 3)
+2025-06-04 14:35:56 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L2_Ins': 45 valores (z-score > 3)
+2025-06-04 14:35:56 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L3_Ins': 179 valores (z-score > 3)
+2025-06-04 14:35:56 [WARNING] GenRodApp: Outliers detectados en 'PowA_L1_Ins': 1 valores (z-score > 3)
+2025-06-04 14:35:56 [WARNING] GenRodApp: Outliers detectados en 'PowA_L2_Ins': 2 valores (z-score > 3)
+2025-06-04 14:35:56 [WARNING] GenRodApp: Outliers detectados en 'PowA_L3_Ins': 4 valores (z-score > 3)
+2025-06-04 14:35:56 [WARNING] GenRodApp: Outliers detectados en 'PowF_T_Ins': 588 valores (z-score > 3)
+2025-06-04 14:35:56 [WARNING] GenRodApp: Outliers detectados en 'PowS_L2_Ins': 2 valores (z-score > 3)
+2025-06-04 14:35:56 [WARNING] GenRodApp: Outliers detectados en 'Fre_Ins': 1104 valores (z-score > 3)
+2025-06-04 14:35:56 [WARNING] GenRodApp: Outliers detectados en 'Irms_L2_Ins': 2 valores (z-score > 3)
+2025-06-04 14:35:56 [WARNING] GenRodApp: Outliers detectados en 'THDI_L1_Ins': 1165 valores (z-score > 3)
+2025-06-04 14:35:56 [WARNING] GenRodApp: Outliers detectados en 'THDI_L2_Ins': 2628 valores (z-score > 3)
+2025-06-04 14:35:56 [WARNING] GenRodApp: Outliers detectados en 'THDI_L3_Ins': 181 valores (z-score > 3)
+2025-06-04 14:35:56 [INFO] GenRodApp: Shape final: (111930, 22)
+2025-06-04 14:35:56 [INFO] GenRodApp: Resumen columnas con outliers:
+2025-06-04 14:35:56 [INFO] GenRodApp:  - THDV_L1_Ins: 512 valores extremos detectados
+2025-06-04 14:35:56 [INFO] GenRodApp:  - THDV_L2_Ins: 354 valores extremos detectados
+2025-06-04 14:35:56 [INFO] GenRodApp:  - THDV_L3_Ins: 291 valores extremos detectados
+2025-06-04 14:35:56 [INFO] GenRodApp:  - Vrms_L1_Ins: 172 valores extremos detectados
+2025-06-04 14:35:56 [INFO] GenRodApp:  - Vrms_L2_Ins: 45 valores extremos detectados
+2025-06-04 14:35:56 [INFO] GenRodApp:  - Vrms_L3_Ins: 179 valores extremos detectados
+2025-06-04 14:35:56 [INFO] GenRodApp:  - PowA_L1_Ins: 1 valores extremos detectados
+2025-06-04 14:35:56 [INFO] GenRodApp:  - PowA_L2_Ins: 2 valores extremos detectados
+2025-06-04 14:35:56 [INFO] GenRodApp:  - PowA_L3_Ins: 4 valores extremos detectados
+2025-06-04 14:35:56 [INFO] GenRodApp:  - PowF_T_Ins: 588 valores extremos detectados
+2025-06-04 14:35:56 [INFO] GenRodApp:  - PowS_L2_Ins: 2 valores extremos detectados
+2025-06-04 14:35:56 [INFO] GenRodApp:  - Fre_Ins: 1104 valores extremos detectados
+2025-06-04 14:35:56 [INFO] GenRodApp:  - Irms_L2_Ins: 2 valores extremos detectados
+2025-06-04 14:35:56 [INFO] GenRodApp:  - THDI_L1_Ins: 1165 valores extremos detectados
+2025-06-04 14:35:56 [INFO] GenRodApp:  - THDI_L2_Ins: 2628 valores extremos detectados
+2025-06-04 14:35:56 [INFO] GenRodApp:  - THDI_L3_Ins: 181 valores extremos detectados
+2025-06-04 14:35:56 [INFO] GenRodApp: ===== FIN DEL PREPROCESAMIENTO =====
+2025-06-04 14:35:58 [INFO] GenRodApp: Datos limpios InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_clean.csv
+2025-06-04 14:35:58 [INFO] GenRodApp: Se normalizaron las columnas: ['THDV_L1_Ins', 'THDV_L2_Ins', 'THDV_L3_Ins', 'Vrms_L1_Ins', 'Vrms_L2_Ins', 'Vrms_L3_Ins', 'PowA_L1_Ins', 'PowA_L2_Ins', 'PowA_L3_Ins', 'PowF_T_Ins', 'PowS_L1_Ins', 'PowS_L2_Ins', 'PowS_L3_Ins', 'EA_I_IV_T', 'Fre_Ins', 'Irms_L1_Ins', 'Irms_L2_Ins', 'Irms_L3_Ins', 'THDI_L1_Ins', 'THDI_L2_Ins', 'THDI_L3_Ins']
+2025-06-04 14:36:00 [INFO] GenRodApp: Datos normalizados InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_norm.csv
+2025-06-04 14:36:00 [INFO] GenRodApp: ===== INICIANDO DETECCIÓN DE ANOMALÍAS =====
+2025-06-04 14:36:00 [INFO] GenRodApp: Preview de serie creada para ADTK:
+                     PowA_L1_Ins  PowF_T_Ins  THDI_L1_Ins
+time                                                     
+2024-12-16 19:05:53     0.471992    0.857956     0.069733
+2024-12-16 19:06:03     0.447114    0.848073     0.055921
+2024-12-16 19:06:14     0.522716    0.872749     0.043903
+2024-12-16 19:06:24     0.537084    0.869645     0.046609
+2024-12-16 19:06:34     0.569931    0.883982     0.047688
+2025-06-04 14:36:00 [INFO] GenRodApp: Corriendo métodos de detección de anomalías (ADTK)...
+2025-06-04 14:36:00 [INFO] GenRodApp: Aplicando LevelShiftAD...
+2025-06-04 14:36:01 [INFO] GenRodApp: Aplicando VolatilityShiftAD...
+2025-06-04 14:36:01 [INFO] GenRodApp: Aplicando AutoregressionAD...
+2025-06-04 14:36:02 [INFO] GenRodApp: Procesando detector: LevelShift...
+2025-06-04 14:36:02 [INFO] GenRodApp: [LevelShift] Series generadas: 6 anómalas, 1806 normales
+2025-06-04 14:36:02 [INFO] GenRodApp: Procesando detector: AutoReg...
+2025-06-04 14:36:02 [INFO] GenRodApp: [AutoReg] Series generadas: 72 anómalas, 21672 normales
+2025-06-04 14:36:03 [INFO] GenRodApp: ===== DETECCIÓN COMPLETADA =====
+2025-06-04 14:37:23 [INFO] GenRodApp: ==== INICIO DEL PROCESO ====
+2025-06-04 14:37:23 [INFO] GenRodApp: Consultando InfluxDB ...
+2025-06-04 14:37:23 [INFO] GenRodApp: 🔍 Intentando consulta en InfluxDB Nuevo como fuente primaria...
+2025-06-04 14:37:40 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (119044, 22)
+2025-06-04 14:37:40 [INFO] GenRodApp: Datos InfluxDB: (119044, 22)
+2025-06-04 14:37:40 [INFO] GenRodApp: 🕐 Fecha mínima: 2024-12-16 19:05:44 | Fecha máxima: 2024-12-31 23:58:53
+2025-06-04 14:37:40 [INFO] GenRodApp: 📥 InfluxDB - Preview:
+2025-06-04 14:37:42 [INFO] GenRodApp: Datos crudos InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_raw.csv
+2025-06-04 14:37:42 [INFO] GenRodApp: Limpieza básica ...
+2025-06-04 14:37:42 [INFO] GenRodApp: ===== INICIO DEL PREPROCESAMIENTO =====
+2025-06-04 14:37:42 [INFO] GenRodApp: Shape original: (119044, 22)
+2025-06-04 14:37:42 [INFO] GenRodApp: No se encontraron valores nulos.
+2025-06-04 14:37:42 [INFO] GenRodApp: Eliminadas 0 filas duplicadas por 'time'
+2025-06-04 14:37:42 [INFO] GenRodApp: Eliminadas 0 columnas duplicadas
+2025-06-04 14:37:42 [INFO] GenRodApp: Eliminadas 0 filas con valores nulos (0.00%)
+2025-06-04 14:37:42 [WARNING] GenRodApp: Outliers detectados en 'THDV_L1_Ins': 625 valores (z-score > 3)
+2025-06-04 14:37:42 [WARNING] GenRodApp: Outliers detectados en 'THDV_L2_Ins': 782 valores (z-score > 3)
+2025-06-04 14:37:42 [WARNING] GenRodApp: Outliers detectados en 'THDV_L3_Ins': 709 valores (z-score > 3)
+2025-06-04 14:37:42 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L1_Ins': 162 valores (z-score > 3)
+2025-06-04 14:37:42 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L2_Ins': 162 valores (z-score > 3)
+2025-06-04 14:37:42 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L3_Ins': 162 valores (z-score > 3)
+2025-06-04 14:37:42 [WARNING] GenRodApp: Outliers detectados en 'PowF_T_Ins': 721 valores (z-score > 3)
+2025-06-04 14:37:42 [WARNING] GenRodApp: Outliers detectados en 'Fre_Ins': 163 valores (z-score > 3)
+2025-06-04 14:37:42 [WARNING] GenRodApp: Outliers detectados en 'THDI_L1_Ins': 1305 valores (z-score > 3)
+2025-06-04 14:37:42 [WARNING] GenRodApp: Outliers detectados en 'THDI_L2_Ins': 1323 valores (z-score > 3)
+2025-06-04 14:37:42 [WARNING] GenRodApp: Outliers detectados en 'THDI_L3_Ins': 1271 valores (z-score > 3)
+2025-06-04 14:37:42 [INFO] GenRodApp: Shape final: (119044, 22)
+2025-06-04 14:37:42 [INFO] GenRodApp: Resumen columnas con outliers:
+2025-06-04 14:37:42 [INFO] GenRodApp:  - THDV_L1_Ins: 625 valores extremos detectados
+2025-06-04 14:37:42 [INFO] GenRodApp:  - THDV_L2_Ins: 782 valores extremos detectados
+2025-06-04 14:37:42 [INFO] GenRodApp:  - THDV_L3_Ins: 709 valores extremos detectados
+2025-06-04 14:37:42 [INFO] GenRodApp:  - Vrms_L1_Ins: 162 valores extremos detectados
+2025-06-04 14:37:42 [INFO] GenRodApp:  - Vrms_L2_Ins: 162 valores extremos detectados
+2025-06-04 14:37:42 [INFO] GenRodApp:  - Vrms_L3_Ins: 162 valores extremos detectados
+2025-06-04 14:37:42 [INFO] GenRodApp:  - PowF_T_Ins: 721 valores extremos detectados
+2025-06-04 14:37:42 [INFO] GenRodApp:  - Fre_Ins: 163 valores extremos detectados
+2025-06-04 14:37:42 [INFO] GenRodApp:  - THDI_L1_Ins: 1305 valores extremos detectados
+2025-06-04 14:37:42 [INFO] GenRodApp:  - THDI_L2_Ins: 1323 valores extremos detectados
+2025-06-04 14:37:42 [INFO] GenRodApp:  - THDI_L3_Ins: 1271 valores extremos detectados
+2025-06-04 14:37:42 [INFO] GenRodApp: ===== FIN DEL PREPROCESAMIENTO =====
+2025-06-04 14:37:43 [INFO] GenRodApp: Datos limpios InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_clean.csv
+2025-06-04 14:37:43 [INFO] GenRodApp: Se normalizaron las columnas: ['THDV_L1_Ins', 'THDV_L2_Ins', 'THDV_L3_Ins', 'Vrms_L1_Ins', 'Vrms_L2_Ins', 'Vrms_L3_Ins', 'PowA_L1_Ins', 'PowA_L2_Ins', 'PowA_L3_Ins', 'PowF_T_Ins', 'PowS_L1_Ins', 'PowS_L2_Ins', 'PowS_L3_Ins', 'EA_I_IV_T', 'Fre_Ins', 'Irms_L1_Ins', 'Irms_L2_Ins', 'Irms_L3_Ins', 'THDI_L1_Ins', 'THDI_L2_Ins', 'THDI_L3_Ins']
+2025-06-04 14:37:45 [INFO] GenRodApp: Datos normalizados InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_norm.csv
+2025-06-04 14:37:45 [INFO] GenRodApp: ===== INICIANDO DETECCIÓN DE ANOMALÍAS =====
+2025-06-04 14:37:45 [INFO] GenRodApp: Preview de serie creada para ADTK:
+                     PowA_L1_Ins  PowF_T_Ins  THDI_L1_Ins
+time                                                     
+2024-12-16 19:05:44     0.615217    0.873684     0.158541
+2024-12-16 19:05:53     0.580435    0.863158     0.168425
+2024-12-16 19:06:03     0.554348    0.863158     0.159343
+2024-12-16 19:06:14     0.589130    0.873684     0.149192
+2024-12-16 19:06:23     0.650000    0.852632     0.134633
+2025-06-04 14:37:45 [INFO] GenRodApp: Corriendo métodos de detección de anomalías (ADTK)...
+2025-06-04 14:37:45 [INFO] GenRodApp: Aplicando LevelShiftAD...
+2025-06-04 14:37:46 [INFO] GenRodApp: Aplicando VolatilityShiftAD...
+2025-06-04 14:37:46 [INFO] GenRodApp: Aplicando AutoregressionAD...
+2025-06-04 14:37:47 [INFO] GenRodApp: Procesando detector: LevelShift...
+2025-06-04 14:37:47 [INFO] GenRodApp: [LevelShift] Series generadas: 7 anómalas, 2107 normales
+2025-06-04 14:37:47 [INFO] GenRodApp: Procesando detector: AutoReg...
+2025-06-04 14:37:47 [INFO] GenRodApp: [AutoReg] Series generadas: 41 anómalas, 12341 normales
+2025-06-04 14:37:48 [INFO] GenRodApp: ===== DETECCIÓN COMPLETADA =====
+2025-06-04 14:38:30 [INFO] GenRodApp: ==== INICIO DEL PROCESO ====
+2025-06-04 14:38:30 [INFO] GenRodApp: Consultando InfluxDB ...
+2025-06-04 14:38:30 [INFO] GenRodApp: 🔍 Intentando consulta en InfluxDB Nuevo como fuente primaria...
+2025-06-04 14:39:07 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (250046, 22)
+2025-06-04 14:39:07 [INFO] GenRodApp: Datos InfluxDB: (250046, 22)
+2025-06-04 14:39:07 [INFO] GenRodApp: 🕐 Fecha mínima: 2025-01-01 00:00:04 | Fecha máxima: 2025-01-31 23:58:53
+2025-06-04 14:39:07 [INFO] GenRodApp: 📥 InfluxDB - Preview:
+2025-06-04 14:39:09 [INFO] GenRodApp: Datos crudos InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_raw.csv
+2025-06-04 14:39:09 [INFO] GenRodApp: Limpieza básica ...
+2025-06-04 14:39:09 [INFO] GenRodApp: ===== INICIO DEL PREPROCESAMIENTO =====
+2025-06-04 14:39:09 [INFO] GenRodApp: Shape original: (250046, 22)
+2025-06-04 14:39:09 [INFO] GenRodApp: No se encontraron valores nulos.
+2025-06-04 14:39:09 [INFO] GenRodApp: Eliminadas 0 filas duplicadas por 'time'
+2025-06-04 14:39:09 [INFO] GenRodApp: Eliminadas 0 columnas duplicadas
+2025-06-04 14:39:09 [INFO] GenRodApp: Eliminadas 0 filas con valores nulos (0.00%)
+2025-06-04 14:39:10 [WARNING] GenRodApp: Outliers detectados en 'THDV_L1_Ins': 353 valores (z-score > 3)
+2025-06-04 14:39:10 [WARNING] GenRodApp: Outliers detectados en 'THDV_L2_Ins': 453 valores (z-score > 3)
+2025-06-04 14:39:10 [WARNING] GenRodApp: Outliers detectados en 'THDV_L3_Ins': 654 valores (z-score > 3)
+2025-06-04 14:39:10 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L1_Ins': 413 valores (z-score > 3)
+2025-06-04 14:39:10 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L2_Ins': 457 valores (z-score > 3)
+2025-06-04 14:39:10 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L3_Ins': 480 valores (z-score > 3)
+2025-06-04 14:39:10 [WARNING] GenRodApp: Outliers detectados en 'PowF_T_Ins': 7533 valores (z-score > 3)
+2025-06-04 14:39:10 [WARNING] GenRodApp: Outliers detectados en 'Fre_Ins': 8 valores (z-score > 3)
+2025-06-04 14:39:10 [WARNING] GenRodApp: Outliers detectados en 'THDI_L1_Ins': 1294 valores (z-score > 3)
+2025-06-04 14:39:10 [WARNING] GenRodApp: Outliers detectados en 'THDI_L2_Ins': 2036 valores (z-score > 3)
+2025-06-04 14:39:10 [WARNING] GenRodApp: Outliers detectados en 'THDI_L3_Ins': 2040 valores (z-score > 3)
+2025-06-04 14:39:10 [INFO] GenRodApp: Shape final: (250046, 22)
+2025-06-04 14:39:10 [INFO] GenRodApp: Resumen columnas con outliers:
+2025-06-04 14:39:10 [INFO] GenRodApp:  - THDV_L1_Ins: 353 valores extremos detectados
+2025-06-04 14:39:10 [INFO] GenRodApp:  - THDV_L2_Ins: 453 valores extremos detectados
+2025-06-04 14:39:10 [INFO] GenRodApp:  - THDV_L3_Ins: 654 valores extremos detectados
+2025-06-04 14:39:10 [INFO] GenRodApp:  - Vrms_L1_Ins: 413 valores extremos detectados
+2025-06-04 14:39:10 [INFO] GenRodApp:  - Vrms_L2_Ins: 457 valores extremos detectados
+2025-06-04 14:39:10 [INFO] GenRodApp:  - Vrms_L3_Ins: 480 valores extremos detectados
+2025-06-04 14:39:10 [INFO] GenRodApp:  - PowF_T_Ins: 7533 valores extremos detectados
+2025-06-04 14:39:10 [INFO] GenRodApp:  - Fre_Ins: 8 valores extremos detectados
+2025-06-04 14:39:10 [INFO] GenRodApp:  - THDI_L1_Ins: 1294 valores extremos detectados
+2025-06-04 14:39:10 [INFO] GenRodApp:  - THDI_L2_Ins: 2036 valores extremos detectados
+2025-06-04 14:39:10 [INFO] GenRodApp:  - THDI_L3_Ins: 2040 valores extremos detectados
+2025-06-04 14:39:10 [INFO] GenRodApp: ===== FIN DEL PREPROCESAMIENTO =====
+2025-06-04 14:39:12 [INFO] GenRodApp: Datos limpios InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_clean.csv
+2025-06-04 14:39:12 [INFO] GenRodApp: Se normalizaron las columnas: ['THDV_L1_Ins', 'THDV_L2_Ins', 'THDV_L3_Ins', 'Vrms_L1_Ins', 'Vrms_L2_Ins', 'Vrms_L3_Ins', 'PowA_L1_Ins', 'PowA_L2_Ins', 'PowA_L3_Ins', 'PowF_T_Ins', 'PowS_L1_Ins', 'PowS_L2_Ins', 'PowS_L3_Ins', 'EA_I_IV_T', 'Fre_Ins', 'Irms_L1_Ins', 'Irms_L2_Ins', 'Irms_L3_Ins', 'THDI_L1_Ins', 'THDI_L2_Ins', 'THDI_L3_Ins']
+2025-06-04 14:39:17 [INFO] GenRodApp: Datos normalizados InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_norm.csv
+2025-06-04 14:39:17 [INFO] GenRodApp: ===== INICIANDO DETECCIÓN DE ANOMALÍAS =====
+2025-06-04 14:39:17 [INFO] GenRodApp: Preview de serie creada para ADTK:
+                     PowA_L1_Ins  PowF_T_Ins  THDI_L1_Ins
+time                                                     
+2025-01-01 00:00:04     0.084967    0.595745     0.198746
+2025-01-01 00:00:13     0.061002    0.468085     0.248432
+2025-01-01 00:00:23     0.058824    0.446809     0.254221
+2025-01-01 00:00:33     0.058824    0.446809     0.256151
+2025-01-01 00:00:43     0.080610    0.574468     0.210323
+2025-06-04 14:39:17 [INFO] GenRodApp: Corriendo métodos de detección de anomalías (ADTK)...
+2025-06-04 14:39:17 [INFO] GenRodApp: Aplicando LevelShiftAD...
+2025-06-04 14:39:18 [INFO] GenRodApp: Aplicando VolatilityShiftAD...
+2025-06-04 14:39:19 [INFO] GenRodApp: Aplicando AutoregressionAD...
+2025-06-04 14:39:21 [INFO] GenRodApp: Procesando detector: LevelShift...
+2025-06-04 14:39:21 [INFO] GenRodApp: [LevelShift] Series generadas: 5 anómalas, 1505 normales
+2025-06-04 14:39:21 [INFO] GenRodApp: Procesando detector: AutoReg...
+2025-06-04 14:39:21 [INFO] GenRodApp: [AutoReg] Series generadas: 8 anómalas, 2408 normales
+2025-06-04 14:39:22 [INFO] GenRodApp: ===== DETECCIÓN COMPLETADA =====
+2025-06-04 14:39:42 [INFO] GenRodApp: Mean Absolute Error de test y predicción: 0.03841569568574662
+2025-06-04 14:39:42 [INFO] GenRodApp: Mean Absolute Error de predicción y anormal: 0.16601082610967455
+2025-06-04 14:39:42 [INFO] GenRodApp: ==== INICIO DE EJECUCION CONTINUA ====
+2025-06-04 14:39:42 [INFO] GenRodApp: Hora inicial: 2025-06-04T14:39:42Z
+2025-06-04 14:39:42 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:39:42 [INFO] GenRodApp: Hora actual: 2025-06-04T14:39:42Z
+2025-06-04 14:39:42 [WARNING] GenRodApp: Rango de tiempo inválido. Saltando iteración.
+2025-06-04 14:39:50 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:39:50 [INFO] GenRodApp: Hora actual: 2025-06-04T14:39:50Z
+2025-06-04 14:39:52 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:39:52 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:39:44        360.0        366.0        357.0         0.9        0.855        0.813        0.829
+2025-06-04 14:39:52 [INFO] GenRodApp: Lazo completado: 1
+2025-06-04 14:39:52 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 1).
+2025-06-04 14:40:00 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:40:00 [INFO] GenRodApp: Hora actual: 2025-06-04T14:40:00Z
+2025-06-04 14:40:01 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:40:01 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:39:54        370.0        376.0        369.0         0.9         0.98        0.953        0.972
+2025-06-04 14:40:01 [INFO] GenRodApp: Lazo completado: 2
+2025-06-04 14:40:01 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 2).
+2025-06-04 14:40:09 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:40:09 [INFO] GenRodApp: Hora actual: 2025-06-04T14:40:09Z
+2025-06-04 14:40:10 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:40:10 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:40:04        392.0        398.0        404.0        0.91        0.985        0.921        0.926
+2025-06-04 14:40:10 [INFO] GenRodApp: Lazo completado: 3
+2025-06-04 14:40:10 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 3).
+2025-06-04 14:40:43 [INFO] GenRodApp: ==== INICIO DEL PROCESO ====
+2025-06-04 14:40:43 [INFO] GenRodApp: Consultando InfluxDB ...
+2025-06-04 14:40:43 [INFO] GenRodApp: 🔍 Intentando consulta en InfluxDB Nuevo como fuente primaria...
+2025-06-04 14:40:44 [WARNING] GenRodApp: [Fallback] Fallo en InfluxDB Nuevo : Consulta vacía en InfluxDB Nuevo
+2025-06-04 14:40:44 [INFO] GenRodApp: 🔁 Reintentando con InfluxDB Viejo como respaldo...
+2025-06-04 14:40:44 [INFO] GenRodApp: 🔁 Ejecutando consulta directamente en InfluxDB Viejo...
+2025-06-04 14:40:44 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: voltage
+2025-06-04 14:40:52 [INFO] GenRodApp: Consulta voltage completada con 724792 registros
+2025-06-04 14:40:52 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: power
+2025-06-04 14:41:01 [INFO] GenRodApp: Consulta power completada con 724792 registros
+2025-06-04 14:41:01 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: energy
+2025-06-04 14:41:07 [INFO] GenRodApp: Consulta energy completada con 724792 registros
+2025-06-04 14:41:07 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: frequency
+2025-06-04 14:41:11 [INFO] GenRodApp: Consulta frequency completada con 724792 registros
+2025-06-04 14:41:11 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: current
+2025-06-04 14:41:19 [INFO] GenRodApp: Consulta current completada con 724792 registros
+2025-06-04 14:41:20 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (724792, 22)
+2025-06-04 14:41:20 [INFO] GenRodApp: Datos InfluxDB: (724792, 22)
+2025-06-04 14:41:20 [INFO] GenRodApp: 🕐 Fecha mínima: 2024-01-01 00:00:03 | Fecha máxima: 2024-03-31 23:58:53
+2025-06-04 14:41:20 [INFO] GenRodApp: 📥 InfluxDB - Preview:
+2025-06-04 14:41:28 [INFO] GenRodApp: Datos crudos InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_raw.csv
+2025-06-04 14:41:28 [INFO] GenRodApp: Limpieza básica ...
+2025-06-04 14:41:28 [INFO] GenRodApp: ===== INICIO DEL PREPROCESAMIENTO =====
+2025-06-04 14:41:28 [INFO] GenRodApp: Shape original: (724792, 22)
+2025-06-04 14:41:28 [INFO] GenRodApp: No se encontraron valores nulos.
+2025-06-04 14:41:28 [INFO] GenRodApp: Eliminadas 0 filas duplicadas por 'time'
+2025-06-04 14:41:28 [INFO] GenRodApp: Eliminadas 0 columnas duplicadas
+2025-06-04 14:41:28 [INFO] GenRodApp: Eliminadas 0 filas con valores nulos (0.00%)
+2025-06-04 14:41:28 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L1_Ins': 519 valores (z-score > 3)
+2025-06-04 14:41:28 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L2_Ins': 519 valores (z-score > 3)
+2025-06-04 14:41:28 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L3_Ins': 519 valores (z-score > 3)
+2025-06-04 14:41:28 [WARNING] GenRodApp: Outliers detectados en 'THDV_L1_Ins': 682 valores (z-score > 3)
+2025-06-04 14:41:28 [WARNING] GenRodApp: Outliers detectados en 'THDV_L2_Ins': 1458 valores (z-score > 3)
+2025-06-04 14:41:28 [WARNING] GenRodApp: Outliers detectados en 'THDV_L3_Ins': 1279 valores (z-score > 3)
+2025-06-04 14:41:28 [WARNING] GenRodApp: Outliers detectados en 'PowF_T_Ins': 14982 valores (z-score > 3)
+2025-06-04 14:41:28 [WARNING] GenRodApp: Outliers detectados en 'Fre_Ins': 521 valores (z-score > 3)
+2025-06-04 14:41:28 [WARNING] GenRodApp: Outliers detectados en 'THDI_L1_Ins': 7254 valores (z-score > 3)
+2025-06-04 14:41:28 [WARNING] GenRodApp: Outliers detectados en 'THDI_L2_Ins': 7454 valores (z-score > 3)
+2025-06-04 14:41:28 [WARNING] GenRodApp: Outliers detectados en 'THDI_L3_Ins': 8088 valores (z-score > 3)
+2025-06-04 14:41:28 [INFO] GenRodApp: Shape final: (724792, 22)
+2025-06-04 14:41:28 [INFO] GenRodApp: Resumen columnas con outliers:
+2025-06-04 14:41:28 [INFO] GenRodApp:  - Vrms_L1_Ins: 519 valores extremos detectados
+2025-06-04 14:41:28 [INFO] GenRodApp:  - Vrms_L2_Ins: 519 valores extremos detectados
+2025-06-04 14:41:28 [INFO] GenRodApp:  - Vrms_L3_Ins: 519 valores extremos detectados
+2025-06-04 14:41:28 [INFO] GenRodApp:  - THDV_L1_Ins: 682 valores extremos detectados
+2025-06-04 14:41:28 [INFO] GenRodApp:  - THDV_L2_Ins: 1458 valores extremos detectados
+2025-06-04 14:41:28 [INFO] GenRodApp:  - THDV_L3_Ins: 1279 valores extremos detectados
+2025-06-04 14:41:28 [INFO] GenRodApp:  - PowF_T_Ins: 14982 valores extremos detectados
+2025-06-04 14:41:28 [INFO] GenRodApp:  - Fre_Ins: 521 valores extremos detectados
+2025-06-04 14:41:28 [INFO] GenRodApp:  - THDI_L1_Ins: 7254 valores extremos detectados
+2025-06-04 14:41:28 [INFO] GenRodApp:  - THDI_L2_Ins: 7454 valores extremos detectados
+2025-06-04 14:41:28 [INFO] GenRodApp:  - THDI_L3_Ins: 8088 valores extremos detectados
+2025-06-04 14:41:28 [INFO] GenRodApp: ===== FIN DEL PREPROCESAMIENTO =====
+2025-06-04 14:41:36 [INFO] GenRodApp: Datos limpios InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_clean.csv
+2025-06-04 14:41:36 [INFO] GenRodApp: Se normalizaron las columnas: ['Vrms_L1_Ins', 'Vrms_L2_Ins', 'Vrms_L3_Ins', 'THDV_L1_Ins', 'THDV_L2_Ins', 'THDV_L3_Ins', 'PowA_L1_Ins', 'PowA_L2_Ins', 'PowA_L3_Ins', 'PowS_L1_Ins', 'PowS_L2_Ins', 'PowS_L3_Ins', 'PowF_T_Ins', 'EA_I_IV_T', 'Fre_Ins', 'Irms_L1_Ins', 'Irms_L2_Ins', 'Irms_L3_Ins', 'THDI_L1_Ins', 'THDI_L2_Ins', 'THDI_L3_Ins']
+2025-06-04 14:41:49 [INFO] GenRodApp: Datos normalizados InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_norm.csv
+2025-06-04 14:41:49 [INFO] GenRodApp: ===== INICIANDO DETECCIÓN DE ANOMALÍAS =====
+2025-06-04 14:41:49 [INFO] GenRodApp: Preview de serie creada para ADTK:
+                     PowA_L1_Ins  PowF_T_Ins  THDI_L1_Ins
+time                                                     
+2024-01-01 00:00:03     0.047619    0.835052     0.153678
+2024-01-01 00:00:13     0.043810    0.814433     0.162307
+2024-01-01 00:00:23     0.060952    0.855670     0.122997
+2024-01-01 00:00:34     0.062857    0.855670     0.125462
+2024-01-01 00:00:44     0.047619    0.824742     0.148884
+2025-06-04 14:41:49 [INFO] GenRodApp: Corriendo métodos de detección de anomalías (ADTK)...
+2025-06-04 14:41:49 [INFO] GenRodApp: Aplicando LevelShiftAD...
+2025-06-04 14:41:53 [INFO] GenRodApp: Aplicando VolatilityShiftAD...
+2025-06-04 14:41:54 [INFO] GenRodApp: Aplicando AutoregressionAD...
+2025-06-04 14:42:01 [INFO] GenRodApp: Procesando detector: LevelShift...
+2025-06-04 14:42:01 [INFO] GenRodApp: [LevelShift] Series generadas: 10 anómalas, 3010 normales
+2025-06-04 14:42:01 [INFO] GenRodApp: Procesando detector: AutoReg...
+2025-06-04 14:42:01 [INFO] GenRodApp: [AutoReg] Series generadas: 14 anómalas, 4214 normales
+2025-06-04 14:42:02 [INFO] GenRodApp: ===== DETECCIÓN COMPLETADA =====
+2025-06-04 14:42:22 [INFO] GenRodApp: Mean Absolute Error de test y predicción: 0.007844783004450684
+2025-06-04 14:42:22 [INFO] GenRodApp: Mean Absolute Error de predicción y anormal: 0.048468648879307
+2025-06-04 14:42:22 [INFO] GenRodApp: ==== INICIO DE EJECUCION CONTINUA ====
+2025-06-04 14:42:22 [INFO] GenRodApp: Hora inicial: 2025-06-04T14:42:22Z
+2025-06-04 14:42:22 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:42:22 [INFO] GenRodApp: Hora actual: 2025-06-04T14:42:22Z
+2025-06-04 14:42:22 [WARNING] GenRodApp: Rango de tiempo inválido. Saltando iteración.
+2025-06-04 14:42:42 [INFO] GenRodApp: ==== INICIO DEL PROCESO ====
+2025-06-04 14:42:42 [INFO] GenRodApp: Consultando InfluxDB ...
+2025-06-04 14:42:42 [INFO] GenRodApp: 🔍 Intentando consulta en InfluxDB Nuevo como fuente primaria...
+2025-06-04 14:42:43 [WARNING] GenRodApp: [Fallback] Fallo en InfluxDB Nuevo : Consulta vacía en InfluxDB Nuevo
+2025-06-04 14:42:43 [INFO] GenRodApp: 🔁 Reintentando con InfluxDB Viejo como respaldo...
+2025-06-04 14:42:43 [INFO] GenRodApp: 🔁 Ejecutando consulta directamente en InfluxDB Viejo...
+2025-06-04 14:42:43 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: voltage
+2025-06-04 14:43:00 [INFO] GenRodApp: Consulta voltage completada con 1494872 registros
+2025-06-04 14:43:00 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: power
+2025-06-04 14:43:20 [INFO] GenRodApp: Consulta power completada con 1494872 registros
+2025-06-04 14:43:20 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: energy
+2025-06-04 14:43:30 [INFO] GenRodApp: Consulta energy completada con 1494872 registros
+2025-06-04 14:43:30 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: frequency
+2025-06-04 14:43:38 [INFO] GenRodApp: Consulta frequency completada con 1494872 registros
+2025-06-04 14:43:38 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: current
+2025-06-04 14:43:56 [INFO] GenRodApp: Consulta current completada con 1494872 registros
+2025-06-04 14:43:57 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1494872, 22)
+2025-06-04 14:43:57 [INFO] GenRodApp: Datos InfluxDB: (1494872, 22)
+2025-06-04 14:43:57 [INFO] GenRodApp: 🕐 Fecha mínima: 2024-01-01 00:00:03 | Fecha máxima: 2024-06-30 23:58:54
+2025-06-04 14:43:57 [INFO] GenRodApp: 📥 InfluxDB - Preview:
+2025-06-04 14:44:13 [INFO] GenRodApp: Datos crudos InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_raw.csv
+2025-06-04 14:44:13 [INFO] GenRodApp: Limpieza básica ...
+2025-06-04 14:44:14 [INFO] GenRodApp: ===== INICIO DEL PREPROCESAMIENTO =====
+2025-06-04 14:44:14 [INFO] GenRodApp: Shape original: (1494872, 22)
+2025-06-04 14:44:14 [INFO] GenRodApp: No se encontraron valores nulos.
+2025-06-04 14:44:14 [INFO] GenRodApp: Eliminadas 0 filas duplicadas por 'time'
+2025-06-04 14:44:14 [INFO] GenRodApp: Eliminadas 0 columnas duplicadas
+2025-06-04 14:44:14 [INFO] GenRodApp: Eliminadas 0 filas con valores nulos (0.00%)
+2025-06-04 14:44:14 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L1_Ins': 578 valores (z-score > 3)
+2025-06-04 14:44:14 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L2_Ins': 580 valores (z-score > 3)
+2025-06-04 14:44:14 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L3_Ins': 583 valores (z-score > 3)
+2025-06-04 14:44:14 [WARNING] GenRodApp: Outliers detectados en 'THDV_L1_Ins': 2202 valores (z-score > 3)
+2025-06-04 14:44:14 [WARNING] GenRodApp: Outliers detectados en 'THDV_L2_Ins': 3240 valores (z-score > 3)
+2025-06-04 14:44:14 [WARNING] GenRodApp: Outliers detectados en 'THDV_L3_Ins': 2359 valores (z-score > 3)
+2025-06-04 14:44:15 [WARNING] GenRodApp: Outliers detectados en 'PowF_T_Ins': 32733 valores (z-score > 3)
+2025-06-04 14:44:15 [WARNING] GenRodApp: Outliers detectados en 'Fre_Ins': 522 valores (z-score > 3)
+2025-06-04 14:44:15 [WARNING] GenRodApp: Outliers detectados en 'THDI_L1_Ins': 19250 valores (z-score > 3)
+2025-06-04 14:44:15 [WARNING] GenRodApp: Outliers detectados en 'THDI_L2_Ins': 17511 valores (z-score > 3)
+2025-06-04 14:44:15 [WARNING] GenRodApp: Outliers detectados en 'THDI_L3_Ins': 19982 valores (z-score > 3)
+2025-06-04 14:44:15 [INFO] GenRodApp: Shape final: (1494872, 22)
+2025-06-04 14:44:15 [INFO] GenRodApp: Resumen columnas con outliers:
+2025-06-04 14:44:15 [INFO] GenRodApp:  - Vrms_L1_Ins: 578 valores extremos detectados
+2025-06-04 14:44:15 [INFO] GenRodApp:  - Vrms_L2_Ins: 580 valores extremos detectados
+2025-06-04 14:44:15 [INFO] GenRodApp:  - Vrms_L3_Ins: 583 valores extremos detectados
+2025-06-04 14:44:15 [INFO] GenRodApp:  - THDV_L1_Ins: 2202 valores extremos detectados
+2025-06-04 14:44:15 [INFO] GenRodApp:  - THDV_L2_Ins: 3240 valores extremos detectados
+2025-06-04 14:44:15 [INFO] GenRodApp:  - THDV_L3_Ins: 2359 valores extremos detectados
+2025-06-04 14:44:15 [INFO] GenRodApp:  - PowF_T_Ins: 32733 valores extremos detectados
+2025-06-04 14:44:15 [INFO] GenRodApp:  - Fre_Ins: 522 valores extremos detectados
+2025-06-04 14:44:15 [INFO] GenRodApp:  - THDI_L1_Ins: 19250 valores extremos detectados
+2025-06-04 14:44:15 [INFO] GenRodApp:  - THDI_L2_Ins: 17511 valores extremos detectados
+2025-06-04 14:44:15 [INFO] GenRodApp:  - THDI_L3_Ins: 19982 valores extremos detectados
+2025-06-04 14:44:15 [INFO] GenRodApp: ===== FIN DEL PREPROCESAMIENTO =====
+2025-06-04 14:44:31 [INFO] GenRodApp: Datos limpios InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_clean.csv
+2025-06-04 14:44:32 [INFO] GenRodApp: Se normalizaron las columnas: ['Vrms_L1_Ins', 'Vrms_L2_Ins', 'Vrms_L3_Ins', 'THDV_L1_Ins', 'THDV_L2_Ins', 'THDV_L3_Ins', 'PowA_L1_Ins', 'PowA_L2_Ins', 'PowA_L3_Ins', 'PowS_L1_Ins', 'PowS_L2_Ins', 'PowS_L3_Ins', 'PowF_T_Ins', 'EA_I_IV_T', 'Fre_Ins', 'Irms_L1_Ins', 'Irms_L2_Ins', 'Irms_L3_Ins', 'THDI_L1_Ins', 'THDI_L2_Ins', 'THDI_L3_Ins']
+2025-06-04 14:44:59 [INFO] GenRodApp: Datos normalizados InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_norm.csv
+2025-06-04 14:44:59 [INFO] GenRodApp: ===== INICIANDO DETECCIÓN DE ANOMALÍAS =====
+2025-06-04 14:44:59 [INFO] GenRodApp: Preview de serie creada para ADTK:
+                     PowA_L1_Ins  PowF_T_Ins  THDI_L1_Ins
+time                                                     
+2024-01-01 00:00:03     0.047619    0.835052     0.153678
+2024-01-01 00:00:13     0.043810    0.814433     0.162307
+2024-01-01 00:00:23     0.060952    0.855670     0.122997
+2024-01-01 00:00:34     0.062857    0.855670     0.125462
+2024-01-01 00:00:44     0.047619    0.824742     0.148884
+2025-06-04 14:44:59 [INFO] GenRodApp: Corriendo métodos de detección de anomalías (ADTK)...
+2025-06-04 14:44:59 [INFO] GenRodApp: Aplicando LevelShiftAD...
+2025-06-04 14:45:09 [INFO] GenRodApp: Aplicando VolatilityShiftAD...
+2025-06-04 14:45:11 [INFO] GenRodApp: Aplicando AutoregressionAD...
+2025-06-04 14:45:26 [INFO] GenRodApp: Procesando detector: LevelShift...
+2025-06-04 14:45:26 [INFO] GenRodApp: [LevelShift] Series generadas: 9 anómalas, 2709 normales
+2025-06-04 14:45:26 [INFO] GenRodApp: Procesando detector: AutoReg...
+2025-06-04 14:45:26 [INFO] GenRodApp: [AutoReg] Series generadas: 21 anómalas, 6321 normales
+2025-06-04 14:45:29 [INFO] GenRodApp: ===== DETECCIÓN COMPLETADA =====
+2025-06-04 14:46:40 [INFO] GenRodApp: Mean Absolute Error de test y predicción: 0.007979259176338571
+2025-06-04 14:46:40 [INFO] GenRodApp: Mean Absolute Error de predicción y anormal: 0.04613695238103431
+2025-06-04 14:46:40 [INFO] GenRodApp: ==== INICIO DE EJECUCION CONTINUA ====
+2025-06-04 14:46:40 [INFO] GenRodApp: Hora inicial: 2025-06-04T14:46:40Z
+2025-06-04 14:46:40 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:46:40 [INFO] GenRodApp: Hora actual: 2025-06-04T14:46:40Z
+2025-06-04 14:46:40 [WARNING] GenRodApp: Rango de tiempo inválido. Saltando iteración.
+2025-06-04 14:46:48 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:46:48 [INFO] GenRodApp: Hora actual: 2025-06-04T14:46:48Z
+2025-06-04 14:46:49 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:46:49 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:46:43        364.0        376.0        353.0        0.91         0.94        0.887        0.945
+2025-06-04 14:46:49 [INFO] GenRodApp: Lazo completado: 1
+2025-06-04 14:46:49 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 1).
+2025-06-04 14:46:57 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:46:57 [INFO] GenRodApp: Hora actual: 2025-06-04T14:46:57Z
+2025-06-04 14:46:59 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:46:59 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:46:53        368.0        395.0        369.0         0.9        0.999        0.905        0.994
+2025-06-04 14:46:59 [INFO] GenRodApp: Lazo completado: 2
+2025-06-04 14:46:59 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 2).
+2025-06-04 14:47:07 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:47:07 [INFO] GenRodApp: Hora actual: 2025-06-04T14:47:07Z
+2025-06-04 14:47:08 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:47:08 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:47:04        343.0        362.0        336.0         0.9        0.825        0.744        0.792
+2025-06-04 14:47:08 [INFO] GenRodApp: Lazo completado: 3
+2025-06-04 14:47:08 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 3).
+2025-06-04 14:47:16 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:47:16 [INFO] GenRodApp: Hora actual: 2025-06-04T14:47:16Z
+2025-06-04 14:47:18 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:47:18 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:47:13        348.0        354.0        336.0        0.89        0.899        0.869        0.915
+2025-06-04 14:47:18 [INFO] GenRodApp: Lazo completado: 4
+2025-06-04 14:47:18 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 4).
+2025-06-04 14:47:26 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:47:26 [INFO] GenRodApp: Hora actual: 2025-06-04T14:47:26Z
+2025-06-04 14:47:27 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:47:27 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:47:24        339.0        352.0        330.0        0.91        0.962         0.92        0.972
+2025-06-04 14:47:27 [INFO] GenRodApp: Lazo completado: 5
+2025-06-04 14:47:27 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 5).
+2025-06-04 14:47:35 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:47:35 [INFO] GenRodApp: Hora actual: 2025-06-04T14:47:35Z
+2025-06-04 14:47:36 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:47:36 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:47:33        358.0        369.0        352.0        0.91         0.99        0.926        0.971
+2025-06-04 14:47:36 [INFO] GenRodApp: Lazo completado: 6
+2025-06-04 14:47:36 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 6).
+2025-06-04 14:47:44 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:47:44 [INFO] GenRodApp: Hora actual: 2025-06-04T14:47:44Z
+2025-06-04 14:47:46 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:47:46 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:47:43        357.0        369.0        348.0        0.91        0.986        0.928        0.972
+2025-06-04 14:47:46 [INFO] GenRodApp: Lazo completado: 7
+2025-06-04 14:47:46 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 7).
+2025-06-04 14:47:54 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:47:54 [INFO] GenRodApp: Hora actual: 2025-06-04T14:47:54Z
+2025-06-04 14:47:55 [INFO] GenRodApp: Sin nuevos datos. Esperando siguiente iteración.
+2025-06-04 14:48:03 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:48:03 [INFO] GenRodApp: Hora actual: 2025-06-04T14:48:03Z
+2025-06-04 14:48:04 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:48:04 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:47:54        338.0        359.0        335.0        0.88        0.888        0.831        0.877
+2025-06-04 14:48:04 [INFO] GenRodApp: Lazo completado: 8
+2025-06-04 14:48:04 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 8).
+2025-06-04 14:48:12 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:48:12 [INFO] GenRodApp: Hora actual: 2025-06-04T14:48:12Z
+2025-06-04 14:48:14 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:48:14 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:48:04        352.0        367.0        352.0         0.9        0.907        0.855        0.879
+2025-06-04 14:48:14 [INFO] GenRodApp: Lazo completado: 9
+2025-06-04 14:48:14 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 9).
+2025-06-04 14:48:22 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:48:22 [INFO] GenRodApp: Hora actual: 2025-06-04T14:48:22Z
+2025-06-04 14:48:23 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:48:23 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:48:13        367.0        378.0        365.0        0.91        0.946        0.897        0.929
+2025-06-04 14:48:23 [INFO] GenRodApp: Lazo completado: 10
+2025-06-04 14:48:23 [INFO] GenRodApp: MAE calculado: 0.05462279510498049
+2025-06-04 14:48:23 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:48:23 [INFO] GenRodApp: Hora actual: 2025-06-04T14:48:23Z
+2025-06-04 14:48:24 [INFO] GenRodApp: Sin nuevos datos. Esperando siguiente iteración.
+2025-06-04 14:48:32 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:48:32 [INFO] GenRodApp: Hora actual: 2025-06-04T14:48:32Z
+2025-06-04 14:48:33 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:48:33 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:48:23        362.0        371.0        363.0        0.91        0.957        0.919         0.94
+2025-06-04 14:48:33 [INFO] GenRodApp: Lazo completado: 11
+2025-06-04 14:48:33 [INFO] GenRodApp: MAE calculado: 0.05462279510498049
+2025-06-04 14:48:33 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:48:33 [INFO] GenRodApp: Hora actual: 2025-06-04T14:48:33Z
+2025-06-04 14:48:34 [INFO] GenRodApp: Sin nuevos datos. Esperando siguiente iteración.
+2025-06-04 14:48:42 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:48:42 [INFO] GenRodApp: Hora actual: 2025-06-04T14:48:42Z
+2025-06-04 14:48:43 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:48:43 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:48:34        348.0        352.0        354.0        0.91        0.931        0.902        0.909
+2025-06-04 14:48:43 [INFO] GenRodApp: Lazo completado: 12
+2025-06-04 14:48:43 [INFO] GenRodApp: MAE calculado: 0.05562279510498049
+2025-06-04 14:48:43 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:48:43 [INFO] GenRodApp: Hora actual: 2025-06-04T14:48:43Z
+2025-06-04 14:48:44 [INFO] GenRodApp: Sin nuevos datos. Esperando siguiente iteración.
+2025-06-04 14:48:52 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:48:52 [INFO] GenRodApp: Hora actual: 2025-06-04T14:48:52Z
+2025-06-04 14:48:54 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:48:54 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:48:44        348.0        345.0        347.0        0.89        0.917        0.919        0.906
+2025-06-04 14:48:54 [INFO] GenRodApp: Lazo completado: 13
+2025-06-04 14:48:54 [INFO] GenRodApp: MAE calculado: 0.05462279510498049
+2025-06-04 14:48:54 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:48:54 [INFO] GenRodApp: Hora actual: 2025-06-04T14:48:54Z
+2025-06-04 14:48:54 [INFO] GenRodApp: Sin nuevos datos. Esperando siguiente iteración.
+2025-06-04 14:49:02 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:49:02 [INFO] GenRodApp: Hora actual: 2025-06-04T14:49:02Z
+2025-06-04 14:49:04 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:49:04 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:48:54        338.0        353.0        332.0         0.9          1.0        0.943        0.998
+2025-06-04 14:49:04 [INFO] GenRodApp: Lazo completado: 14
+2025-06-04 14:49:04 [INFO] GenRodApp: MAE calculado: 0.05562279510498049
+2025-06-04 14:49:04 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:49:04 [INFO] GenRodApp: Hora actual: 2025-06-04T14:49:04Z
+2025-06-04 14:49:05 [INFO] GenRodApp: Sin nuevos datos. Esperando siguiente iteración.
+2025-06-04 14:52:48 [INFO] GenRodApp: ==== INICIO DEL PROCESO ====
+2025-06-04 14:52:48 [INFO] GenRodApp: Consultando InfluxDB ...
+2025-06-04 14:52:48 [ERROR] GenRodApp: Error en la consulta: can't compare offset-naive and offset-aware datetimes
+2025-06-04 14:52:48 [ERROR] GenRodApp: No se puede continuar: DataFrame inválido
+2025-06-04 14:53:11 [INFO] GenRodApp: ==== INICIO DEL PROCESO ====
+2025-06-04 14:53:11 [INFO] GenRodApp: Consultando InfluxDB ...
+2025-06-04 14:53:11 [ERROR] GenRodApp: Error en la consulta: can't compare offset-naive and offset-aware datetimes
+2025-06-04 14:53:11 [ERROR] GenRodApp: No se puede continuar: DataFrame inválido
+2025-06-04 14:56:50 [INFO] GenRodApp: ==== INICIO DEL PROCESO ====
+2025-06-04 14:56:50 [INFO] GenRodApp: Consultando InfluxDB ...
+2025-06-04 14:56:50 [INFO] GenRodApp: 🔍 Intentando consulta en InfluxDB Nuevo como fuente primaria...
+2025-06-04 14:56:51 [WARNING] GenRodApp: [Fallback] Fallo en InfluxDB Nuevo : Datos parciales en InfluxDB Nuevo, se intentará completar desde InfluxDB Viejo
+2025-06-04 14:56:51 [INFO] GenRodApp: 🔁 Reintentando con InfluxDB Viejo como respaldo...
+2025-06-04 14:56:51 [INFO] GenRodApp: 🔁 Ejecutando consulta directamente en InfluxDB Viejo...
+2025-06-04 14:56:51 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: voltage
+2025-06-04 14:56:51 [INFO] GenRodApp: Consulta voltage completada con 17274 registros
+2025-06-04 14:56:51 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: power
+2025-06-04 14:56:51 [INFO] GenRodApp: Consulta power completada con 17274 registros
+2025-06-04 14:56:51 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: energy
+2025-06-04 14:56:51 [INFO] GenRodApp: Consulta energy completada con 17274 registros
+2025-06-04 14:56:51 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: frequency
+2025-06-04 14:56:52 [INFO] GenRodApp: Consulta frequency completada con 17274 registros
+2025-06-04 14:56:52 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: current
+2025-06-04 14:56:52 [INFO] GenRodApp: Consulta current completada con 17274 registros
+2025-06-04 14:56:52 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (17274, 22)
+2025-06-04 14:56:52 [INFO] GenRodApp: Datos InfluxDB: (17274, 22)
+2025-06-04 14:56:52 [INFO] GenRodApp: 🕐 Fecha mínima: 2024-01-01 00:00:03 | Fecha máxima: 2024-01-02 23:58:53
+2025-06-04 14:56:52 [INFO] GenRodApp: 📥 InfluxDB - Preview:
+2025-06-04 14:56:52 [INFO] GenRodApp: Datos crudos InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_raw.csv
+2025-06-04 14:56:52 [INFO] GenRodApp: Limpieza básica ...
+2025-06-04 14:56:52 [INFO] GenRodApp: ===== INICIO DEL PREPROCESAMIENTO =====
+2025-06-04 14:56:52 [INFO] GenRodApp: Shape original: (17274, 22)
+2025-06-04 14:56:52 [INFO] GenRodApp: No se encontraron valores nulos.
+2025-06-04 14:56:52 [INFO] GenRodApp: Eliminadas 0 filas duplicadas por 'time'
+2025-06-04 14:56:52 [INFO] GenRodApp: Eliminadas 0 columnas duplicadas
+2025-06-04 14:56:52 [INFO] GenRodApp: Eliminadas 0 filas con valores nulos (0.00%)
+2025-06-04 14:56:52 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L1_Ins': 72 valores (z-score > 3)
+2025-06-04 14:56:52 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L2_Ins': 65 valores (z-score > 3)
+2025-06-04 14:56:52 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L3_Ins': 73 valores (z-score > 3)
+2025-06-04 14:56:52 [WARNING] GenRodApp: Outliers detectados en 'THDV_L1_Ins': 14 valores (z-score > 3)
+2025-06-04 14:56:52 [WARNING] GenRodApp: Outliers detectados en 'THDV_L2_Ins': 36 valores (z-score > 3)
+2025-06-04 14:56:52 [WARNING] GenRodApp: Outliers detectados en 'PowF_T_Ins': 205 valores (z-score > 3)
+2025-06-04 14:56:52 [WARNING] GenRodApp: Outliers detectados en 'Fre_Ins': 144 valores (z-score > 3)
+2025-06-04 14:56:52 [WARNING] GenRodApp: Outliers detectados en 'THDI_L1_Ins': 49 valores (z-score > 3)
+2025-06-04 14:56:52 [WARNING] GenRodApp: Outliers detectados en 'THDI_L2_Ins': 60 valores (z-score > 3)
+2025-06-04 14:56:52 [WARNING] GenRodApp: Outliers detectados en 'THDI_L3_Ins': 67 valores (z-score > 3)
+2025-06-04 14:56:52 [INFO] GenRodApp: Shape final: (17274, 22)
+2025-06-04 14:56:52 [INFO] GenRodApp: Resumen columnas con outliers:
+2025-06-04 14:56:52 [INFO] GenRodApp:  - Vrms_L1_Ins: 72 valores extremos detectados
+2025-06-04 14:56:52 [INFO] GenRodApp:  - Vrms_L2_Ins: 65 valores extremos detectados
+2025-06-04 14:56:52 [INFO] GenRodApp:  - Vrms_L3_Ins: 73 valores extremos detectados
+2025-06-04 14:56:52 [INFO] GenRodApp:  - THDV_L1_Ins: 14 valores extremos detectados
+2025-06-04 14:56:52 [INFO] GenRodApp:  - THDV_L2_Ins: 36 valores extremos detectados
+2025-06-04 14:56:52 [INFO] GenRodApp:  - PowF_T_Ins: 205 valores extremos detectados
+2025-06-04 14:56:52 [INFO] GenRodApp:  - Fre_Ins: 144 valores extremos detectados
+2025-06-04 14:56:52 [INFO] GenRodApp:  - THDI_L1_Ins: 49 valores extremos detectados
+2025-06-04 14:56:52 [INFO] GenRodApp:  - THDI_L2_Ins: 60 valores extremos detectados
+2025-06-04 14:56:52 [INFO] GenRodApp:  - THDI_L3_Ins: 67 valores extremos detectados
+2025-06-04 14:56:52 [INFO] GenRodApp: ===== FIN DEL PREPROCESAMIENTO =====
+2025-06-04 14:56:52 [INFO] GenRodApp: Datos limpios InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_clean.csv
+2025-06-04 14:56:52 [INFO] GenRodApp: Se normalizaron las columnas: ['Vrms_L1_Ins', 'Vrms_L2_Ins', 'Vrms_L3_Ins', 'THDV_L1_Ins', 'THDV_L2_Ins', 'THDV_L3_Ins', 'PowA_L1_Ins', 'PowA_L2_Ins', 'PowA_L3_Ins', 'PowS_L1_Ins', 'PowS_L2_Ins', 'PowS_L3_Ins', 'PowF_T_Ins', 'EA_I_IV_T', 'Fre_Ins', 'Irms_L1_Ins', 'Irms_L2_Ins', 'Irms_L3_Ins', 'THDI_L1_Ins', 'THDI_L2_Ins', 'THDI_L3_Ins']
+2025-06-04 14:56:53 [INFO] GenRodApp: Datos normalizados InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_norm.csv
+2025-06-04 14:56:53 [INFO] GenRodApp: ===== INICIANDO DETECCIÓN DE ANOMALÍAS =====
+2025-06-04 14:56:53 [INFO] GenRodApp: Preview de serie creada para ADTK:
+                     PowA_L1_Ins  PowF_T_Ins  THDI_L1_Ins
+time                                                     
+2024-01-01 00:00:03     0.012876    0.363636     0.507174
+2024-01-01 00:00:13     0.008584    0.272727     0.546475
+2024-01-01 00:00:23     0.027897    0.454545     0.367436
+2024-01-01 00:00:34     0.030043    0.454545     0.378665
+2024-01-01 00:00:44     0.012876    0.318182     0.485340
+2025-06-04 14:56:53 [INFO] GenRodApp: Corriendo métodos de detección de anomalías (ADTK)...
+2025-06-04 14:56:53 [INFO] GenRodApp: Aplicando LevelShiftAD...
+2025-06-04 14:56:53 [INFO] GenRodApp: Aplicando VolatilityShiftAD...
+2025-06-04 14:56:53 [INFO] GenRodApp: Aplicando AutoregressionAD...
+2025-06-04 14:56:53 [INFO] GenRodApp: Procesando detector: LevelShift...
+2025-06-04 14:56:53 [INFO] GenRodApp: [LevelShift] Series generadas: 1 anómalas, 301 normales
+2025-06-04 14:56:53 [INFO] GenRodApp: Procesando detector: AutoReg...
+2025-06-04 14:56:53 [INFO] GenRodApp: [AutoReg] Series generadas: 5 anómalas, 1505 normales
+2025-06-04 14:56:53 [INFO] GenRodApp: ===== DETECCIÓN COMPLETADA =====
+2025-06-04 14:57:06 [INFO] GenRodApp: Mean Absolute Error de test y predicción: 0.10011017236926334
+2025-06-04 14:57:06 [INFO] GenRodApp: Mean Absolute Error de predicción y anormal: 0.1313751363212412
+2025-06-04 14:57:06 [INFO] GenRodApp: ==== INICIO DE EJECUCION CONTINUA ====
+2025-06-04 14:57:06 [INFO] GenRodApp: Hora inicial: 2025-06-04T14:57:06Z
+2025-06-04 14:57:06 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:57:06 [INFO] GenRodApp: Hora actual: 2025-06-04T14:57:06Z
+2025-06-04 14:57:06 [WARNING] GenRodApp: Rango de tiempo inválido. Saltando iteración.
+2025-06-04 14:57:14 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:57:14 [INFO] GenRodApp: Hora actual: 2025-06-04T14:57:14Z
+2025-06-04 14:57:16 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:57:16 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:57:13        326.0        343.0        325.0         0.9        0.899         0.82        0.872
+2025-06-04 14:57:16 [INFO] GenRodApp: Lazo completado: 1
+2025-06-04 14:57:16 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 1).
+2025-06-04 14:57:24 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:57:24 [INFO] GenRodApp: Hora actual: 2025-06-04T14:57:24Z
+2025-06-04 14:57:25 [INFO] GenRodApp: Sin nuevos datos. Esperando siguiente iteración.
+2025-06-04 14:57:33 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:57:33 [INFO] GenRodApp: Hora actual: 2025-06-04T14:57:33Z
+2025-06-04 14:57:34 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:57:34 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:57:24        358.0        374.0        347.0        0.88        0.876        0.819        0.866
+2025-06-04 14:57:34 [INFO] GenRodApp: Lazo completado: 2
+2025-06-04 14:57:34 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 2).
+2025-06-04 14:57:42 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:57:42 [INFO] GenRodApp: Hora actual: 2025-06-04T14:57:42Z
+2025-06-04 14:57:44 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:57:44 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:57:34        343.0        370.0        340.0         0.9        0.863        0.783        0.845
+2025-06-04 14:57:44 [INFO] GenRodApp: Lazo completado: 3
+2025-06-04 14:57:44 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 3).
+2025-06-04 14:57:52 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:57:52 [INFO] GenRodApp: Hora actual: 2025-06-04T14:57:52Z
+2025-06-04 14:57:53 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:57:53 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:57:44        348.0        368.0        343.0         0.9        0.975        0.901        0.974
+2025-06-04 14:57:53 [INFO] GenRodApp: Lazo completado: 4
+2025-06-04 14:57:53 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 4).
+2025-06-04 14:58:01 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 14:58:01 [INFO] GenRodApp: Hora actual: 2025-06-04T14:58:01Z
+2025-06-04 14:58:03 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 14:58:03 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 11:57:54        361.0        366.0        346.0        0.89        0.878        0.835         0.89
+2025-06-04 14:58:03 [INFO] GenRodApp: Lazo completado: 5
+2025-06-04 14:58:03 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 5).
+2025-06-04 14:58:13 [INFO] GenRodApp: ==== INICIO DEL PROCESO ====
+2025-06-04 14:58:13 [INFO] GenRodApp: Consultando InfluxDB ...
+2025-06-04 14:58:13 [INFO] GenRodApp: 🔍 Intentando consulta en InfluxDB 2.7 como fuente primaria...
+2025-06-04 14:58:17 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (17274, 22)
+2025-06-04 14:58:17 [INFO] GenRodApp: Datos InfluxDB: (17274, 22)
+2025-06-04 14:58:17 [INFO] GenRodApp: 🕐 Fecha mínima: 2025-01-01 00:00:04 | Fecha máxima: 2025-01-02 23:58:53
+2025-06-04 14:58:17 [INFO] GenRodApp: 📥 InfluxDB - Preview:
+2025-06-04 14:58:17 [INFO] GenRodApp: Datos crudos InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_raw.csv
+2025-06-04 14:58:17 [INFO] GenRodApp: Limpieza básica ...
+2025-06-04 14:58:17 [INFO] GenRodApp: ===== INICIO DEL PREPROCESAMIENTO =====
+2025-06-04 14:58:17 [INFO] GenRodApp: Shape original: (17274, 22)
+2025-06-04 14:58:17 [INFO] GenRodApp: No se encontraron valores nulos.
+2025-06-04 14:58:17 [INFO] GenRodApp: Eliminadas 0 filas duplicadas por 'time'
+2025-06-04 14:58:17 [INFO] GenRodApp: Eliminadas 0 columnas duplicadas
+2025-06-04 14:58:17 [INFO] GenRodApp: Eliminadas 0 filas con valores nulos (0.00%)
+2025-06-04 14:58:17 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L1_Ins': 80 valores (z-score > 3)
+2025-06-04 14:58:17 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L2_Ins': 45 valores (z-score > 3)
+2025-06-04 14:58:17 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L3_Ins': 57 valores (z-score > 3)
+2025-06-04 14:58:17 [WARNING] GenRodApp: Outliers detectados en 'Fre_Ins': 195 valores (z-score > 3)
+2025-06-04 14:58:17 [WARNING] GenRodApp: Outliers detectados en 'THDI_L1_Ins': 66 valores (z-score > 3)
+2025-06-04 14:58:17 [WARNING] GenRodApp: Outliers detectados en 'THDI_L2_Ins': 49 valores (z-score > 3)
+2025-06-04 14:58:17 [WARNING] GenRodApp: Outliers detectados en 'THDI_L3_Ins': 44 valores (z-score > 3)
+2025-06-04 14:58:17 [INFO] GenRodApp: Shape final: (17274, 22)
+2025-06-04 14:58:17 [INFO] GenRodApp: Resumen columnas con outliers:
+2025-06-04 14:58:17 [INFO] GenRodApp:  - Vrms_L1_Ins: 80 valores extremos detectados
+2025-06-04 14:58:17 [INFO] GenRodApp:  - Vrms_L2_Ins: 45 valores extremos detectados
+2025-06-04 14:58:17 [INFO] GenRodApp:  - Vrms_L3_Ins: 57 valores extremos detectados
+2025-06-04 14:58:17 [INFO] GenRodApp:  - Fre_Ins: 195 valores extremos detectados
+2025-06-04 14:58:17 [INFO] GenRodApp:  - THDI_L1_Ins: 66 valores extremos detectados
+2025-06-04 14:58:17 [INFO] GenRodApp:  - THDI_L2_Ins: 49 valores extremos detectados
+2025-06-04 14:58:17 [INFO] GenRodApp:  - THDI_L3_Ins: 44 valores extremos detectados
+2025-06-04 14:58:17 [INFO] GenRodApp: ===== FIN DEL PREPROCESAMIENTO =====
+2025-06-04 14:58:18 [INFO] GenRodApp: Datos limpios InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_clean.csv
+2025-06-04 14:58:18 [INFO] GenRodApp: Se normalizaron las columnas: ['THDV_L1_Ins', 'THDV_L2_Ins', 'THDV_L3_Ins', 'Vrms_L1_Ins', 'Vrms_L2_Ins', 'Vrms_L3_Ins', 'PowA_L1_Ins', 'PowA_L2_Ins', 'PowA_L3_Ins', 'PowF_T_Ins', 'PowS_L1_Ins', 'PowS_L2_Ins', 'PowS_L3_Ins', 'EA_I_IV_T', 'Fre_Ins', 'Irms_L1_Ins', 'Irms_L2_Ins', 'Irms_L3_Ins', 'THDI_L1_Ins', 'THDI_L2_Ins', 'THDI_L3_Ins']
+2025-06-04 14:58:18 [INFO] GenRodApp: Datos normalizados InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_norm.csv
+2025-06-04 14:58:18 [INFO] GenRodApp: ===== INICIANDO DETECCIÓN DE ANOMALÍAS =====
+2025-06-04 14:58:18 [INFO] GenRodApp: Preview de serie creada para ADTK:
+                     PowA_L1_Ins  PowF_T_Ins  THDI_L1_Ins
+time                                                     
+2025-01-01 00:00:04     0.040000    0.407407     0.376253
+2025-01-01 00:00:13     0.014118    0.185185     0.535081
+2025-01-01 00:00:23     0.011765    0.148148     0.553585
+2025-01-01 00:00:33     0.011765    0.148148     0.559753
+2025-01-01 00:00:43     0.035294    0.370370     0.413261
+2025-06-04 14:58:18 [INFO] GenRodApp: Corriendo métodos de detección de anomalías (ADTK)...
+2025-06-04 14:58:18 [INFO] GenRodApp: Aplicando LevelShiftAD...
+2025-06-04 14:58:18 [INFO] GenRodApp: Aplicando VolatilityShiftAD...
+2025-06-04 14:58:18 [INFO] GenRodApp: Aplicando AutoregressionAD...
+2025-06-04 14:58:18 [INFO] GenRodApp: Procesando detector: LevelShift...
+2025-06-04 14:58:18 [INFO] GenRodApp: [LevelShift] Series generadas: 1 anómalas, 301 normales
+2025-06-04 14:58:18 [INFO] GenRodApp: Procesando detector: AutoReg...
+2025-06-04 14:58:18 [INFO] GenRodApp: [AutoReg] Series generadas: 5 anómalas, 1505 normales
+2025-06-04 14:58:18 [INFO] GenRodApp: ===== DETECCIÓN COMPLETADA =====
+2025-06-04 14:58:55 [INFO] GenRodApp: ==== INICIO DEL PROCESO ====
+2025-06-04 14:58:55 [INFO] GenRodApp: Consultando InfluxDB ...
+2025-06-04 14:58:55 [INFO] GenRodApp: 🔍 Intentando consulta en InfluxDB 2.7 como fuente primaria...
+2025-06-04 14:59:13 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (119044, 22)
+2025-06-04 14:59:13 [INFO] GenRodApp: Datos InfluxDB: (119044, 22)
+2025-06-04 14:59:13 [INFO] GenRodApp: 🕐 Fecha mínima: 2024-12-16 19:05:44 | Fecha máxima: 2024-12-31 23:58:53
+2025-06-04 14:59:13 [INFO] GenRodApp: 📥 InfluxDB - Preview:
+2025-06-04 14:59:14 [INFO] GenRodApp: Datos crudos InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_raw.csv
+2025-06-04 14:59:14 [INFO] GenRodApp: Limpieza básica ...
+2025-06-04 14:59:14 [INFO] GenRodApp: ===== INICIO DEL PREPROCESAMIENTO =====
+2025-06-04 14:59:14 [INFO] GenRodApp: Shape original: (119044, 22)
+2025-06-04 14:59:14 [INFO] GenRodApp: No se encontraron valores nulos.
+2025-06-04 14:59:14 [INFO] GenRodApp: Eliminadas 0 filas duplicadas por 'time'
+2025-06-04 14:59:14 [INFO] GenRodApp: Eliminadas 0 columnas duplicadas
+2025-06-04 14:59:14 [INFO] GenRodApp: Eliminadas 0 filas con valores nulos (0.00%)
+2025-06-04 14:59:14 [WARNING] GenRodApp: Outliers detectados en 'THDV_L1_Ins': 625 valores (z-score > 3)
+2025-06-04 14:59:14 [WARNING] GenRodApp: Outliers detectados en 'THDV_L2_Ins': 782 valores (z-score > 3)
+2025-06-04 14:59:14 [WARNING] GenRodApp: Outliers detectados en 'THDV_L3_Ins': 709 valores (z-score > 3)
+2025-06-04 14:59:14 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L1_Ins': 162 valores (z-score > 3)
+2025-06-04 14:59:14 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L2_Ins': 162 valores (z-score > 3)
+2025-06-04 14:59:14 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L3_Ins': 162 valores (z-score > 3)
+2025-06-04 14:59:14 [WARNING] GenRodApp: Outliers detectados en 'PowF_T_Ins': 721 valores (z-score > 3)
+2025-06-04 14:59:14 [WARNING] GenRodApp: Outliers detectados en 'Fre_Ins': 163 valores (z-score > 3)
+2025-06-04 14:59:14 [WARNING] GenRodApp: Outliers detectados en 'THDI_L1_Ins': 1305 valores (z-score > 3)
+2025-06-04 14:59:14 [WARNING] GenRodApp: Outliers detectados en 'THDI_L2_Ins': 1323 valores (z-score > 3)
+2025-06-04 14:59:14 [WARNING] GenRodApp: Outliers detectados en 'THDI_L3_Ins': 1271 valores (z-score > 3)
+2025-06-04 14:59:14 [INFO] GenRodApp: Shape final: (119044, 22)
+2025-06-04 14:59:14 [INFO] GenRodApp: Resumen columnas con outliers:
+2025-06-04 14:59:14 [INFO] GenRodApp:  - THDV_L1_Ins: 625 valores extremos detectados
+2025-06-04 14:59:14 [INFO] GenRodApp:  - THDV_L2_Ins: 782 valores extremos detectados
+2025-06-04 14:59:14 [INFO] GenRodApp:  - THDV_L3_Ins: 709 valores extremos detectados
+2025-06-04 14:59:14 [INFO] GenRodApp:  - Vrms_L1_Ins: 162 valores extremos detectados
+2025-06-04 14:59:14 [INFO] GenRodApp:  - Vrms_L2_Ins: 162 valores extremos detectados
+2025-06-04 14:59:14 [INFO] GenRodApp:  - Vrms_L3_Ins: 162 valores extremos detectados
+2025-06-04 14:59:14 [INFO] GenRodApp:  - PowF_T_Ins: 721 valores extremos detectados
+2025-06-04 14:59:14 [INFO] GenRodApp:  - Fre_Ins: 163 valores extremos detectados
+2025-06-04 14:59:14 [INFO] GenRodApp:  - THDI_L1_Ins: 1305 valores extremos detectados
+2025-06-04 14:59:14 [INFO] GenRodApp:  - THDI_L2_Ins: 1323 valores extremos detectados
+2025-06-04 14:59:14 [INFO] GenRodApp:  - THDI_L3_Ins: 1271 valores extremos detectados
+2025-06-04 14:59:14 [INFO] GenRodApp: ===== FIN DEL PREPROCESAMIENTO =====
+2025-06-04 14:59:16 [INFO] GenRodApp: Datos limpios InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_clean.csv
+2025-06-04 14:59:16 [INFO] GenRodApp: Se normalizaron las columnas: ['THDV_L1_Ins', 'THDV_L2_Ins', 'THDV_L3_Ins', 'Vrms_L1_Ins', 'Vrms_L2_Ins', 'Vrms_L3_Ins', 'PowA_L1_Ins', 'PowA_L2_Ins', 'PowA_L3_Ins', 'PowF_T_Ins', 'PowS_L1_Ins', 'PowS_L2_Ins', 'PowS_L3_Ins', 'EA_I_IV_T', 'Fre_Ins', 'Irms_L1_Ins', 'Irms_L2_Ins', 'Irms_L3_Ins', 'THDI_L1_Ins', 'THDI_L2_Ins', 'THDI_L3_Ins']
+2025-06-04 14:59:18 [INFO] GenRodApp: Datos normalizados InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_norm.csv
+2025-06-04 14:59:18 [INFO] GenRodApp: ===== INICIANDO DETECCIÓN DE ANOMALÍAS =====
+2025-06-04 14:59:18 [INFO] GenRodApp: Preview de serie creada para ADTK:
+                     PowA_L1_Ins  PowF_T_Ins  THDI_L1_Ins
+time                                                     
+2024-12-16 19:05:44     0.615217    0.873684     0.158541
+2024-12-16 19:05:53     0.580435    0.863158     0.168425
+2024-12-16 19:06:03     0.554348    0.863158     0.159343
+2024-12-16 19:06:14     0.589130    0.873684     0.149192
+2024-12-16 19:06:23     0.650000    0.852632     0.134633
+2025-06-04 14:59:18 [INFO] GenRodApp: Corriendo métodos de detección de anomalías (ADTK)...
+2025-06-04 14:59:18 [INFO] GenRodApp: Aplicando LevelShiftAD...
+2025-06-04 14:59:19 [INFO] GenRodApp: Aplicando VolatilityShiftAD...
+2025-06-04 14:59:19 [INFO] GenRodApp: Aplicando AutoregressionAD...
+2025-06-04 14:59:20 [INFO] GenRodApp: Procesando detector: LevelShift...
+2025-06-04 14:59:20 [INFO] GenRodApp: [LevelShift] Series generadas: 7 anómalas, 2107 normales
+2025-06-04 14:59:20 [INFO] GenRodApp: Procesando detector: AutoReg...
+2025-06-04 14:59:20 [INFO] GenRodApp: [AutoReg] Series generadas: 41 anómalas, 12341 normales
+2025-06-04 14:59:20 [INFO] GenRodApp: ===== DETECCIÓN COMPLETADA =====
+2025-06-04 15:02:03 [INFO] GenRodApp: ==== INICIO DEL PROCESO ====
+2025-06-04 15:02:03 [INFO] GenRodApp: Consultando InfluxDB ...
+2025-06-04 15:02:03 [INFO] GenRodApp: 🔍 Intentando consulta en InfluxDB Nuevo como fuente primaria...
+2025-06-04 15:02:20 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (119044, 22)
+2025-06-04 15:02:20 [INFO] GenRodApp: Datos InfluxDB: (119044, 22)
+2025-06-04 15:02:20 [INFO] GenRodApp: 🕐 Fecha mínima: 2024-12-16 19:05:44 | Fecha máxima: 2024-12-31 23:58:53
+2025-06-04 15:02:20 [INFO] GenRodApp: 📥 InfluxDB - Preview:
+2025-06-04 15:02:21 [INFO] GenRodApp: Datos crudos InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_raw.csv
+2025-06-04 15:02:21 [INFO] GenRodApp: Limpieza básica ...
+2025-06-04 15:02:21 [INFO] GenRodApp: ===== INICIO DEL PREPROCESAMIENTO =====
+2025-06-04 15:02:21 [INFO] GenRodApp: Shape original: (119044, 22)
+2025-06-04 15:02:21 [INFO] GenRodApp: No se encontraron valores nulos.
+2025-06-04 15:02:21 [INFO] GenRodApp: Eliminadas 0 filas duplicadas por 'time'
+2025-06-04 15:02:22 [INFO] GenRodApp: Eliminadas 0 columnas duplicadas
+2025-06-04 15:02:22 [INFO] GenRodApp: Eliminadas 0 filas con valores nulos (0.00%)
+2025-06-04 15:02:22 [WARNING] GenRodApp: Outliers detectados en 'THDV_L1_Ins': 625 valores (z-score > 3)
+2025-06-04 15:02:22 [WARNING] GenRodApp: Outliers detectados en 'THDV_L2_Ins': 782 valores (z-score > 3)
+2025-06-04 15:02:22 [WARNING] GenRodApp: Outliers detectados en 'THDV_L3_Ins': 709 valores (z-score > 3)
+2025-06-04 15:02:22 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L1_Ins': 162 valores (z-score > 3)
+2025-06-04 15:02:22 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L2_Ins': 162 valores (z-score > 3)
+2025-06-04 15:02:22 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L3_Ins': 162 valores (z-score > 3)
+2025-06-04 15:02:22 [WARNING] GenRodApp: Outliers detectados en 'PowF_T_Ins': 721 valores (z-score > 3)
+2025-06-04 15:02:22 [WARNING] GenRodApp: Outliers detectados en 'Fre_Ins': 163 valores (z-score > 3)
+2025-06-04 15:02:22 [WARNING] GenRodApp: Outliers detectados en 'THDI_L1_Ins': 1305 valores (z-score > 3)
+2025-06-04 15:02:22 [WARNING] GenRodApp: Outliers detectados en 'THDI_L2_Ins': 1323 valores (z-score > 3)
+2025-06-04 15:02:22 [WARNING] GenRodApp: Outliers detectados en 'THDI_L3_Ins': 1271 valores (z-score > 3)
+2025-06-04 15:02:22 [INFO] GenRodApp: Shape final: (119044, 22)
+2025-06-04 15:02:22 [INFO] GenRodApp: Resumen columnas con outliers:
+2025-06-04 15:02:22 [INFO] GenRodApp:  - THDV_L1_Ins: 625 valores extremos detectados
+2025-06-04 15:02:22 [INFO] GenRodApp:  - THDV_L2_Ins: 782 valores extremos detectados
+2025-06-04 15:02:22 [INFO] GenRodApp:  - THDV_L3_Ins: 709 valores extremos detectados
+2025-06-04 15:02:22 [INFO] GenRodApp:  - Vrms_L1_Ins: 162 valores extremos detectados
+2025-06-04 15:02:22 [INFO] GenRodApp:  - Vrms_L2_Ins: 162 valores extremos detectados
+2025-06-04 15:02:22 [INFO] GenRodApp:  - Vrms_L3_Ins: 162 valores extremos detectados
+2025-06-04 15:02:22 [INFO] GenRodApp:  - PowF_T_Ins: 721 valores extremos detectados
+2025-06-04 15:02:22 [INFO] GenRodApp:  - Fre_Ins: 163 valores extremos detectados
+2025-06-04 15:02:22 [INFO] GenRodApp:  - THDI_L1_Ins: 1305 valores extremos detectados
+2025-06-04 15:02:22 [INFO] GenRodApp:  - THDI_L2_Ins: 1323 valores extremos detectados
+2025-06-04 15:02:22 [INFO] GenRodApp:  - THDI_L3_Ins: 1271 valores extremos detectados
+2025-06-04 15:02:22 [INFO] GenRodApp: ===== FIN DEL PREPROCESAMIENTO =====
+2025-06-04 15:02:23 [INFO] GenRodApp: Datos limpios InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_clean.csv
+2025-06-04 15:02:23 [INFO] GenRodApp: Se normalizaron las columnas: ['THDV_L1_Ins', 'THDV_L2_Ins', 'THDV_L3_Ins', 'Vrms_L1_Ins', 'Vrms_L2_Ins', 'Vrms_L3_Ins', 'PowA_L1_Ins', 'PowA_L2_Ins', 'PowA_L3_Ins', 'PowF_T_Ins', 'PowS_L1_Ins', 'PowS_L2_Ins', 'PowS_L3_Ins', 'EA_I_IV_T', 'Fre_Ins', 'Irms_L1_Ins', 'Irms_L2_Ins', 'Irms_L3_Ins', 'THDI_L1_Ins', 'THDI_L2_Ins', 'THDI_L3_Ins']
+2025-06-04 15:02:25 [INFO] GenRodApp: Datos normalizados InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_norm.csv
+2025-06-04 15:02:25 [INFO] GenRodApp: ===== INICIANDO DETECCIÓN DE ANOMALÍAS =====
+2025-06-04 15:02:25 [INFO] GenRodApp: Preview de serie creada para ADTK:
+                     PowA_L1_Ins  PowF_T_Ins  THDI_L1_Ins
+time                                                     
+2024-12-16 19:05:44     0.615217    0.873684     0.158541
+2024-12-16 19:05:53     0.580435    0.863158     0.168425
+2024-12-16 19:06:03     0.554348    0.863158     0.159343
+2024-12-16 19:06:14     0.589130    0.873684     0.149192
+2024-12-16 19:06:23     0.650000    0.852632     0.134633
+2025-06-04 15:02:25 [INFO] GenRodApp: Corriendo métodos de detección de anomalías (ADTK)...
+2025-06-04 15:02:25 [INFO] GenRodApp: Aplicando LevelShiftAD...
+2025-06-04 15:02:26 [INFO] GenRodApp: Aplicando VolatilityShiftAD...
+2025-06-04 15:02:26 [INFO] GenRodApp: Aplicando AutoregressionAD...
+2025-06-04 15:02:27 [INFO] GenRodApp: Procesando detector: LevelShift...
+2025-06-04 15:02:27 [INFO] GenRodApp: [LevelShift] Series generadas: 7 anómalas, 2107 normales
+2025-06-04 15:02:27 [INFO] GenRodApp: Procesando detector: AutoReg...
+2025-06-04 15:02:27 [INFO] GenRodApp: [AutoReg] Series generadas: 41 anómalas, 12341 normales
+2025-06-04 15:02:27 [INFO] GenRodApp: ===== DETECCIÓN COMPLETADA =====
+2025-06-04 15:06:04 [INFO] GenRodApp: ==== INICIO DEL PROCESO ====
+2025-06-04 15:06:04 [INFO] GenRodApp: Consultando InfluxDB ...
+2025-06-04 15:06:04 [INFO] GenRodApp: 🔍 Intentando consulta en InfluxDB Nuevo como fuente primaria...
+2025-06-04 15:06:22 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (119044, 22)
+2025-06-04 15:06:22 [INFO] GenRodApp: 📊 voltage: 119044 filas
+2025-06-04 15:06:22 [INFO] GenRodApp: 📊 power: 119044 filas
+2025-06-04 15:06:22 [INFO] GenRodApp: 📊 energy: 119044 filas
+2025-06-04 15:06:22 [INFO] GenRodApp: 📊 frequency: 119044 filas
+2025-06-04 15:06:22 [INFO] GenRodApp: 📊 current: 119044 filas
+2025-06-04 15:06:22 [INFO] GenRodApp: 📅 voltage - min: 2024-12-16 19:05:44 | max: 2024-12-31 23:58:53
+2025-06-04 15:06:22 [INFO] GenRodApp: 📅 power - min: 2024-12-16 19:05:44 | max: 2024-12-31 23:58:53
+2025-06-04 15:06:22 [INFO] GenRodApp: 📅 energy - min: 2024-12-16 19:05:44 | max: 2024-12-31 23:58:53
+2025-06-04 15:06:22 [INFO] GenRodApp: 📅 frequency - min: 2024-12-16 19:05:44 | max: 2024-12-31 23:58:53
+2025-06-04 15:06:22 [INFO] GenRodApp: 📅 current - min: 2024-12-16 19:05:44 | max: 2024-12-31 23:58:53
+2025-06-04 15:06:22 [INFO] GenRodApp: Datos InfluxDB: (119044, 22)
+2025-06-04 15:06:22 [INFO] GenRodApp: 🕐 Fecha mínima: 2024-12-16 19:05:44 | Fecha máxima: 2024-12-31 23:58:53
+2025-06-04 15:06:22 [INFO] GenRodApp: 📥 InfluxDB - Preview:
+2025-06-04 15:06:23 [INFO] GenRodApp: Datos crudos InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_raw.csv
+2025-06-04 15:06:23 [INFO] GenRodApp: Limpieza básica ...
+2025-06-04 15:06:23 [INFO] GenRodApp: ===== INICIO DEL PREPROCESAMIENTO =====
+2025-06-04 15:06:23 [INFO] GenRodApp: Shape original: (119044, 22)
+2025-06-04 15:06:23 [INFO] GenRodApp: No se encontraron valores nulos.
+2025-06-04 15:06:23 [INFO] GenRodApp: Eliminadas 0 filas duplicadas por 'time'
+2025-06-04 15:06:23 [INFO] GenRodApp: Eliminadas 0 columnas duplicadas
+2025-06-04 15:06:23 [INFO] GenRodApp: Eliminadas 0 filas con valores nulos (0.00%)
+2025-06-04 15:06:23 [WARNING] GenRodApp: Outliers detectados en 'THDV_L1_Ins': 625 valores (z-score > 3)
+2025-06-04 15:06:23 [WARNING] GenRodApp: Outliers detectados en 'THDV_L2_Ins': 782 valores (z-score > 3)
+2025-06-04 15:06:23 [WARNING] GenRodApp: Outliers detectados en 'THDV_L3_Ins': 709 valores (z-score > 3)
+2025-06-04 15:06:23 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L1_Ins': 162 valores (z-score > 3)
+2025-06-04 15:06:23 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L2_Ins': 162 valores (z-score > 3)
+2025-06-04 15:06:23 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L3_Ins': 162 valores (z-score > 3)
+2025-06-04 15:06:23 [WARNING] GenRodApp: Outliers detectados en 'PowF_T_Ins': 721 valores (z-score > 3)
+2025-06-04 15:06:23 [WARNING] GenRodApp: Outliers detectados en 'Fre_Ins': 163 valores (z-score > 3)
+2025-06-04 15:06:23 [WARNING] GenRodApp: Outliers detectados en 'THDI_L1_Ins': 1305 valores (z-score > 3)
+2025-06-04 15:06:23 [WARNING] GenRodApp: Outliers detectados en 'THDI_L2_Ins': 1323 valores (z-score > 3)
+2025-06-04 15:06:23 [WARNING] GenRodApp: Outliers detectados en 'THDI_L3_Ins': 1271 valores (z-score > 3)
+2025-06-04 15:06:23 [INFO] GenRodApp: Shape final: (119044, 22)
+2025-06-04 15:06:23 [INFO] GenRodApp: Resumen columnas con outliers:
+2025-06-04 15:06:23 [INFO] GenRodApp:  - THDV_L1_Ins: 625 valores extremos detectados
+2025-06-04 15:06:23 [INFO] GenRodApp:  - THDV_L2_Ins: 782 valores extremos detectados
+2025-06-04 15:06:23 [INFO] GenRodApp:  - THDV_L3_Ins: 709 valores extremos detectados
+2025-06-04 15:06:23 [INFO] GenRodApp:  - Vrms_L1_Ins: 162 valores extremos detectados
+2025-06-04 15:06:23 [INFO] GenRodApp:  - Vrms_L2_Ins: 162 valores extremos detectados
+2025-06-04 15:06:23 [INFO] GenRodApp:  - Vrms_L3_Ins: 162 valores extremos detectados
+2025-06-04 15:06:23 [INFO] GenRodApp:  - PowF_T_Ins: 721 valores extremos detectados
+2025-06-04 15:06:23 [INFO] GenRodApp:  - Fre_Ins: 163 valores extremos detectados
+2025-06-04 15:06:23 [INFO] GenRodApp:  - THDI_L1_Ins: 1305 valores extremos detectados
+2025-06-04 15:06:23 [INFO] GenRodApp:  - THDI_L2_Ins: 1323 valores extremos detectados
+2025-06-04 15:06:23 [INFO] GenRodApp:  - THDI_L3_Ins: 1271 valores extremos detectados
+2025-06-04 15:06:23 [INFO] GenRodApp: ===== FIN DEL PREPROCESAMIENTO =====
+2025-06-04 15:06:24 [INFO] GenRodApp: Datos limpios InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_clean.csv
+2025-06-04 15:06:24 [INFO] GenRodApp: Se normalizaron las columnas: ['THDV_L1_Ins', 'THDV_L2_Ins', 'THDV_L3_Ins', 'Vrms_L1_Ins', 'Vrms_L2_Ins', 'Vrms_L3_Ins', 'PowA_L1_Ins', 'PowA_L2_Ins', 'PowA_L3_Ins', 'PowF_T_Ins', 'PowS_L1_Ins', 'PowS_L2_Ins', 'PowS_L3_Ins', 'EA_I_IV_T', 'Fre_Ins', 'Irms_L1_Ins', 'Irms_L2_Ins', 'Irms_L3_Ins', 'THDI_L1_Ins', 'THDI_L2_Ins', 'THDI_L3_Ins']
+2025-06-04 15:06:26 [INFO] GenRodApp: Datos normalizados InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_norm.csv
+2025-06-04 15:06:26 [INFO] GenRodApp: ===== INICIANDO DETECCIÓN DE ANOMALÍAS =====
+2025-06-04 15:06:26 [INFO] GenRodApp: Preview de serie creada para ADTK:
+                     PowA_L1_Ins  PowF_T_Ins  THDI_L1_Ins
+time                                                     
+2024-12-16 19:05:44     0.615217    0.873684     0.158541
+2024-12-16 19:05:53     0.580435    0.863158     0.168425
+2024-12-16 19:06:03     0.554348    0.863158     0.159343
+2024-12-16 19:06:14     0.589130    0.873684     0.149192
+2024-12-16 19:06:23     0.650000    0.852632     0.134633
+2025-06-04 15:06:27 [INFO] GenRodApp: Corriendo métodos de detección de anomalías (ADTK)...
+2025-06-04 15:06:27 [INFO] GenRodApp: Aplicando LevelShiftAD...
+2025-06-04 15:06:27 [INFO] GenRodApp: Aplicando VolatilityShiftAD...
+2025-06-04 15:06:27 [INFO] GenRodApp: Aplicando AutoregressionAD...
+2025-06-04 15:06:28 [INFO] GenRodApp: Procesando detector: LevelShift...
+2025-06-04 15:06:28 [INFO] GenRodApp: [LevelShift] Series generadas: 7 anómalas, 2107 normales
+2025-06-04 15:06:28 [INFO] GenRodApp: Procesando detector: AutoReg...
+2025-06-04 15:06:29 [INFO] GenRodApp: [AutoReg] Series generadas: 41 anómalas, 12341 normales
+2025-06-04 15:06:29 [INFO] GenRodApp: ===== DETECCIÓN COMPLETADA =====
+2025-06-04 15:08:42 [INFO] GenRodApp: ==== INICIO DEL PROCESO ====
+2025-06-04 15:08:42 [INFO] GenRodApp: Consultando InfluxDB ...
+2025-06-04 15:08:42 [INFO] GenRodApp: 🔍 Intentando consulta en InfluxDB Nuevo como fuente primaria...
+2025-06-04 15:08:59 [WARNING] GenRodApp: [Fallback total] Fallo InfluxDB Nuevo: Cannot compare tz-naive and tz-aware timestamps
+2025-06-04 15:08:59 [INFO] GenRodApp: 🔁 Reintentando con InfluxDB Viejo...
+2025-06-04 15:08:59 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: voltage
+2025-06-04 15:09:03 [INFO] GenRodApp: Consulta voltage completada con 255518 registros
+2025-06-04 15:09:03 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: power
+2025-06-04 15:09:06 [INFO] GenRodApp: Consulta power completada con 255518 registros
+2025-06-04 15:09:06 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: energy
+2025-06-04 15:09:08 [INFO] GenRodApp: Consulta energy completada con 255518 registros
+2025-06-04 15:09:08 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: frequency
+2025-06-04 15:09:09 [INFO] GenRodApp: Consulta frequency completada con 255518 registros
+2025-06-04 15:09:09 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: current
+2025-06-04 15:09:13 [INFO] GenRodApp: Consulta current completada con 255518 registros
+2025-06-04 15:09:13 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (255518, 22)
+2025-06-04 15:09:13 [INFO] GenRodApp: 📊 voltage: 255518 filas
+2025-06-04 15:09:13 [INFO] GenRodApp: 📊 power: 255518 filas
+2025-06-04 15:09:13 [INFO] GenRodApp: 📊 energy: 255518 filas
+2025-06-04 15:09:13 [INFO] GenRodApp: 📊 frequency: 255518 filas
+2025-06-04 15:09:13 [INFO] GenRodApp: 📊 current: 255518 filas
+2025-06-04 15:09:13 [INFO] GenRodApp: 📅 voltage - min: 2024-12-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-04 15:09:13 [INFO] GenRodApp: 📅 power - min: 2024-12-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-04 15:09:13 [INFO] GenRodApp: 📅 energy - min: 2024-12-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-04 15:09:13 [INFO] GenRodApp: 📅 frequency - min: 2024-12-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-04 15:09:13 [INFO] GenRodApp: 📅 current - min: 2024-12-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-04 15:09:13 [INFO] GenRodApp: Datos InfluxDB: (255518, 22)
+2025-06-04 15:09:13 [INFO] GenRodApp: 🕐 Fecha mínima: 2024-12-01 00:00:03 | Fecha máxima: 2024-12-31 23:58:53
+2025-06-04 15:09:13 [INFO] GenRodApp: 📥 InfluxDB - Preview:
+2025-06-04 15:09:16 [INFO] GenRodApp: Datos crudos InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_raw.csv
+2025-06-04 15:09:16 [INFO] GenRodApp: Limpieza básica ...
+2025-06-04 15:09:16 [INFO] GenRodApp: ===== INICIO DEL PREPROCESAMIENTO =====
+2025-06-04 15:09:16 [INFO] GenRodApp: Shape original: (255518, 22)
+2025-06-04 15:09:16 [INFO] GenRodApp: No se encontraron valores nulos.
+2025-06-04 15:09:16 [INFO] GenRodApp: Eliminadas 0 filas duplicadas por 'time'
+2025-06-04 15:09:16 [INFO] GenRodApp: Eliminadas 0 columnas duplicadas
+2025-06-04 15:09:16 [INFO] GenRodApp: Eliminadas 0 filas con valores nulos (0.00%)
+2025-06-04 15:09:16 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L1_Ins': 162 valores (z-score > 3)
+2025-06-04 15:09:16 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L2_Ins': 162 valores (z-score > 3)
+2025-06-04 15:09:16 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L3_Ins': 162 valores (z-score > 3)
+2025-06-04 15:09:16 [WARNING] GenRodApp: Outliers detectados en 'THDV_L1_Ins': 1668 valores (z-score > 3)
+2025-06-04 15:09:16 [WARNING] GenRodApp: Outliers detectados en 'THDV_L2_Ins': 1659 valores (z-score > 3)
+2025-06-04 15:09:16 [WARNING] GenRodApp: Outliers detectados en 'THDV_L3_Ins': 1728 valores (z-score > 3)
+2025-06-04 15:09:16 [WARNING] GenRodApp: Outliers detectados en 'PowF_T_Ins': 1528 valores (z-score > 3)
+2025-06-04 15:09:16 [WARNING] GenRodApp: Outliers detectados en 'Fre_Ins': 163 valores (z-score > 3)
+2025-06-04 15:09:16 [WARNING] GenRodApp: Outliers detectados en 'THDI_L1_Ins': 4073 valores (z-score > 3)
+2025-06-04 15:09:16 [WARNING] GenRodApp: Outliers detectados en 'THDI_L2_Ins': 3994 valores (z-score > 3)
+2025-06-04 15:09:16 [WARNING] GenRodApp: Outliers detectados en 'THDI_L3_Ins': 4121 valores (z-score > 3)
+2025-06-04 15:09:16 [INFO] GenRodApp: Shape final: (255518, 22)
+2025-06-04 15:09:16 [INFO] GenRodApp: Resumen columnas con outliers:
+2025-06-04 15:09:16 [INFO] GenRodApp:  - Vrms_L1_Ins: 162 valores extremos detectados
+2025-06-04 15:09:16 [INFO] GenRodApp:  - Vrms_L2_Ins: 162 valores extremos detectados
+2025-06-04 15:09:16 [INFO] GenRodApp:  - Vrms_L3_Ins: 162 valores extremos detectados
+2025-06-04 15:09:16 [INFO] GenRodApp:  - THDV_L1_Ins: 1668 valores extremos detectados
+2025-06-04 15:09:16 [INFO] GenRodApp:  - THDV_L2_Ins: 1659 valores extremos detectados
+2025-06-04 15:09:16 [INFO] GenRodApp:  - THDV_L3_Ins: 1728 valores extremos detectados
+2025-06-04 15:09:16 [INFO] GenRodApp:  - PowF_T_Ins: 1528 valores extremos detectados
+2025-06-04 15:09:16 [INFO] GenRodApp:  - Fre_Ins: 163 valores extremos detectados
+2025-06-04 15:09:16 [INFO] GenRodApp:  - THDI_L1_Ins: 4073 valores extremos detectados
+2025-06-04 15:09:16 [INFO] GenRodApp:  - THDI_L2_Ins: 3994 valores extremos detectados
+2025-06-04 15:09:16 [INFO] GenRodApp:  - THDI_L3_Ins: 4121 valores extremos detectados
+2025-06-04 15:09:16 [INFO] GenRodApp: ===== FIN DEL PREPROCESAMIENTO =====
+2025-06-04 15:09:19 [INFO] GenRodApp: Datos limpios InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_clean.csv
+2025-06-04 15:09:19 [INFO] GenRodApp: Se normalizaron las columnas: ['Vrms_L1_Ins', 'Vrms_L2_Ins', 'Vrms_L3_Ins', 'THDV_L1_Ins', 'THDV_L2_Ins', 'THDV_L3_Ins', 'PowA_L1_Ins', 'PowA_L2_Ins', 'PowA_L3_Ins', 'PowS_L1_Ins', 'PowS_L2_Ins', 'PowS_L3_Ins', 'PowF_T_Ins', 'EA_I_IV_T', 'Fre_Ins', 'Irms_L1_Ins', 'Irms_L2_Ins', 'Irms_L3_Ins', 'THDI_L1_Ins', 'THDI_L2_Ins', 'THDI_L3_Ins']
+2025-06-04 15:09:23 [INFO] GenRodApp: Datos normalizados InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_norm.csv
+2025-06-04 15:09:23 [INFO] GenRodApp: ===== INICIANDO DETECCIÓN DE ANOMALÍAS =====
+2025-06-04 15:09:23 [INFO] GenRodApp: Preview de serie creada para ADTK:
+                     PowA_L1_Ins  PowF_T_Ins  THDI_L1_Ins
+time                                                     
+2024-12-01 00:00:03     0.046025    0.715789     0.188059
+2024-12-01 00:00:13     0.073222    0.842105     0.132897
+2024-12-01 00:00:24     0.073222    0.842105     0.133164
+2024-12-01 00:00:34     0.069038    0.831579     0.139976
+2024-12-01 00:00:44     0.069038    0.831579     0.137572
+2025-06-04 15:09:23 [INFO] GenRodApp: Corriendo métodos de detección de anomalías (ADTK)...
+2025-06-04 15:09:23 [INFO] GenRodApp: Aplicando LevelShiftAD...
+2025-06-04 15:09:25 [INFO] GenRodApp: Aplicando VolatilityShiftAD...
+2025-06-04 15:09:25 [INFO] GenRodApp: Aplicando AutoregressionAD...
+2025-06-04 15:09:28 [INFO] GenRodApp: Procesando detector: LevelShift...
+2025-06-04 15:09:28 [INFO] GenRodApp: [LevelShift] Series generadas: 11 anómalas, 3311 normales
+2025-06-04 15:09:28 [INFO] GenRodApp: Procesando detector: AutoReg...
+2025-06-04 15:09:28 [INFO] GenRodApp: [AutoReg] Series generadas: 86 anómalas, 25886 normales
+2025-06-04 15:09:29 [INFO] GenRodApp: ===== DETECCIÓN COMPLETADA =====
+2025-06-04 15:14:03 [INFO] GenRodApp: ==== INICIO DEL PROCESO ====
+2025-06-04 15:14:03 [INFO] GenRodApp: Consultando InfluxDB ...
+2025-06-04 15:14:03 [INFO] GenRodApp: 🔍 Intentando consulta en InfluxDB Nuevo como fuente primaria...
+2025-06-04 15:14:20 [WARNING] GenRodApp: [Fallback total] Fallo InfluxDB Nuevo: Cannot compare tz-naive and tz-aware timestamps
+2025-06-04 15:14:20 [INFO] GenRodApp: 🔁 Reintentando con InfluxDB Viejo...
+2025-06-04 15:14:20 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: voltage
+2025-06-04 15:14:27 [INFO] GenRodApp: Consulta voltage completada con 512219 registros
+2025-06-04 15:14:27 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: power
+2025-06-04 15:14:33 [INFO] GenRodApp: Consulta power completada con 512219 registros
+2025-06-04 15:14:33 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: energy
+2025-06-04 15:14:37 [INFO] GenRodApp: Consulta energy completada con 512219 registros
+2025-06-04 15:14:37 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: frequency
+2025-06-04 15:14:40 [INFO] GenRodApp: Consulta frequency completada con 512219 registros
+2025-06-04 15:14:40 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: current
+2025-06-04 15:14:46 [INFO] GenRodApp: Consulta current completada con 512219 registros
+2025-06-04 15:14:47 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (512219, 22)
+2025-06-04 15:14:47 [INFO] GenRodApp: 📊 voltage: 512219 filas
+2025-06-04 15:14:47 [INFO] GenRodApp: 📊 power: 512219 filas
+2025-06-04 15:14:47 [INFO] GenRodApp: 📊 energy: 512219 filas
+2025-06-04 15:14:47 [INFO] GenRodApp: 📊 frequency: 512219 filas
+2025-06-04 15:14:47 [INFO] GenRodApp: 📊 current: 512219 filas
+2025-06-04 15:14:47 [INFO] GenRodApp: 📅 voltage - min: 2024-11-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-04 15:14:47 [INFO] GenRodApp: 📅 power - min: 2024-11-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-04 15:14:47 [INFO] GenRodApp: 📅 energy - min: 2024-11-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-04 15:14:47 [INFO] GenRodApp: 📅 frequency - min: 2024-11-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-04 15:14:47 [INFO] GenRodApp: 📅 current - min: 2024-11-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-04 15:14:47 [INFO] GenRodApp: Datos InfluxDB: (512219, 22)
+2025-06-04 15:14:47 [INFO] GenRodApp: 🕐 Fecha mínima: 2024-11-01 00:00:03 | Fecha máxima: 2024-12-31 23:58:53
+2025-06-04 15:14:47 [INFO] GenRodApp: 📥 InfluxDB - Preview:
+2025-06-04 15:14:52 [INFO] GenRodApp: Datos crudos InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_raw.csv
+2025-06-04 15:14:52 [INFO] GenRodApp: Limpieza básica ...
+2025-06-04 15:14:52 [INFO] GenRodApp: ===== INICIO DEL PREPROCESAMIENTO =====
+2025-06-04 15:14:52 [INFO] GenRodApp: Shape original: (512219, 22)
+2025-06-04 15:14:52 [INFO] GenRodApp: No se encontraron valores nulos.
+2025-06-04 15:14:52 [INFO] GenRodApp: Eliminadas 0 filas duplicadas por 'time'
+2025-06-04 15:14:52 [INFO] GenRodApp: Eliminadas 0 columnas duplicadas
+2025-06-04 15:14:52 [INFO] GenRodApp: Eliminadas 0 filas con valores nulos (0.00%)
+2025-06-04 15:14:52 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L1_Ins': 1180 valores (z-score > 3)
+2025-06-04 15:14:52 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L2_Ins': 1155 valores (z-score > 3)
+2025-06-04 15:14:52 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L3_Ins': 3821 valores (z-score > 3)
+2025-06-04 15:14:52 [WARNING] GenRodApp: Outliers detectados en 'THDV_L1_Ins': 5240 valores (z-score > 3)
+2025-06-04 15:14:52 [WARNING] GenRodApp: Outliers detectados en 'THDV_L2_Ins': 2850 valores (z-score > 3)
+2025-06-04 15:14:52 [WARNING] GenRodApp: Outliers detectados en 'THDV_L3_Ins': 4262 valores (z-score > 3)
+2025-06-04 15:14:52 [WARNING] GenRodApp: Outliers detectados en 'PowF_T_Ins': 5667 valores (z-score > 3)
+2025-06-04 15:14:52 [WARNING] GenRodApp: Outliers detectados en 'Fre_Ins': 1156 valores (z-score > 3)
+2025-06-04 15:14:53 [WARNING] GenRodApp: Outliers detectados en 'THDI_L1_Ins': 6318 valores (z-score > 3)
+2025-06-04 15:14:53 [WARNING] GenRodApp: Outliers detectados en 'THDI_L2_Ins': 5993 valores (z-score > 3)
+2025-06-04 15:14:53 [WARNING] GenRodApp: Outliers detectados en 'THDI_L3_Ins': 3912 valores (z-score > 3)
+2025-06-04 15:14:53 [INFO] GenRodApp: Shape final: (512219, 22)
+2025-06-04 15:14:53 [INFO] GenRodApp: Resumen columnas con outliers:
+2025-06-04 15:14:53 [INFO] GenRodApp:  - Vrms_L1_Ins: 1180 valores extremos detectados
+2025-06-04 15:14:53 [INFO] GenRodApp:  - Vrms_L2_Ins: 1155 valores extremos detectados
+2025-06-04 15:14:53 [INFO] GenRodApp:  - Vrms_L3_Ins: 3821 valores extremos detectados
+2025-06-04 15:14:53 [INFO] GenRodApp:  - THDV_L1_Ins: 5240 valores extremos detectados
+2025-06-04 15:14:53 [INFO] GenRodApp:  - THDV_L2_Ins: 2850 valores extremos detectados
+2025-06-04 15:14:53 [INFO] GenRodApp:  - THDV_L3_Ins: 4262 valores extremos detectados
+2025-06-04 15:14:53 [INFO] GenRodApp:  - PowF_T_Ins: 5667 valores extremos detectados
+2025-06-04 15:14:53 [INFO] GenRodApp:  - Fre_Ins: 1156 valores extremos detectados
+2025-06-04 15:14:53 [INFO] GenRodApp:  - THDI_L1_Ins: 6318 valores extremos detectados
+2025-06-04 15:14:53 [INFO] GenRodApp:  - THDI_L2_Ins: 5993 valores extremos detectados
+2025-06-04 15:14:53 [INFO] GenRodApp:  - THDI_L3_Ins: 3912 valores extremos detectados
+2025-06-04 15:14:53 [INFO] GenRodApp: ===== FIN DEL PREPROCESAMIENTO =====
+2025-06-04 15:14:58 [INFO] GenRodApp: Datos limpios InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_clean.csv
+2025-06-04 15:14:58 [INFO] GenRodApp: Se normalizaron las columnas: ['Vrms_L1_Ins', 'Vrms_L2_Ins', 'Vrms_L3_Ins', 'THDV_L1_Ins', 'THDV_L2_Ins', 'THDV_L3_Ins', 'PowA_L1_Ins', 'PowA_L2_Ins', 'PowA_L3_Ins', 'PowS_L1_Ins', 'PowS_L2_Ins', 'PowS_L3_Ins', 'PowF_T_Ins', 'EA_I_IV_T', 'Fre_Ins', 'Irms_L1_Ins', 'Irms_L2_Ins', 'Irms_L3_Ins', 'THDI_L1_Ins', 'THDI_L2_Ins', 'THDI_L3_Ins']
+2025-06-04 15:15:08 [INFO] GenRodApp: Datos normalizados InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_norm.csv
+2025-06-04 15:15:08 [INFO] GenRodApp: ===== INICIANDO DETECCIÓN DE ANOMALÍAS =====
+2025-06-04 15:15:08 [INFO] GenRodApp: Preview de serie creada para ADTK:
+                     PowA_L1_Ins  PowF_T_Ins  THDI_L1_Ins
+time                                                     
+2024-11-01 00:00:03     0.567766    0.906667     0.023217
+2024-11-01 00:00:13     0.500000    0.900000     0.023355
+2024-11-01 00:00:23     0.538462    0.906667     0.026057
+2024-11-01 00:00:33     0.576923    0.906667     0.025395
+2024-11-01 00:00:43     0.547619    0.906667     0.023685
+2025-06-04 15:15:08 [INFO] GenRodApp: Corriendo métodos de detección de anomalías (ADTK)...
+2025-06-04 15:15:08 [INFO] GenRodApp: Aplicando LevelShiftAD...
+2025-06-04 15:15:11 [INFO] GenRodApp: Aplicando VolatilityShiftAD...
+2025-06-04 15:15:12 [INFO] GenRodApp: Aplicando AutoregressionAD...
+2025-06-04 15:15:17 [INFO] GenRodApp: Procesando detector: LevelShift...
+2025-06-04 15:15:17 [INFO] GenRodApp: [LevelShift] Series generadas: 38 anómalas, 11438 normales
+2025-06-04 15:15:17 [INFO] GenRodApp: Procesando detector: AutoReg...
+2025-06-04 15:15:18 [INFO] GenRodApp: [AutoReg] Series generadas: 224 anómalas, 67424 normales
+2025-06-04 15:15:19 [INFO] GenRodApp: ===== DETECCIÓN COMPLETADA =====
+2025-06-04 15:16:31 [INFO] GenRodApp: Mean Absolute Error de test y predicción: 0.0025754018945195927
+2025-06-04 15:16:31 [INFO] GenRodApp: Mean Absolute Error de predicción y anormal: 0.13190901117250284
+2025-06-04 15:16:31 [INFO] GenRodApp: ==== INICIO DE EJECUCION CONTINUA ====
+2025-06-04 15:16:31 [INFO] GenRodApp: Hora inicial: 2025-06-04T15:16:31Z
+2025-06-04 15:16:31 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 15:16:31 [INFO] GenRodApp: Hora actual: 2025-06-04T15:16:31Z
+2025-06-04 15:16:31 [WARNING] GenRodApp: Rango de tiempo inválido. Saltando iteración.
+2025-06-04 15:16:39 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 15:16:39 [INFO] GenRodApp: Hora actual: 2025-06-04T15:16:39Z
+2025-06-04 15:16:40 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 15:16:40 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 12:16:33        345.0        369.0        341.0         0.9        0.945        0.878        0.948
+2025-06-04 15:16:40 [INFO] GenRodApp: Lazo completado: 1
+2025-06-04 15:16:40 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 1).
+2025-06-04 15:16:48 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 15:16:48 [INFO] GenRodApp: Hora actual: 2025-06-04T15:16:48Z
+2025-06-04 15:16:50 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 15:16:50 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 12:16:44        335.0        361.0        337.0         0.9        0.967        0.895        0.948
+2025-06-04 15:16:50 [INFO] GenRodApp: Lazo completado: 2
+2025-06-04 15:16:50 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 2).
+2025-06-04 15:16:58 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 15:16:58 [INFO] GenRodApp: Hora actual: 2025-06-04T15:16:58Z
+2025-06-04 15:16:59 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 15:16:59 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 12:16:53        338.0        358.0        344.0         0.9        0.956        0.883        0.932
+2025-06-04 15:16:59 [INFO] GenRodApp: Lazo completado: 3
+2025-06-04 15:16:59 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 3).
+2025-06-04 15:17:07 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 15:17:07 [INFO] GenRodApp: Hora actual: 2025-06-04T15:17:07Z
+2025-06-04 15:17:09 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 15:17:09 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 12:17:04        338.0        350.0        346.0        0.91        0.985        0.923        0.958
+2025-06-04 15:17:09 [INFO] GenRodApp: Lazo completado: 4
+2025-06-04 15:17:09 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 4).
+2025-06-04 15:17:17 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 15:17:17 [INFO] GenRodApp: Hora actual: 2025-06-04T15:17:17Z
+2025-06-04 15:17:18 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 15:17:18 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 12:17:13        329.0        354.0        329.0        0.89        1.003        0.964         1.02
+2025-06-04 15:17:18 [INFO] GenRodApp: Lazo completado: 5
+2025-06-04 15:17:18 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 5).
+2025-06-04 15:17:26 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 15:17:26 [INFO] GenRodApp: Hora actual: 2025-06-04T15:17:26Z
+2025-06-04 15:17:28 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 15:17:28 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 12:17:24        354.0        368.0        359.0         0.9        0.855        0.824        0.845
+2025-06-04 15:17:28 [INFO] GenRodApp: Lazo completado: 6
+2025-06-04 15:17:28 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 6).
+2025-06-04 15:17:36 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 15:17:36 [INFO] GenRodApp: Hora actual: 2025-06-04T15:17:36Z
+2025-06-04 15:17:37 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 15:17:37 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 12:17:34        330.0        343.0        335.0        0.91        1.003        0.956        0.979
+2025-06-04 15:17:37 [INFO] GenRodApp: Lazo completado: 7
+2025-06-04 15:17:37 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 7).
+2025-06-04 15:17:45 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 15:17:45 [INFO] GenRodApp: Hora actual: 2025-06-04T15:17:45Z
+2025-06-04 15:17:47 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 15:17:47 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 12:17:43        338.0        352.0        344.0         0.9        0.997        0.946        0.987
+2025-06-04 15:17:47 [INFO] GenRodApp: Lazo completado: 8
+2025-06-04 15:17:47 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 8).
+2025-06-04 15:17:55 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 15:17:55 [INFO] GenRodApp: Hora actual: 2025-06-04T15:17:55Z
+2025-06-04 15:17:56 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 15:17:56 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 12:17:53        339.0        359.0        353.0        0.91        1.115         1.04        1.077
+2025-06-04 15:17:56 [INFO] GenRodApp: Lazo completado: 9
+2025-06-04 15:17:56 [INFO] GenRodApp: Aún no hay suficientes datos para aplicar predicción (actual: 9).
+2025-06-04 15:18:04 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 15:18:04 [INFO] GenRodApp: Hora actual: 2025-06-04T15:18:04Z
+2025-06-04 15:18:06 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 15:18:06 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 12:18:03        328.0        335.0        332.0         0.9        0.976        0.957        0.964
+2025-06-04 15:18:06 [INFO] GenRodApp: Lazo completado: 10
+2025-06-04 15:18:06 [INFO] GenRodApp: MAE calculado: 0.03289182376861575
+2025-06-04 15:18:06 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 15:18:06 [INFO] GenRodApp: Hora actual: 2025-06-04T15:18:06Z
+2025-06-04 15:18:06 [INFO] GenRodApp: Sin nuevos datos. Esperando siguiente iteración.
+2025-06-04 15:18:14 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 15:18:14 [INFO] GenRodApp: Hora actual: 2025-06-04T15:18:14Z
+2025-06-04 15:18:16 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 15:18:16 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 12:18:13        337.0        347.0        335.0         0.9        0.924        0.896        0.918
+2025-06-04 15:18:16 [INFO] GenRodApp: Lazo completado: 11
+2025-06-04 15:18:16 [INFO] GenRodApp: MAE calculado: 0.03289182376861575
+2025-06-04 15:18:16 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 15:18:16 [INFO] GenRodApp: Hora actual: 2025-06-04T15:18:16Z
+2025-06-04 15:18:17 [INFO] GenRodApp: Sin nuevos datos. Esperando siguiente iteración.
+2025-06-04 15:18:25 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 15:18:25 [INFO] GenRodApp: Hora actual: 2025-06-04T15:18:25Z
+2025-06-04 15:18:26 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 15:18:26 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 12:18:23        326.0        332.0        323.0         0.9        1.007        0.981        1.001
+2025-06-04 15:18:26 [INFO] GenRodApp: Lazo completado: 12
+2025-06-04 15:18:26 [INFO] GenRodApp: MAE calculado: 0.03289182376861575
+2025-06-04 15:18:26 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 15:18:26 [INFO] GenRodApp: Hora actual: 2025-06-04T15:18:26Z
+2025-06-04 15:18:27 [INFO] GenRodApp: Sin nuevos datos. Esperando siguiente iteración.
+2025-06-04 15:18:35 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 15:18:35 [INFO] GenRodApp: Hora actual: 2025-06-04T15:18:35Z
+2025-06-04 15:18:36 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 15:18:36 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 12:18:34        361.0        373.0        366.0        0.91        0.973        0.923        0.951
+2025-06-04 15:18:36 [INFO] GenRodApp: Lazo completado: 13
+2025-06-04 15:18:36 [INFO] GenRodApp: MAE calculado: 0.03389182376861575
+2025-06-04 15:18:36 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 15:18:36 [INFO] GenRodApp: Hora actual: 2025-06-04T15:18:36Z
+2025-06-04 15:18:37 [INFO] GenRodApp: Sin nuevos datos. Esperando siguiente iteración.
+2025-06-04 15:18:45 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 15:18:45 [INFO] GenRodApp: Hora actual: 2025-06-04T15:18:45Z
+2025-06-04 15:18:47 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (1, 22)
+2025-06-04 15:18:47 [INFO] GenRodApp: df_t: 
+                 time  PowA_L1_Ins  PowA_L2_Ins  PowA_L3_Ins  PowF_T_Ins  THDI_L1_Ins  THDI_L2_Ins  THDI_L3_Ins
+0 2025-06-04 12:18:43        323.0        339.0        326.0         0.9         1.05        0.991        1.033
+2025-06-04 15:18:47 [INFO] GenRodApp: Lazo completado: 14
+2025-06-04 15:18:47 [INFO] GenRodApp: MAE calculado: 0.03289182376861575
+2025-06-04 15:18:47 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-04 15:18:47 [INFO] GenRodApp: Hora actual: 2025-06-04T15:18:47Z
+2025-06-04 15:18:47 [INFO] GenRodApp: Sin nuevos datos. Esperando siguiente iteración.
+2025-06-04 15:19:16 [INFO] GenRodApp: ==== INICIO DEL PROCESO ====
+2025-06-04 15:19:16 [INFO] GenRodApp: Consultando InfluxDB ...
+2025-06-04 15:19:16 [INFO] GenRodApp: 🔍 Intentando consulta en InfluxDB 2.7 como fuente primaria...
+2025-06-04 15:19:33 [WARNING] GenRodApp: [Fallback total] Fallo InfluxDB 2.7: Cannot compare tz-naive and tz-aware timestamps
+2025-06-04 15:19:33 [INFO] GenRodApp: 🔁 Reintentando con InfluxDB 1.8...
+2025-06-04 15:19:33 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: voltage
+2025-06-04 15:19:40 [INFO] GenRodApp: Consulta voltage completada con 512219 registros
+2025-06-04 15:19:40 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: power
+2025-06-04 15:19:46 [INFO] GenRodApp: Consulta power completada con 512219 registros
+2025-06-04 15:19:46 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: energy
+2025-06-04 15:19:49 [INFO] GenRodApp: Consulta energy completada con 512219 registros
+2025-06-04 15:19:49 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: frequency
+2025-06-04 15:19:53 [INFO] GenRodApp: Consulta frequency completada con 512219 registros
+2025-06-04 15:19:53 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: current
+2025-06-04 15:19:59 [INFO] GenRodApp: Consulta current completada con 512219 registros
+2025-06-04 15:19:59 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (512219, 22)
+2025-06-04 15:19:59 [INFO] GenRodApp: 📊 voltage: 512219 filas
+2025-06-04 15:19:59 [INFO] GenRodApp: 📊 power: 512219 filas
+2025-06-04 15:19:59 [INFO] GenRodApp: 📊 energy: 512219 filas
+2025-06-04 15:19:59 [INFO] GenRodApp: 📊 frequency: 512219 filas
+2025-06-04 15:19:59 [INFO] GenRodApp: 📊 current: 512219 filas
+2025-06-04 15:19:59 [INFO] GenRodApp: 📅 voltage - min: 2024-11-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-04 15:19:59 [INFO] GenRodApp: 📅 power - min: 2024-11-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-04 15:19:59 [INFO] GenRodApp: 📅 energy - min: 2024-11-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-04 15:19:59 [INFO] GenRodApp: 📅 frequency - min: 2024-11-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-04 15:19:59 [INFO] GenRodApp: 📅 current - min: 2024-11-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-04 15:19:59 [INFO] GenRodApp: Datos InfluxDB: (512219, 22)
+2025-06-04 15:19:59 [INFO] GenRodApp: 🕐 Fecha mínima: 2024-11-01 00:00:03 | Fecha máxima: 2024-12-31 23:58:53
+2025-06-04 15:19:59 [INFO] GenRodApp: 📥 InfluxDB - Preview:
+2025-06-04 15:20:05 [INFO] GenRodApp: Datos crudos InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_raw.csv
+2025-06-04 15:20:05 [INFO] GenRodApp: Limpieza básica ...
+2025-06-04 15:20:05 [INFO] GenRodApp: ===== INICIO DEL PREPROCESAMIENTO =====
+2025-06-04 15:20:05 [INFO] GenRodApp: Shape original: (512219, 22)
+2025-06-04 15:20:05 [INFO] GenRodApp: No se encontraron valores nulos.
+2025-06-04 15:20:05 [INFO] GenRodApp: Eliminadas 0 filas duplicadas por 'time'
+2025-06-04 15:20:05 [INFO] GenRodApp: Eliminadas 0 columnas duplicadas
+2025-06-04 15:20:05 [INFO] GenRodApp: Eliminadas 0 filas con valores nulos (0.00%)
+2025-06-04 15:20:05 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L1_Ins': 1180 valores (z-score > 3)
+2025-06-04 15:20:05 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L2_Ins': 1155 valores (z-score > 3)
+2025-06-04 15:20:05 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L3_Ins': 3821 valores (z-score > 3)
+2025-06-04 15:20:05 [WARNING] GenRodApp: Outliers detectados en 'THDV_L1_Ins': 5240 valores (z-score > 3)
+2025-06-04 15:20:05 [WARNING] GenRodApp: Outliers detectados en 'THDV_L2_Ins': 2850 valores (z-score > 3)
+2025-06-04 15:20:05 [WARNING] GenRodApp: Outliers detectados en 'THDV_L3_Ins': 4262 valores (z-score > 3)
+2025-06-04 15:20:05 [WARNING] GenRodApp: Outliers detectados en 'PowF_T_Ins': 5667 valores (z-score > 3)
+2025-06-04 15:20:05 [WARNING] GenRodApp: Outliers detectados en 'Fre_Ins': 1156 valores (z-score > 3)
+2025-06-04 15:20:05 [WARNING] GenRodApp: Outliers detectados en 'THDI_L1_Ins': 6318 valores (z-score > 3)
+2025-06-04 15:20:05 [WARNING] GenRodApp: Outliers detectados en 'THDI_L2_Ins': 5993 valores (z-score > 3)
+2025-06-04 15:20:05 [WARNING] GenRodApp: Outliers detectados en 'THDI_L3_Ins': 3912 valores (z-score > 3)
+2025-06-04 15:20:05 [INFO] GenRodApp: Shape final: (512219, 22)
+2025-06-04 15:20:05 [INFO] GenRodApp: Resumen columnas con outliers:
+2025-06-04 15:20:05 [INFO] GenRodApp:  - Vrms_L1_Ins: 1180 valores extremos detectados
+2025-06-04 15:20:05 [INFO] GenRodApp:  - Vrms_L2_Ins: 1155 valores extremos detectados
+2025-06-04 15:20:05 [INFO] GenRodApp:  - Vrms_L3_Ins: 3821 valores extremos detectados
+2025-06-04 15:20:05 [INFO] GenRodApp:  - THDV_L1_Ins: 5240 valores extremos detectados
+2025-06-04 15:20:05 [INFO] GenRodApp:  - THDV_L2_Ins: 2850 valores extremos detectados
+2025-06-04 15:20:05 [INFO] GenRodApp:  - THDV_L3_Ins: 4262 valores extremos detectados
+2025-06-04 15:20:05 [INFO] GenRodApp:  - PowF_T_Ins: 5667 valores extremos detectados
+2025-06-04 15:20:05 [INFO] GenRodApp:  - Fre_Ins: 1156 valores extremos detectados
+2025-06-04 15:20:05 [INFO] GenRodApp:  - THDI_L1_Ins: 6318 valores extremos detectados
+2025-06-04 15:20:05 [INFO] GenRodApp:  - THDI_L2_Ins: 5993 valores extremos detectados
+2025-06-04 15:20:05 [INFO] GenRodApp:  - THDI_L3_Ins: 3912 valores extremos detectados
+2025-06-04 15:20:05 [INFO] GenRodApp: ===== FIN DEL PREPROCESAMIENTO =====
+2025-06-04 15:20:11 [INFO] GenRodApp: Datos limpios InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_clean.csv
+2025-06-04 15:20:11 [INFO] GenRodApp: Se normalizaron las columnas: ['Vrms_L1_Ins', 'Vrms_L2_Ins', 'Vrms_L3_Ins', 'THDV_L1_Ins', 'THDV_L2_Ins', 'THDV_L3_Ins', 'PowA_L1_Ins', 'PowA_L2_Ins', 'PowA_L3_Ins', 'PowS_L1_Ins', 'PowS_L2_Ins', 'PowS_L3_Ins', 'PowF_T_Ins', 'EA_I_IV_T', 'Fre_Ins', 'Irms_L1_Ins', 'Irms_L2_Ins', 'Irms_L3_Ins', 'THDI_L1_Ins', 'THDI_L2_Ins', 'THDI_L3_Ins']
+2025-06-04 15:20:20 [INFO] GenRodApp: Datos normalizados InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_norm.csv
+2025-06-04 15:20:20 [INFO] GenRodApp: ===== INICIANDO DETECCIÓN DE ANOMALÍAS =====
+2025-06-04 15:20:20 [INFO] GenRodApp: Preview de serie creada para ADTK:
+                     PowA_L1_Ins  PowF_T_Ins  THDI_L1_Ins
+time                                                     
+2024-11-01 00:00:03     0.567766    0.906667     0.023217
+2024-11-01 00:00:13     0.500000    0.900000     0.023355
+2024-11-01 00:00:23     0.538462    0.906667     0.026057
+2024-11-01 00:00:33     0.576923    0.906667     0.025395
+2024-11-01 00:00:43     0.547619    0.906667     0.023685
+2025-06-04 15:20:21 [INFO] GenRodApp: Corriendo métodos de detección de anomalías (ADTK)...
+2025-06-04 15:20:21 [INFO] GenRodApp: Aplicando LevelShiftAD...
+2025-06-04 15:20:24 [INFO] GenRodApp: Aplicando VolatilityShiftAD...
+2025-06-04 15:20:24 [INFO] GenRodApp: Aplicando AutoregressionAD...
+2025-06-04 15:20:29 [INFO] GenRodApp: Procesando detector: LevelShift...
+2025-06-04 15:20:29 [INFO] GenRodApp: [LevelShift] Series generadas: 38 anómalas, 11438 normales
+2025-06-04 15:20:29 [INFO] GenRodApp: Procesando detector: AutoReg...
+2025-06-04 15:20:30 [INFO] GenRodApp: [AutoReg] Series generadas: 224 anómalas, 67424 normales
+2025-06-04 15:20:31 [INFO] GenRodApp: ===== DETECCIÓN COMPLETADA =====
+2025-06-04 15:21:08 [INFO] GenRodApp: ==== INICIO DEL PROCESO ====
+2025-06-04 15:21:08 [INFO] GenRodApp: Consultando InfluxDB ...
+2025-06-04 15:21:08 [INFO] GenRodApp: 🔍 Intentando consulta en InfluxDB 2.7 como fuente primaria...
+2025-06-04 15:21:25 [WARNING] GenRodApp: [Fallback total] Fallo InfluxDB 2.7: Cannot compare tz-naive and tz-aware timestamps
+2025-06-04 15:21:25 [INFO] GenRodApp: 🔁 Reintentando con InfluxDB 1.8...
+2025-06-04 15:21:25 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: voltage
+2025-06-04 15:21:31 [INFO] GenRodApp: Consulta voltage completada con 512219 registros
+2025-06-04 15:21:31 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: power
+2025-06-04 15:21:50 [INFO] GenRodApp: ==== INICIO DEL PROCESO ====
+2025-06-04 15:21:50 [INFO] GenRodApp: Consultando InfluxDB ...
+2025-06-04 15:21:50 [INFO] GenRodApp: 🔍 Intentando consulta en InfluxDB 2.7 como fuente primaria...
+2025-06-04 15:22:07 [WARNING] GenRodApp: [Fallback total] Fallo InfluxDB 2.7: Cannot compare tz-naive and tz-aware timestamps
+2025-06-04 15:22:07 [INFO] GenRodApp: 🔁 Reintentando con InfluxDB 1.8...
+2025-06-04 15:22:07 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: voltage
+2025-06-04 15:22:43 [INFO] GenRodApp: Consulta voltage completada con 3069771 registros
+2025-06-04 15:22:43 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: power
+2025-06-04 15:23:26 [INFO] GenRodApp: Consulta power completada con 3069771 registros
+2025-06-04 15:23:26 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: energy
+2025-06-04 15:23:47 [INFO] GenRodApp: Consulta energy completada con 3069771 registros
+2025-06-04 15:23:47 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: frequency
+2025-06-04 15:24:07 [INFO] GenRodApp: Consulta frequency completada con 3069771 registros
+2025-06-04 15:24:07 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: current
+2025-06-04 15:24:44 [INFO] GenRodApp: Consulta current completada con 3069771 registros
+2025-06-04 15:24:46 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (3069771, 22)
+2025-06-04 15:24:46 [INFO] GenRodApp: 📊 voltage: 3069771 filas
+2025-06-04 15:24:46 [INFO] GenRodApp: 📊 power: 3069771 filas
+2025-06-04 15:24:46 [INFO] GenRodApp: 📊 energy: 3069771 filas
+2025-06-04 15:24:46 [INFO] GenRodApp: 📊 frequency: 3069771 filas
+2025-06-04 15:24:46 [INFO] GenRodApp: 📊 current: 3069771 filas
+2025-06-04 15:24:46 [INFO] GenRodApp: 📅 voltage - min: 2024-01-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-04 15:24:46 [INFO] GenRodApp: 📅 power - min: 2024-01-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-04 15:24:46 [INFO] GenRodApp: 📅 energy - min: 2024-01-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-04 15:24:46 [INFO] GenRodApp: 📅 frequency - min: 2024-01-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-04 15:24:46 [INFO] GenRodApp: 📅 current - min: 2024-01-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-04 15:24:46 [INFO] GenRodApp: Datos InfluxDB: (3069771, 22)
+2025-06-04 15:24:46 [INFO] GenRodApp: 🕐 Fecha mínima: 2024-01-01 00:00:03 | Fecha máxima: 2024-12-31 23:58:53
+2025-06-04 15:24:46 [INFO] GenRodApp: 📥 InfluxDB - Preview:
+2025-06-04 15:25:19 [INFO] GenRodApp: Datos crudos InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_raw.csv
+2025-06-04 15:25:19 [INFO] GenRodApp: Limpieza básica ...
+2025-06-04 15:25:19 [INFO] GenRodApp: ===== INICIO DEL PREPROCESAMIENTO =====
+2025-06-04 15:25:19 [INFO] GenRodApp: Shape original: (3069771, 22)
+2025-06-04 15:25:20 [INFO] GenRodApp: No se encontraron valores nulos.
+2025-06-04 15:25:20 [INFO] GenRodApp: Eliminadas 0 filas duplicadas por 'time'
+2025-06-04 15:25:20 [INFO] GenRodApp: Eliminadas 0 columnas duplicadas
+2025-06-04 15:25:20 [INFO] GenRodApp: Eliminadas 0 filas con valores nulos (0.00%)
+2025-06-04 15:25:20 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L1_Ins': 2769 valores (z-score > 3)
+2025-06-04 15:25:21 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L2_Ins': 2581 valores (z-score > 3)
+2025-06-04 15:25:21 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L3_Ins': 5369 valores (z-score > 3)
+2025-06-04 15:25:21 [WARNING] GenRodApp: Outliers detectados en 'THDV_L1_Ins': 13027 valores (z-score > 3)
+2025-06-04 15:25:21 [WARNING] GenRodApp: Outliers detectados en 'THDV_L2_Ins': 9520 valores (z-score > 3)
+2025-06-04 15:25:21 [WARNING] GenRodApp: Outliers detectados en 'THDV_L3_Ins': 4878 valores (z-score > 3)
+2025-06-04 15:25:21 [WARNING] GenRodApp: Outliers detectados en 'PowF_T_Ins': 9709 valores (z-score > 3)
+2025-06-04 15:25:21 [WARNING] GenRodApp: Outliers detectados en 'Fre_Ins': 2584 valores (z-score > 3)
+2025-06-04 15:25:22 [WARNING] GenRodApp: Outliers detectados en 'THDI_L1_Ins': 9737 valores (z-score > 3)
+2025-06-04 15:25:22 [WARNING] GenRodApp: Outliers detectados en 'THDI_L2_Ins': 18625 valores (z-score > 3)
+2025-06-04 15:25:22 [WARNING] GenRodApp: Outliers detectados en 'THDI_L3_Ins': 26475 valores (z-score > 3)
+2025-06-04 15:25:22 [INFO] GenRodApp: Shape final: (3069771, 22)
+2025-06-04 15:25:22 [INFO] GenRodApp: Resumen columnas con outliers:
+2025-06-04 15:25:22 [INFO] GenRodApp:  - Vrms_L1_Ins: 2769 valores extremos detectados
+2025-06-04 15:25:22 [INFO] GenRodApp:  - Vrms_L2_Ins: 2581 valores extremos detectados
+2025-06-04 15:25:22 [INFO] GenRodApp:  - Vrms_L3_Ins: 5369 valores extremos detectados
+2025-06-04 15:25:22 [INFO] GenRodApp:  - THDV_L1_Ins: 13027 valores extremos detectados
+2025-06-04 15:25:22 [INFO] GenRodApp:  - THDV_L2_Ins: 9520 valores extremos detectados
+2025-06-04 15:25:22 [INFO] GenRodApp:  - THDV_L3_Ins: 4878 valores extremos detectados
+2025-06-04 15:25:22 [INFO] GenRodApp:  - PowF_T_Ins: 9709 valores extremos detectados
+2025-06-04 15:25:22 [INFO] GenRodApp:  - Fre_Ins: 2584 valores extremos detectados
+2025-06-04 15:25:22 [INFO] GenRodApp:  - THDI_L1_Ins: 9737 valores extremos detectados
+2025-06-04 15:25:22 [INFO] GenRodApp:  - THDI_L2_Ins: 18625 valores extremos detectados
+2025-06-04 15:25:22 [INFO] GenRodApp:  - THDI_L3_Ins: 26475 valores extremos detectados
+2025-06-04 15:25:22 [INFO] GenRodApp: ===== FIN DEL PREPROCESAMIENTO =====
+2025-06-04 15:25:54 [INFO] GenRodApp: Datos limpios InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_clean.csv
+2025-06-04 15:25:56 [INFO] GenRodApp: Se normalizaron las columnas: ['Vrms_L1_Ins', 'Vrms_L2_Ins', 'Vrms_L3_Ins', 'THDV_L1_Ins', 'THDV_L2_Ins', 'THDV_L3_Ins', 'PowA_L1_Ins', 'PowA_L2_Ins', 'PowA_L3_Ins', 'PowS_L1_Ins', 'PowS_L2_Ins', 'PowS_L3_Ins', 'PowF_T_Ins', 'EA_I_IV_T', 'Fre_Ins', 'Irms_L1_Ins', 'Irms_L2_Ins', 'Irms_L3_Ins', 'THDI_L1_Ins', 'THDI_L2_Ins', 'THDI_L3_Ins']
+2025-06-04 15:26:50 [INFO] GenRodApp: Datos normalizados InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_norm.csv
+2025-06-04 15:26:50 [INFO] GenRodApp: ===== INICIANDO DETECCIÓN DE ANOMALÍAS =====
+2025-06-04 15:26:50 [INFO] GenRodApp: Preview de serie creada para ADTK:
+                     PowA_L1_Ins  PowF_T_Ins  THDI_L1_Ins
+time                                                     
+2024-01-01 00:00:03     0.074205    0.893333     0.030937
+2024-01-01 00:00:13     0.070671    0.880000     0.032674
+2024-01-01 00:00:23     0.086572    0.906667     0.024761
+2024-01-01 00:00:34     0.088339    0.906667     0.025257
+2024-01-01 00:00:44     0.074205    0.886667     0.029972
+2025-06-04 15:26:51 [INFO] GenRodApp: Corriendo métodos de detección de anomalías (ADTK)...
+2025-06-04 15:26:51 [INFO] GenRodApp: Aplicando LevelShiftAD...
+2025-06-04 15:27:11 [INFO] GenRodApp: Aplicando VolatilityShiftAD...
+2025-06-04 15:27:15 [INFO] GenRodApp: Aplicando AutoregressionAD...
+2025-06-04 15:27:47 [INFO] GenRodApp: Procesando detector: LevelShift...
+2025-06-04 15:27:48 [INFO] GenRodApp: [LevelShift] Series generadas: 59 anómalas, 17759 normales
+2025-06-04 15:27:48 [INFO] GenRodApp: Procesando detector: AutoReg...
+2025-06-04 15:27:55 [INFO] GenRodApp: [AutoReg] Series generadas: 415 anómalas, 124915 normales
+2025-06-04 15:28:01 [INFO] GenRodApp: ===== DETECCIÓN COMPLETADA =====
+2025-06-04 15:30:10 [INFO] GenRodApp: Ejecutando visualizaciones...
+2025-06-04 15:36:43 [INFO] GenRodApp: Ejecutando visualizaciones...
+2025-06-04 15:42:16 [INFO] GenRodApp: Ejecutando visualizaciones...
+2025-06-04 15:56:05 [INFO] GenRodApp: Ejecutando visualizaciones...
+2025-06-04 15:59:57 [INFO] GenRodApp: Ejecutando visualizaciones...
+2025-06-04 16:01:59 [INFO] GenRodApp: Ejecutando visualizaciones...
+2025-06-04 16:02:44 [INFO] matplotlib.category: Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-06-04 16:02:45 [INFO] matplotlib.category: Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-06-04 16:10:49 [INFO] GenRodApp: Ejecutando visualizaciones...
+2025-06-05 13:30:25 [INFO] GenRodApp: Ejecutando visualizaciones...
+2025-06-05 13:48:07 [INFO] GenRodApp: Ejecutando visualizaciones...
+2025-06-05 14:00:54 [INFO] GenRodApp: Ejecutando visualizaciones...
+2025-06-05 14:02:45 [INFO] GenRodApp: Ejecutando visualizaciones...
+2025-06-05 14:13:27 [INFO] GenRodApp: Ejecutando visualizaciones...
+2025-06-05 14:27:42 [INFO] GenRodApp: Ejecutando visualizaciones...
+2025-06-05 15:34:08 [INFO] GenRodApp: Ejecutando visualizaciones...
+2025-06-05 15:40:38 [INFO] GenRodApp: Ejecutando visualizaciones...
+2025-06-05 15:44:04 [INFO] GenRodApp: Ejecutando visualizaciones...
+2025-06-13 11:29:31 [INFO] GenRodApp: ==== INICIO DEL PROCESO ====
+2025-06-13 11:29:31 [INFO] GenRodApp: Consultando InfluxDB ...
+2025-06-13 11:29:31 [INFO] GenRodApp: 🔍 Intentando consulta en InfluxDB 2.7 como fuente primaria...
+2025-06-13 11:29:50 [WARNING] GenRodApp: [Fallback total] Fallo InfluxDB 2.7: Cannot compare tz-naive and tz-aware timestamps
+2025-06-13 11:29:50 [INFO] GenRodApp: 🔁 Reintentando con InfluxDB 1.8...
+2025-06-13 11:29:50 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: voltage
+2025-06-13 11:30:26 [INFO] GenRodApp: Consulta voltage completada con 3069771 registros
+2025-06-13 11:30:26 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: power
+2025-06-13 11:31:07 [INFO] GenRodApp: Consulta power completada con 3069771 registros
+2025-06-13 11:31:07 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: energy
+2025-06-13 11:31:28 [INFO] GenRodApp: Consulta energy completada con 3069771 registros
+2025-06-13 11:31:28 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: frequency
+2025-06-13 11:31:46 [INFO] GenRodApp: Consulta frequency completada con 3069771 registros
+2025-06-13 11:31:46 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: current
+2025-06-13 11:32:24 [INFO] GenRodApp: Consulta current completada con 3069771 registros
+2025-06-13 11:32:25 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (3069771, 22)
+2025-06-13 11:32:25 [INFO] GenRodApp: 📊 voltage: 3069771 filas
+2025-06-13 11:32:25 [INFO] GenRodApp: 📊 power: 3069771 filas
+2025-06-13 11:32:25 [INFO] GenRodApp: 📊 energy: 3069771 filas
+2025-06-13 11:32:25 [INFO] GenRodApp: 📊 frequency: 3069771 filas
+2025-06-13 11:32:25 [INFO] GenRodApp: 📊 current: 3069771 filas
+2025-06-13 11:32:25 [INFO] GenRodApp: 📅 voltage - min: 2024-01-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-13 11:32:26 [INFO] GenRodApp: 📅 power - min: 2024-01-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-13 11:32:26 [INFO] GenRodApp: 📅 energy - min: 2024-01-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-13 11:32:26 [INFO] GenRodApp: 📅 frequency - min: 2024-01-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-13 11:32:26 [INFO] GenRodApp: 📅 current - min: 2024-01-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-13 11:32:26 [INFO] GenRodApp: Datos InfluxDB: (3069771, 22)
+2025-06-13 11:32:26 [INFO] GenRodApp: 🕐 Fecha mínima: 2024-01-01 00:00:03 | Fecha máxima: 2024-12-31 23:58:53
+2025-06-13 11:32:26 [INFO] GenRodApp: 📥 InfluxDB - Preview:
+2025-06-13 11:32:58 [INFO] GenRodApp: Datos crudos InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_raw.csv
+2025-06-13 11:32:58 [INFO] GenRodApp: Limpieza básica ...
+2025-06-13 11:32:59 [INFO] GenRodApp: ===== INICIO DEL PREPROCESAMIENTO =====
+2025-06-13 11:32:59 [INFO] GenRodApp: Shape original: (3069771, 22)
+2025-06-13 11:32:59 [INFO] GenRodApp: No se encontraron valores nulos.
+2025-06-13 11:32:59 [INFO] GenRodApp: Eliminadas 0 filas duplicadas por 'time'
+2025-06-13 11:32:59 [INFO] GenRodApp: Eliminadas 0 columnas duplicadas
+2025-06-13 11:32:59 [INFO] GenRodApp: Eliminadas 0 filas con valores nulos (0.00%)
+2025-06-13 11:33:00 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L1_Ins': 2769 valores (z-score > 3)
+2025-06-13 11:33:00 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L2_Ins': 2581 valores (z-score > 3)
+2025-06-13 11:33:00 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L3_Ins': 5369 valores (z-score > 3)
+2025-06-13 11:33:00 [WARNING] GenRodApp: Outliers detectados en 'THDV_L1_Ins': 13027 valores (z-score > 3)
+2025-06-13 11:33:00 [WARNING] GenRodApp: Outliers detectados en 'THDV_L2_Ins': 9520 valores (z-score > 3)
+2025-06-13 11:33:00 [WARNING] GenRodApp: Outliers detectados en 'THDV_L3_Ins': 4878 valores (z-score > 3)
+2025-06-13 11:33:01 [WARNING] GenRodApp: Outliers detectados en 'PowF_T_Ins': 9709 valores (z-score > 3)
+2025-06-13 11:33:01 [WARNING] GenRodApp: Outliers detectados en 'Fre_Ins': 2584 valores (z-score > 3)
+2025-06-13 11:33:01 [WARNING] GenRodApp: Outliers detectados en 'THDI_L1_Ins': 9737 valores (z-score > 3)
+2025-06-13 11:33:01 [WARNING] GenRodApp: Outliers detectados en 'THDI_L2_Ins': 18625 valores (z-score > 3)
+2025-06-13 11:33:01 [WARNING] GenRodApp: Outliers detectados en 'THDI_L3_Ins': 26475 valores (z-score > 3)
+2025-06-13 11:33:01 [INFO] GenRodApp: Shape final: (3069771, 22)
+2025-06-13 11:33:01 [INFO] GenRodApp: Resumen columnas con outliers:
+2025-06-13 11:33:01 [INFO] GenRodApp:  - Vrms_L1_Ins: 2769 valores extremos detectados
+2025-06-13 11:33:01 [INFO] GenRodApp:  - Vrms_L2_Ins: 2581 valores extremos detectados
+2025-06-13 11:33:01 [INFO] GenRodApp:  - Vrms_L3_Ins: 5369 valores extremos detectados
+2025-06-13 11:33:01 [INFO] GenRodApp:  - THDV_L1_Ins: 13027 valores extremos detectados
+2025-06-13 11:33:01 [INFO] GenRodApp:  - THDV_L2_Ins: 9520 valores extremos detectados
+2025-06-13 11:33:01 [INFO] GenRodApp:  - THDV_L3_Ins: 4878 valores extremos detectados
+2025-06-13 11:33:01 [INFO] GenRodApp:  - PowF_T_Ins: 9709 valores extremos detectados
+2025-06-13 11:33:01 [INFO] GenRodApp:  - Fre_Ins: 2584 valores extremos detectados
+2025-06-13 11:33:01 [INFO] GenRodApp:  - THDI_L1_Ins: 9737 valores extremos detectados
+2025-06-13 11:33:01 [INFO] GenRodApp:  - THDI_L2_Ins: 18625 valores extremos detectados
+2025-06-13 11:33:01 [INFO] GenRodApp:  - THDI_L3_Ins: 26475 valores extremos detectados
+2025-06-13 11:33:01 [INFO] GenRodApp: ===== FIN DEL PREPROCESAMIENTO =====
+2025-06-13 11:33:34 [INFO] GenRodApp: Datos limpios InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_clean.csv
+2025-06-13 11:33:36 [INFO] GenRodApp: Se normalizaron las columnas: ['Vrms_L1_Ins', 'Vrms_L2_Ins', 'Vrms_L3_Ins', 'THDV_L1_Ins', 'THDV_L2_Ins', 'THDV_L3_Ins', 'PowA_L1_Ins', 'PowA_L2_Ins', 'PowA_L3_Ins', 'PowS_L1_Ins', 'PowS_L2_Ins', 'PowS_L3_Ins', 'PowF_T_Ins', 'EA_I_IV_T', 'Fre_Ins', 'Irms_L1_Ins', 'Irms_L2_Ins', 'Irms_L3_Ins', 'THDI_L1_Ins', 'THDI_L2_Ins', 'THDI_L3_Ins']
+2025-06-13 11:34:30 [INFO] GenRodApp: Datos normalizados InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_norm.csv
+2025-06-13 11:34:30 [INFO] GenRodApp: ===== INICIANDO DETECCIÓN DE ANOMALÍAS =====
+2025-06-13 11:34:30 [INFO] GenRodApp: Preview de serie creada para ADTK:
+                     PowA_L1_Ins  PowF_T_Ins  THDI_L1_Ins
+time                                                     
+2024-01-01 00:00:03     0.074205    0.893333     0.030937
+2024-01-01 00:00:13     0.070671    0.880000     0.032674
+2024-01-01 00:00:23     0.086572    0.906667     0.024761
+2024-01-01 00:00:34     0.088339    0.906667     0.025257
+2024-01-01 00:00:44     0.074205    0.886667     0.029972
+2025-06-13 11:34:31 [INFO] GenRodApp: Corriendo métodos de detección de anomalías (ADTK)...
+2025-06-13 11:34:31 [INFO] GenRodApp: Aplicando LevelShiftAD...
+2025-06-13 11:34:50 [INFO] GenRodApp: Aplicando VolatilityShiftAD...
+2025-06-13 11:34:54 [INFO] GenRodApp: Aplicando AutoregressionAD...
+2025-06-13 11:35:25 [INFO] GenRodApp: Procesando detector: LevelShift...
+2025-06-13 11:35:27 [INFO] GenRodApp: [LevelShift] Series generadas: 59 anómalas, 17759 normales
+2025-06-13 11:35:27 [INFO] GenRodApp: Procesando detector: AutoReg...
+2025-06-13 11:35:34 [INFO] GenRodApp: [AutoReg] Series generadas: 415 anómalas, 124915 normales
+2025-06-13 11:35:39 [INFO] GenRodApp: ===== DETECCIÓN COMPLETADA =====
+2025-06-13 11:38:12 [INFO] GenRodApp: Mean Absolute Error de test y predicción: 0.009339170022102482
+2025-06-13 11:38:12 [INFO] GenRodApp: Mean Absolute Error de predicción y anormal: 0.025526557890041237
+2025-06-26 13:48:42 [INFO] GenRodApp: ==== INICIO DEL PROCESO ====
+2025-06-26 13:48:42 [INFO] GenRodApp: Consultando InfluxDB ...
+2025-06-26 13:48:42 [INFO] GenRodApp: 🔍 Intentando consulta en InfluxDB 2.7 como fuente primaria...
+2025-06-26 13:49:00 [WARNING] GenRodApp: [Fallback total] Fallo InfluxDB 2.7: Cannot compare tz-naive and tz-aware timestamps
+2025-06-26 13:49:00 [INFO] GenRodApp: 🔁 Reintentando con InfluxDB 1.8...
+2025-06-26 13:49:00 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: voltage
+2025-06-26 13:49:34 [INFO] GenRodApp: Consulta voltage completada con 3069771 registros
+2025-06-26 13:49:34 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: power
+2025-06-26 13:50:13 [INFO] GenRodApp: Consulta power completada con 3069771 registros
+2025-06-26 13:50:13 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: energy
+2025-06-26 13:50:33 [INFO] GenRodApp: Consulta energy completada con 3069771 registros
+2025-06-26 13:50:33 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: frequency
+2025-06-26 13:50:52 [INFO] GenRodApp: Consulta frequency completada con 3069771 registros
+2025-06-26 13:50:52 [INFO] GenRodApp: Ejecutando consulta InfluxDB 1.8: current
+2025-06-26 13:51:27 [INFO] GenRodApp: Consulta current completada con 3069771 registros
+2025-06-26 13:51:29 [INFO] GenRodApp: DataFrames combinados en un único DataFrame con shape (3069771, 22)
+2025-06-26 13:51:29 [INFO] GenRodApp: 📊 voltage: 3069771 filas
+2025-06-26 13:51:29 [INFO] GenRodApp: 📊 power: 3069771 filas
+2025-06-26 13:51:29 [INFO] GenRodApp: 📊 energy: 3069771 filas
+2025-06-26 13:51:29 [INFO] GenRodApp: 📊 frequency: 3069771 filas
+2025-06-26 13:51:29 [INFO] GenRodApp: 📊 current: 3069771 filas
+2025-06-26 13:51:29 [INFO] GenRodApp: 📅 voltage - min: 2024-01-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-26 13:51:29 [INFO] GenRodApp: 📅 power - min: 2024-01-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-26 13:51:29 [INFO] GenRodApp: 📅 energy - min: 2024-01-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-26 13:51:29 [INFO] GenRodApp: 📅 frequency - min: 2024-01-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-26 13:51:29 [INFO] GenRodApp: 📅 current - min: 2024-01-01 00:00:03 | max: 2024-12-31 23:58:53
+2025-06-26 13:51:29 [INFO] GenRodApp: Datos InfluxDB: (3069771, 22)
+2025-06-26 13:51:29 [INFO] GenRodApp: 🕐 Fecha mínima: 2024-01-01 00:00:03 | Fecha máxima: 2024-12-31 23:58:53
+2025-06-26 13:51:29 [INFO] GenRodApp: 📥 InfluxDB - Preview:
+2025-06-26 13:52:03 [INFO] GenRodApp: Datos crudos InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_raw.csv
+2025-06-26 13:52:03 [INFO] GenRodApp: Limpieza básica ...
+2025-06-26 13:52:04 [INFO] GenRodApp: ===== INICIO DEL PREPROCESAMIENTO =====
+2025-06-26 13:52:04 [INFO] GenRodApp: Shape original: (3069771, 22)
+2025-06-26 13:52:04 [INFO] GenRodApp: No se encontraron valores nulos.
+2025-06-26 13:52:04 [INFO] GenRodApp: Eliminadas 0 filas duplicadas por 'time'
+2025-06-26 13:52:04 [INFO] GenRodApp: Eliminadas 0 columnas duplicadas
+2025-06-26 13:52:04 [INFO] GenRodApp: Eliminadas 0 filas con valores nulos (0.00%)
+2025-06-26 13:52:05 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L1_Ins': 2769 valores (z-score > 3)
+2025-06-26 13:52:05 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L2_Ins': 2581 valores (z-score > 3)
+2025-06-26 13:52:05 [WARNING] GenRodApp: Outliers detectados en 'Vrms_L3_Ins': 5369 valores (z-score > 3)
+2025-06-26 13:52:05 [WARNING] GenRodApp: Outliers detectados en 'THDV_L1_Ins': 13027 valores (z-score > 3)
+2025-06-26 13:52:05 [WARNING] GenRodApp: Outliers detectados en 'THDV_L2_Ins': 9520 valores (z-score > 3)
+2025-06-26 13:52:05 [WARNING] GenRodApp: Outliers detectados en 'THDV_L3_Ins': 4878 valores (z-score > 3)
+2025-06-26 13:52:06 [WARNING] GenRodApp: Outliers detectados en 'PowF_T_Ins': 9709 valores (z-score > 3)
+2025-06-26 13:52:06 [WARNING] GenRodApp: Outliers detectados en 'Fre_Ins': 2584 valores (z-score > 3)
+2025-06-26 13:52:06 [WARNING] GenRodApp: Outliers detectados en 'THDI_L1_Ins': 9737 valores (z-score > 3)
+2025-06-26 13:52:06 [WARNING] GenRodApp: Outliers detectados en 'THDI_L2_Ins': 18625 valores (z-score > 3)
+2025-06-26 13:52:06 [WARNING] GenRodApp: Outliers detectados en 'THDI_L3_Ins': 26475 valores (z-score > 3)
+2025-06-26 13:52:06 [INFO] GenRodApp: Shape final: (3069771, 22)
+2025-06-26 13:52:06 [INFO] GenRodApp: Resumen columnas con outliers:
+2025-06-26 13:52:06 [INFO] GenRodApp:  - Vrms_L1_Ins: 2769 valores extremos detectados
+2025-06-26 13:52:06 [INFO] GenRodApp:  - Vrms_L2_Ins: 2581 valores extremos detectados
+2025-06-26 13:52:06 [INFO] GenRodApp:  - Vrms_L3_Ins: 5369 valores extremos detectados
+2025-06-26 13:52:06 [INFO] GenRodApp:  - THDV_L1_Ins: 13027 valores extremos detectados
+2025-06-26 13:52:06 [INFO] GenRodApp:  - THDV_L2_Ins: 9520 valores extremos detectados
+2025-06-26 13:52:06 [INFO] GenRodApp:  - THDV_L3_Ins: 4878 valores extremos detectados
+2025-06-26 13:52:06 [INFO] GenRodApp:  - PowF_T_Ins: 9709 valores extremos detectados
+2025-06-26 13:52:06 [INFO] GenRodApp:  - Fre_Ins: 2584 valores extremos detectados
+2025-06-26 13:52:06 [INFO] GenRodApp:  - THDI_L1_Ins: 9737 valores extremos detectados
+2025-06-26 13:52:06 [INFO] GenRodApp:  - THDI_L2_Ins: 18625 valores extremos detectados
+2025-06-26 13:52:06 [INFO] GenRodApp:  - THDI_L3_Ins: 26475 valores extremos detectados
+2025-06-26 13:52:06 [INFO] GenRodApp: ===== FIN DEL PREPROCESAMIENTO =====
+2025-06-26 13:52:40 [INFO] GenRodApp: Datos limpios InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_clean.csv
+2025-06-26 13:52:41 [INFO] GenRodApp: Se normalizaron las columnas: ['Vrms_L1_Ins', 'Vrms_L2_Ins', 'Vrms_L3_Ins', 'THDV_L1_Ins', 'THDV_L2_Ins', 'THDV_L3_Ins', 'PowA_L1_Ins', 'PowA_L2_Ins', 'PowA_L3_Ins', 'PowS_L1_Ins', 'PowS_L2_Ins', 'PowS_L3_Ins', 'PowF_T_Ins', 'EA_I_IV_T', 'Fre_Ins', 'Irms_L1_Ins', 'Irms_L2_Ins', 'Irms_L3_Ins', 'THDI_L1_Ins', 'THDI_L2_Ins', 'THDI_L3_Ins']
+2025-06-26 13:53:37 [INFO] GenRodApp: Datos normalizados InfluxDB guardados en C:\Users\mgulfo\Desktop\Proyecto-GRD\data\raw\df_norm.csv
+2025-06-26 13:53:37 [INFO] GenRodApp: ===== INICIANDO DETECCIÓN DE ANOMALÍAS =====
+2025-06-26 13:53:37 [INFO] GenRodApp: Preview de serie creada para ADTK:
+                     PowA_L1_Ins  PowF_T_Ins  THDI_L1_Ins
+time                                                     
+2024-01-01 00:00:03     0.074205    0.893333     0.030937
+2024-01-01 00:00:13     0.070671    0.880000     0.032674
+2024-01-01 00:00:23     0.086572    0.906667     0.024761
+2024-01-01 00:00:34     0.088339    0.906667     0.025257
+2024-01-01 00:00:44     0.074205    0.886667     0.029972
+2025-06-26 13:53:37 [INFO] GenRodApp: Corriendo métodos de detección de anomalías (ADTK)...
+2025-06-26 13:53:37 [INFO] GenRodApp: Aplicando LevelShiftAD...
+2025-06-26 13:53:56 [INFO] GenRodApp: Aplicando VolatilityShiftAD...
+2025-06-26 13:54:01 [INFO] GenRodApp: Aplicando AutoregressionAD...
+2025-06-26 13:54:31 [INFO] GenRodApp: Procesando detector: LevelShift...
+2025-06-26 13:54:33 [INFO] GenRodApp: [LevelShift] Series generadas: 59 anómalas, 17759 normales
+2025-06-26 13:54:33 [INFO] GenRodApp: Procesando detector: AutoReg...
+2025-06-26 13:54:40 [INFO] GenRodApp: [AutoReg] Series generadas: 415 anómalas, 124915 normales
+2025-06-26 13:54:45 [INFO] GenRodApp: ===== DETECCIÓN COMPLETADA =====
+2025-06-26 13:55:16 [INFO] GenRodApp: Mean Absolute Error de test y predicción: 0.0058949658373018115
+2025-06-26 13:55:16 [INFO] GenRodApp: Mean Absolute Error de predicción y anormal: 0.03359108544878559
+2025-06-26 13:55:16 [INFO] GenRodApp: ==== INICIO DE EJECUCION CONTINUA ====
+2025-06-26 13:55:16 [INFO] GenRodApp: Hora inicial: 2025-06-26T13:55:16Z
+2025-06-26 13:55:16 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-26 13:55:16 [INFO] GenRodApp: Hora actual: 2025-06-26T13:55:16Z
+2025-06-26 13:55:16 [WARNING] GenRodApp: Rango de tiempo inválido. Saltando iteración.
+2025-06-26 13:55:24 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-26 13:55:24 [INFO] GenRodApp: Hora actual: 2025-06-26T13:55:24Z
+2025-06-26 13:55:25 [INFO] GenRodApp: Sin nuevos datos. Esperando siguiente iteración.
+2025-06-26 13:55:33 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-26 13:55:33 [INFO] GenRodApp: Hora actual: 2025-06-26T13:55:33Z
+2025-06-26 13:55:34 [INFO] GenRodApp: Sin nuevos datos. Esperando siguiente iteración.
+2025-06-26 13:55:42 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-26 13:55:42 [INFO] GenRodApp: Hora actual: 2025-06-26T13:55:42Z
+2025-06-26 13:55:43 [WARNING] GenRodApp: No se obtienen datos nuevos desde hace 3 iteraciones.
+2025-06-26 13:55:51 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-26 13:55:51 [INFO] GenRodApp: Hora actual: 2025-06-26T13:55:51Z
+2025-06-26 13:55:51 [WARNING] GenRodApp: No se obtienen datos nuevos desde hace 4 iteraciones.
+2025-06-26 13:55:59 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-26 13:55:59 [INFO] GenRodApp: Hora actual: 2025-06-26T13:55:59Z
+2025-06-26 13:56:00 [WARNING] GenRodApp: No se obtienen datos nuevos desde hace 5 iteraciones.
+2025-06-26 13:56:08 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-26 13:56:08 [INFO] GenRodApp: Hora actual: 2025-06-26T13:56:08Z
+2025-06-26 13:56:09 [WARNING] GenRodApp: No se obtienen datos nuevos desde hace 6 iteraciones.
+2025-06-26 13:56:17 [INFO] GenRodApp: Consultando InfluxDB 2.7 ...
+2025-06-26 13:56:17 [INFO] GenRodApp: Hora actual: 2025-06-26T13:56:17Z
+2025-06-26 13:56:18 [WARNING] GenRodApp: No se obtienen datos nuevos desde hace 7 iteraciones.

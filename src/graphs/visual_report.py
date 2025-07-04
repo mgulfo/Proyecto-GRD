@@ -1,16 +1,18 @@
-# src/main.py
-
 #Config iniciales
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from visualization import (
-    plot_time_series,
-    plot_boxplot,
-    plot_histogram,
-    plot_multiple_series
+    plot_fp_total_line,
+    plot_fp_y_potencia,
+    plot_fp_y_tension,
+    plot_fp_total_line,
+    plot_fp_vs_variable_separados,
+    plot_thd_vs_variable_separados,
+    filtrar_por_rango_fecha
 )
+
 
 from config import (
     EXECUTE_VISUALIZATION,
@@ -34,47 +36,51 @@ print("Datos limpios cargados:")
 print(df_clean.head())
 print(df_clean.tail())
 
+# 🔎 Definí el rango que querés estudiar
+fecha_inicio = '2024-02-01T00:00:00'
+fecha_fin = '2024-02-29T23:00:00'
+
+# 🔹 Filtrar el DataFrame
+df_zoom = filtrar_por_rango_fecha(df_clean, fecha_inicio, fecha_fin)
+
 if EXECUTE_VISUALIZATION:
     logger.info("Ejecutando visualizaciones...")
 
-    if 'time' in df_clean.columns and 'EA_I_IV_T' in df_clean.columns:
-        fig = plot_time_series(df_clean, 'time', ['EA_I_IV_T'], title='Energía Consumida', ylabel='Energía')
-        if fig and SAVE_OUTPUTS:
-            fig.savefig(os.path.join(IMAGES_DIR, "energia_consumida.png"))
-        if SHOW_GRAPHS and fig:
-            fig.show()
-        else:
-            plt.close(fig)
+# 🔹 FP total
+fig = plot_fp_total_line(df_zoom)
+fig.savefig(os.path.join(IMAGES_DIR, "fp_total.png")) if SAVE_OUTPUTS else None
+fig.show() if SHOW_GRAPHS else plt.close(fig)
 
-    fig = plot_boxplot(df_clean, ['Vrms_L1_Ins', 'Vrms_L2_Ins', 'Vrms_L3_Ins'], title='Tensión por Fase')
-    if fig and SAVE_OUTPUTS:
-        fig.savefig(os.path.join(IMAGES_DIR, "boxplot_tension.png"))
-    if SHOW_GRAPHS and fig:
-        fig.show()
-    else:
-        plt.close(fig)
+# 🔹 FP + Potencia y FP + Tensión por fase
+for fase in ["L1", "L2", "L3"]:
+    fig = plot_fp_y_potencia(df_zoom, fase)
+    fig.savefig(os.path.join(IMAGES_DIR, f"fp_y_potencia_{fase}.png")) if SAVE_OUTPUTS else None
+    fig.show() if SHOW_GRAPHS else plt.close(fig)
 
-    for col in ['Irms_L1_Ins', 'Irms_L2_Ins', 'Irms_L3_Ins']:
-        fig = plot_histogram(df_clean, col)
-        if fig and SAVE_OUTPUTS:
-            fig.savefig(os.path.join(IMAGES_DIR, f"hist_{col}.png"))
-        if SHOW_GRAPHS and fig:
-            fig.show()
-        else:
-            plt.close(fig)
+    fig = plot_fp_y_tension(df_zoom, fase)
+    fig.savefig(os.path.join(IMAGES_DIR, f"fp_y_tension_{fase}.png")) if SAVE_OUTPUTS else None
+    fig.show() if SHOW_GRAPHS else plt.close(fig)
 
-    figuras = plot_multiple_series(df_clean, 'time', {
-        'Tensión': ['Vrms_L1_Ins', 'Vrms_L2_Ins', 'Vrms_L3_Ins'],
-        'Corriente': ['Irms_L1_Ins', 'Irms_L2_Ins', 'Irms_L3_Ins'],
-        'Potencia Activa': ['PowA_L1_Ins', 'PowA_L2_Ins', 'PowA_L3_Ins']
-    })
-    for grupo, fig in figuras:
-        if fig and SAVE_OUTPUTS:
-            fig.savefig(os.path.join(IMAGES_DIR, f"grupo_{grupo.lower().replace(' ', '_')}.png"))
-        if SHOW_GRAPHS and fig:
-            fig.show()
-        else:
-            plt.close(fig)
+# 🔹 FP vs Potencia Activa por fase
+figs_fp_potencia = plot_fp_vs_variable_separados(df_zoom, 'PowA', 'Potencia Activa', 'Potencia (W)', ['L1', 'L2', 'L3'])
+for fase, fig in figs_fp_potencia:
+    fig.savefig(os.path.join(IMAGES_DIR, f"fp_vs_potencia_{fase.lower()}.png"))
+
+# 🔹 FP vs Tensión por fase
+figs_fp_tension = plot_fp_vs_variable_separados(df_zoom, 'Vrms', 'Tensión RMS', 'Tensión (V)', ['L1', 'L2', 'L3'])
+for fase, fig in figs_fp_tension:
+    fig.savefig(os.path.join(IMAGES_DIR, f"fp_vs_tension_{fase.lower()}.png"))
+
+# 🔹 THDI vs Corriente (L1 y L3)
+figs_thdi_corriente = plot_thd_vs_variable_separados(df_zoom, 'THDI', 'Irms', 'Corriente RMS', 'Corriente (A)', ['L1', 'L3'])
+for fase, fig in figs_thdi_corriente:
+    fig.savefig(os.path.join(IMAGES_DIR, f"thdi_vs_corriente_{fase.lower()}.png"))
+
+# 🔹 THDV vs Tensión (L1 y L3)
+figs_thdv_tension = plot_thd_vs_variable_separados(df_zoom, 'THDV', 'Vrms', 'Tensión RMS', 'Tensión (V)', ['L1', 'L3'])
+for fase, fig in figs_thdv_tension:
+    fig.savefig(os.path.join(IMAGES_DIR, f"thdv_vs_tension_{fase.lower()}.png"))
+
 
 if SHOW_GRAPHS:
     print("Mostrando gráficos. Cerrá la ventana para continuar...")

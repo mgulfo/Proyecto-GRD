@@ -9,8 +9,6 @@ Este proyecto analiza series temporales provenientes de medidores industriales, 
 ```
 Proyecto-GRD/
 ├── data/
-│   ├── raw/             # Datos crudos y limpios
-│   └── images/          # Visualizaciones guardadas
 ├── logs/                # Logs del sistema
 ├── notebooks/           # Notebooks exploratorios
 ├── src/                 # Código fuente modular

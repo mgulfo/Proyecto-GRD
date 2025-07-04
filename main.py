@@ -21,6 +21,7 @@ import models.anomaly_detection as anom
 from models.prediction_lstm import correr_prediccion
 from models.anomaly_detection import analisis_anomalias, visualizar_series_anomalias
 from models.prediction_lstm import evaluar_prediccion
+from models.cammesa_analysis import leer_cammessa_csv, asociar_datos_energia
 from query_engine import consultar_datos_influx
 from data_processing.data_cleaning import preprocess_data, normalize_all_numeric
 from utils.logger import logger
@@ -48,7 +49,6 @@ from adtk.visualization import plot
 import matplotlib.dates as mdates
 import random
 import pandas as pd
-import matplotlib.pyplot as plt
 import matplotlib.patches as Patches
 from sklearn.metrics import mean_absolute_error
 
@@ -61,15 +61,15 @@ def main():
     # ---------------------------------------------
     
     # Ingrese fechas en HORA ARGENTINA (lo que VOS querés)
-    fecha_inicio_arg = '2025-02-28T21:00:00'
-    fecha_fin_arg    = '2025-03-11T00:00:30'
+    fecha_inicio_arg = '2024-01-01T00:00:00'
+    fecha_fin_arg    = '2024-12-31T23:59:00'
 
     # Se convierte a UTC automáticamente
     fecha_inicio = hora_local_a_utc(fecha_inicio_arg)
     fecha_fin    = hora_local_a_utc(fecha_fin_arg)
 
     # Locación
-    location = "SET01"
+    location = "MEDIA"
 
     if SAVE_OUTPUTS:
         os.makedirs(OUTPUT_DIR, exist_ok=True)
