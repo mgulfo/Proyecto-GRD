@@ -1,6 +1,33 @@
-# ⚡ Proyecto: Detección de Perturbaciones y Predicción de Consumo en Redes Eléctricas Industriales
+# ⚡ Proyecto GRD
 
-Este proyecto analiza series temporales provenientes de medidores industriales, con el objetivo de detectar perturbaciones eléctricas y predecir el consumo energético en redes Smart Grid.
+Este proyecto tiene como objetivo desarrollar un sistema integral para la detección de perturbaciones eléctricas y la predicción de consumo en entornos industriales, utilizando datos reales de medidores con frecuencia de muestreo de 10 segundos. Se trabaja con variables como tensión, corriente, potencia activa, distorsión armónica (THD), frecuencia y factor de potencia (FP), en configuraciones trifásicas.
+
+El sistema implementado abarca todo el pipeline de análisis, desde la consulta a la base de datos hasta la visualización y predicción de eventos, utilizando herramientas modernas de ciencia de datos, aprendizaje automático y visualización.
+
+---
+
+## 🎯 Objetivos del Proyecto
+
+- Consolidar una base de datos unificada en InfluxDB 1.8 / 2.7.
+- Detectar perturbaciones mediante métodos estadísticos y de series temporales.
+- Analizar la sensibilidad de distintas variables eléctricas ante eventos anómalos.
+- Entrenar modelos de predicción (LSTM) para detección anticipada basada en errores.
+- Evaluar y justificar la efectividad de los enfoques mediante métricas, gráficos y documentación técnica.
+
+---
+
+## 📄 Documentación Técnica del Proyecto
+
+🔗 **[Ver Bitácora Técnica](https://drive.google.com/drive/folders/1tCQ2pb9OmT4hnKJpD__YTpGoqdQZVu-g?usp=drive_link)**  
+Documento Técnica donde se detallan cada una de las fases del proyecto, incluyendo:
+
+- Justificación técnica de cada decisión
+- Análisis estadístico de variables
+- Evaluación de modelos
+- Gráficos y resultados
+- Vinculación con bibliografía relevante y código fuente
+
+🔗 **[Ver Github del Proyecto](hhttps://github.com/mgulfo/Proyecto-GRD)**  
 
 ---
 
@@ -13,6 +40,7 @@ Proyecto-GRD/
 ├── notebooks/           # Notebooks exploratorios
 ├── src/                 # Código fuente modular
 │   ├── data_processing/ 
+│   ├── ejecucion_continua/ 
 │   ├── graphs/                     
 │   ├── models/                
 │   ├── utils/                         
@@ -27,6 +55,8 @@ Proyecto-GRD/
 ├── requirements.txt     # Dependencias
 └── README.md
 ```
+
+---
 
 ## 📋 Diccionario de Variables
 
@@ -96,15 +126,10 @@ pytest tests/
 - Machine Learning (RNN)
 - Pandas, NumPy, Matplotlib
 
-Instalación rápida:
-
-```bash
-pip install -r requirements.txt
-```
-
 ---
 
 ## 📚 Recursos y Bibliografía
+
 Los manuales y papers relevantes están en la carpeta resources/.
 
 ---
@@ -117,4 +142,4 @@ Los manuales y papers relevantes están en la carpeta resources/.
 - [ ] Documentación extendida
 
 📌 Autor: [INTI-IoE]
-📅 Última actualización: [28/05/2025]
+📅 Última actualización: [28/06/2025]
