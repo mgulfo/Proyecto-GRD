@@ -130,7 +130,7 @@ pytest tests/
 
 ## 📚 Recursos y Bibliografía
 
-Los manuales y papers relevantes están en la carpeta resources/.
+Los manuales y papers relevantes están en [la carpeta Bibliografía del drive](https://drive.google.com/drive/folders/1tv9Mvj972xAfFvOs7zQrCA4IotLX5HLP)
 
 ---
 
