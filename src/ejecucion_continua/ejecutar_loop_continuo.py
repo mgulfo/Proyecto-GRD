@@ -11,21 +11,33 @@ from sklearn.metrics import mean_absolute_error
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from query_engine import busqueda_influx2, merge_data
+from query_engine import busqueda_influx2, merge_data, subir_mae_influxdb_v2
 from data_processing.data_cleaning import preprocess_data
 from config import OUTPUT_DIR, MAX_ST, VISUALIZAR_MAE, LOCAL_TIMEZONE
-
+from utils.utils import convert_utc_to_local
 from utils.logger import logger
-
+import models.Predictor as predictor2
+import models.analysis as analisis1
 # Definir zonas
 arg_tz = pytz.timezone(LOCAL_TIMEZONE)
 
 def loop_continuo(location, pred_norm, df_clean, visualizar_mae=True):
-
+    train_pred = 0
+    df_f = df_clean[['time', 'PowA_L1_Ins']]
+    dfc = analisis1.leer_cammessa_csv()
+    dfr = analisis1.asociar_datos_energia(dfc,13,2024)    
+    dfr.set_index('Fecha', inplace=True)
+    df_f.set_index('time', inplace=True)    
+    fig1, axes = plt.subplots(nrows=2, ncols=1)  # 2 rows, 1 column
+    dfr.plot(ax=axes[0], title='Datos cammesa')
+    df_f.plot(ax=axes[1], title='Datos potencia')
+    plt.show()
     logger.info("==== INICIO DE EJECUCION CONTINUA ====")
     mae_filepath = os.path.join(OUTPUT_DIR, "mae_resultados.csv")
     sin_datos_consecutivos = 0
-
+    current_local_datetime = datetime.now()
+    time1 = current_local_datetime.strftime("%Y-%m-%d %H:%M:%S")
+    print(time1)
     # Inicialización   
     utc_tz = pytz.timezone('UTC')
     now = datetime.now()
@@ -41,11 +53,12 @@ def loop_continuo(location, pred_norm, df_clean, visualizar_mae=True):
         'PowF_T_Ins', 'THDI_L1_Ins', 'THDI_L2_Ins', 'THDI_L3_Ins'
     ])
     df_mae = pd.DataFrame(columns=['time', 'MAE'])
+    mae_1 = pd.DataFrame(columns=['time', 'MAE'])
     contador_anom = 0
 
     # Acumulador de errores
     mae_hist = pd.DataFrame(columns=['time', 'MAE'])
-
+    cont_mae_pred = 0
     while True:
         try:
             logger.info("Consultando InfluxDB 2.7 ...")
@@ -100,6 +113,9 @@ def loop_continuo(location, pred_norm, df_clean, visualizar_mae=True):
 
             if len(df_temporal) > MAX_ST:
                 df_temporal = df_temporal.tail(MAX_ST).reset_index(drop=True)
+                if train_pred == 0:
+                    train_pred = 1
+
 
             df_t_proc = preprocess_data(df_temporal.copy(), silenciar_logs=True)
             n = min(len(df_t_proc), MAX_ST)
@@ -131,7 +147,27 @@ def loop_continuo(location, pred_norm, df_clean, visualizar_mae=True):
                     df_mae.to_csv(mae_filepath, mode='a', header=False, index=False)
                 else:
                     df_mae.to_csv(mae_filepath, mode='w', header=True, index=False)
+                
 
+                if train_pred == 1:
+                    df_pred = df_temporal[['time', 'PowA_L1_Ins', 'PowA_L2_Ins', 'PowA_L3_Ins']]
+                    df_res = predictor2.gen_prediccion(df_pred,60,1,1) 
+                    logger.info(f"Prediccion finalizada:{df_res.head(10)}")                    
+                    df_res = pd.concat([df_temporal,df_res], ignore_index=True)
+                    pred_path = os.path.join(OUTPUT_DIR, "df_res_pred.csv")
+                    df_res.to_csv(pred_path, index=False) 
+                    cont_mae_pred = cont_mae_pred + 1
+                    if cont_mae_pred == 1:
+                        df_comp = df_res.tail(60).copy()                        
+                    if cont_mae_pred == 60:
+                        df_comp_1 =  df_temporal.tail(60).copy()                                                                        
+                        mae_pred = mean_absolute_error(df_comp_1['PowA_L1_Ins'], df_comp['PowA_L1_Ins'])
+                        logger.info(f"MAE de la predicción: {mae_pred}")
+                        pred_path = os.path.join(OUTPUT_DIR, "df_concat_respred.csv")
+                        concatenated_df = pd.concat([df_comp_1, df_comp])
+                        concatenated_df.to_csv(pred_path, index=False) 
+                        cont_mae_pred = 0
+                    #train_pred = 2
                 # Lazo para activar o desactivar gráfico en tiempo real del MAE (en config.py está VISUALIZAR_MAE)
                 if visualizar_mae:
                     if 'fig' not in globals():
@@ -147,8 +183,9 @@ def loop_continuo(location, pred_norm, df_clean, visualizar_mae=True):
                     # Guardar mae
                     mae_hist = mae_hist.tail(100)
                     mae_hist['time'] = pd.to_datetime(mae_hist['time'])
-
+                    
                     ax.clear()
+
                     ax.plot(mae_hist['time'], mae_hist['MAE'], marker='o', linestyle='-')
                     ax.set_title("MAE en tiempo real")
                     ax.set_xlabel("Hora")
@@ -162,6 +199,21 @@ def loop_continuo(location, pred_norm, df_clean, visualizar_mae=True):
                 logger.warning(f"Error en el cálculo o guardado del MAE: {e}")
                 logger.info(f"Último UTC procesado: {utc_time2}")
                 time.sleep(10)
+
+            '''
+                Aqui colocamos la escritura del MAE en InfluxDB 2.7
+            '''
+            now = datetime.now()
+            now1 = now.strftime("%Y-%m-%dT%H:%M:%SZ")
+            now_str = convert_utc_to_local(now1, "%Y-%m-%dT%H:%M:%SZ")            
+            tiempo_local = now         
+            mae_1 = pd.concat([mae_1, pd.DataFrame([{
+            'time': tiempo_local,
+            'MAE': mae_anom
+            }])], ignore_index=True)
+            subir_mae_influxdb_v2(mae_1)
+            logger.info(f"Hora de MAE: {now}")
+            logger.info(f"Hora de MAE 2: {now_str}")
 
         except Exception as e:
             logger.error(f"Error inesperado en la ejecución continua: {e}")

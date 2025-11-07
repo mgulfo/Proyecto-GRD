@@ -17,9 +17,10 @@ import pytz
 from datetime import datetime
 from influxdb import InfluxDBClient
 import influxdb_client
+from influxdb_client import Point, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS
 from utils.utils import convert_df_utc_to_local
-from config import INFLUXDB1_CONFIG, INFLUXDB2_CONFIG, LOCAL_TIMEZONE
+from config import INFLUXDB1_CONFIG, INFLUXDB2_CONFIG, INFLUXDB2_CONFIG_INTI, LOCAL_TIMEZONE
 
 class DBConnector:
     def __init__(self):
@@ -52,7 +53,17 @@ class DBConnector:
             verify_ssl=INFLUXDB2_CONFIG['verify_ssl']
         )
         return self.client2
-
+    def connect_influxdb3(self):
+        """Conecta a InfluxDB 2.7 utilizando la configuración definida."""
+        self.client2 = influxdb_client.InfluxDBClient(
+            url=INFLUXDB2_CONFIG_INTI['url'],
+            token=INFLUXDB2_CONFIG_INTI['token'],
+            org=INFLUXDB2_CONFIG_INTI['org'],
+            timeout=INFLUXDB2_CONFIG_INTI['timeout'],
+            ssl=INFLUXDB2_CONFIG_INTI['ssl'],
+            verify_ssl=INFLUXDB2_CONFIG_INTI['verify_ssl']
+        )
+        return self.client2
     def query_influx1(self, query):
         """Realiza una consulta a InfluxDB 1.8.
         

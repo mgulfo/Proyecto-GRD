@@ -19,10 +19,10 @@ OUTPUT_DIR = os.path.join("data", "raw")
 IMAGES_DIR = os.path.join("data", "images")
 
 # Definición de Rango para generate_ts_anomalies()
-RANGE = 300
+RANGE = 180
 
 # Definición de Rango de entradas de datos para empezar a calcular el MAE
-MAX_ST = 10
+MAX_ST = 180
 
 # Ejecución análisis de anomaliás (False: X)
 EJECUTAR_ANALISIS_ANOMALIAS = False
@@ -52,7 +52,16 @@ INFLUXDB2_CONFIG = {
     'verify_ssl': False,
     'bucket': "ss_genrod"
 }
-
+# Configuración para InfluxDB 2.7 INTI
+INFLUXDB2_CONFIG_INTI = {
+    'url': "http://149.78.55.22:10010",
+    'token': "Lpk2-Fsiv0wKs2xaCUAGYhIEiN5JXwEvLcTWBrSb8GcMHB2hE4fW83c-QgjpHRwVH_ccl9dMQbT8wSuC0Q4xWw==",
+    'org': "97d58b9470b74eb5",
+    'timeout': 90000,
+    'ssl': True,
+    'verify_ssl': False,
+    'bucket': "ss_inti"
+}
 # Otros parámetros globales
 LOCAL_TIMEZONE = 'America/Argentina/Buenos_Aires'
 

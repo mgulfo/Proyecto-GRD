@@ -3,8 +3,9 @@
 import os
 
 from db_connector import DBConnector
-from config import INFLUXDB2_CONFIG
+from config import INFLUXDB2_CONFIG, INFLUXDB2_CONFIG_INTI
 from data_processing.data_cleaning import clean_influx2_meta
+from influxdb_client.client.write_api import SYNCHRONOUS
 from utils.logger import logger
 import pandas as pd
 from functools import reduce
@@ -125,8 +126,17 @@ def merge_data(dict_data, silenciar_warning=False):
 
     logger.info(f"DataFrames combinados en un único DataFrame con shape {df_combined.shape}")
     return df_combined
-
-
+######Escribir MAE###################
+def subir_mae_influxdb_v2(df_mae):
+    db = DBConnector()
+    client2 = db.connect_influxdb3()
+    bucket = INFLUXDB2_CONFIG_INTI["bucket"]
+    org = INFLUXDB2_CONFIG_INTI["org"]
+    df_mae.set_index("time")
+    write_api = client2.write_api(write_options=SYNCHRONOUS) 
+    write_api.write(bucket, org, record=df_mae, data_frame_measurement_name="Indicador_eventos",data_frame_timestamp_column="time", data_frame_tag_columns=['device','valuetype','location','name'])
+    logger.info("Datos escritos en InfluxDB 2.7 - ss_inti")
+    client2.close()  
 ######## Sección 2 del main ########
 
 def consultar_datos_influx(fecha_inicio, fecha_fin, location, output_dir=None, guardar=False):
