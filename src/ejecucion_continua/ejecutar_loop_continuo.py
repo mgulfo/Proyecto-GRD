@@ -7,7 +7,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import mean_absolute_error
-
+from config import EJECUTAR_CAMMESA
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -24,14 +24,15 @@ arg_tz = pytz.timezone(LOCAL_TIMEZONE)
 def loop_continuo(location, pred_norm, df_clean, visualizar_mae=True):
     train_pred = 0
     df_f = df_clean[['time', 'PowA_L1_Ins']]
-    dfc = analisis1.leer_cammessa_csv()
-    dfr = analisis1.asociar_datos_energia(dfc,13,2024)    
-    dfr.set_index('Fecha', inplace=True)
-    df_f.set_index('time', inplace=True)    
-    fig1, axes = plt.subplots(nrows=2, ncols=1)  # 2 rows, 1 column
-    dfr.plot(ax=axes[0], title='Datos cammesa')
-    df_f.plot(ax=axes[1], title='Datos potencia')
-    plt.show()
+    if EJECUTAR_CAMMESA:
+        dfc = analisis1.leer_cammessa_csv()
+        dfr = analisis1.asociar_datos_energia(dfc,13,2024)    
+        dfr.set_index('Fecha', inplace=True)
+        df_f.set_index('time', inplace=True)    
+        fig1, axes = plt.subplots(nrows=2, ncols=1)  
+        dfr.plot(ax=axes[0], title='Datos cammesa')
+        df_f.plot(ax=axes[1], title='Datos potencia')
+        plt.show()
     logger.info("==== INICIO DE EJECUCION CONTINUA ====")
     mae_filepath = os.path.join(OUTPUT_DIR, "mae_resultados.csv")
     sin_datos_consecutivos = 0
@@ -61,15 +62,17 @@ def loop_continuo(location, pred_norm, df_clean, visualizar_mae=True):
     cont_mae_pred = 0
     while True:
         try:
-            logger.info("Consultando InfluxDB 2.7 ...")
+            #Lineas de log comentadas. se pretende que solo haga log cuando hay eventos criticos o
+            #periodicamente cada 10 min que esta operando normalmente
+            #logger.info("Consultando InfluxDB 2.7 ...")
             now = datetime.now()
             now_str = datetime.strftime(now, "%Y-%m-%dT%H:%M:%SZ")
             utc_t = utc_tz.localize(datetime.strptime(now_str, "%Y-%m-%dT%H:%M:%SZ")) 
             utc_time = now_str
-            logger.info(f"Hora actual: {utc_time}")
+            #logger.info(f"Hora actual: {utc_time}")
 
             if utc_time == utc_time2:
-                logger.warning("Rango de tiempo inválido. Saltando iteración.")
+                #logger.warning("Rango de tiempo inválido. Saltando iteración.")
                 time.sleep(8)
                 continue
 
@@ -81,7 +84,8 @@ def loop_continuo(location, pred_norm, df_clean, visualizar_mae=True):
                 if sin_datos_consecutivos >= 3:
                     logger.warning(f"No se obtienen datos nuevos desde hace {sin_datos_consecutivos} iteraciones.")
                 else:
-                    logger.info("Sin nuevos datos. Esperando siguiente iteración.")
+                    str_1 = "Sin nuevos datos. Esperando siguiente iteración."
+                    #logger.info(str1)
                 time.sleep(8)
                 continue
             else:
@@ -95,26 +99,27 @@ def loop_continuo(location, pred_norm, df_clean, visualizar_mae=True):
 
             try:
                 s = df_t.iloc[[0]]
-                logger.info(f"df_t: \n{df_t}")
+                #logger.info(f"df_t: \n{df_t}")
             except Exception as e:
                 logger.warning(f"No se pudo obtener una fila válida de datos: {e}")
                 time.sleep(8)
                 continue
 
             contador_anom += 1
-            logger.info(f"Lazo completado: {contador_anom}")
+            if (contador_anom % 10 == 0):
+                logger.info(f"Lazo completado: {contador_anom}")
 
             df_temporal = pd.concat([df_temporal, s], ignore_index=True)
 
             if len(df_temporal) < MAX_ST:
-                logger.info(f"Aún no hay suficientes datos para aplicar predicción (actual: {len(df_temporal)}).")
+                #logger.info(f"Aún no hay suficientes datos para aplicar predicción (actual: {len(df_temporal)}).")
                 time.sleep(8)
                 continue
 
             if len(df_temporal) > MAX_ST:
                 df_temporal = df_temporal.tail(MAX_ST).reset_index(drop=True)
                 if train_pred == 0:
-                    train_pred = 1
+                    train_pred = 2
 
 
             df_t_proc = preprocess_data(df_temporal.copy(), silenciar_logs=True)
@@ -142,20 +147,22 @@ def loop_continuo(location, pred_norm, df_clean, visualizar_mae=True):
                     'time_local': time_local.strftime("%Y-%m-%d %H:%M:%S"),
                     'MAE': mae_anom
                 }])
-
+                '''
                 if os.path.exists(mae_filepath):
                     df_mae.to_csv(mae_filepath, mode='a', header=False, index=False)
                 else:
                     df_mae.to_csv(mae_filepath, mode='w', header=True, index=False)
-                
+                '''
 
                 if train_pred == 1:
                     df_pred = df_temporal[['time', 'PowA_L1_Ins', 'PowA_L2_Ins', 'PowA_L3_Ins']]
-                    df_res = predictor2.gen_prediccion(df_pred,60,1,1) 
-                    logger.info(f"Prediccion finalizada:{df_res.head(10)}")                    
+                    df_res = predictor2.gen_prediccion(df_pred,60,1) 
+                    #logger.info(f"Prediccion finalizada:{df_res.head(10)}")                    
                     df_res = pd.concat([df_temporal,df_res], ignore_index=True)
+                    '''
                     pred_path = os.path.join(OUTPUT_DIR, "df_res_pred.csv")
                     df_res.to_csv(pred_path, index=False) 
+                    '''
                     cont_mae_pred = cont_mae_pred + 1
                     if cont_mae_pred == 1:
                         df_comp = df_res.tail(60).copy()                        
@@ -163,11 +170,12 @@ def loop_continuo(location, pred_norm, df_clean, visualizar_mae=True):
                         df_comp_1 =  df_temporal.tail(60).copy()                                                                        
                         mae_pred = mean_absolute_error(df_comp_1['PowA_L1_Ins'], df_comp['PowA_L1_Ins'])
                         logger.info(f"MAE de la predicción: {mae_pred}")
-                        pred_path = os.path.join(OUTPUT_DIR, "df_concat_respred.csv")
+                        '''pred_path = os.path.join(OUTPUT_DIR, "df_concat_respred.csv")
                         concatenated_df = pd.concat([df_comp_1, df_comp])
-                        concatenated_df.to_csv(pred_path, index=False) 
+                        concatenated_df.to_csv(pred_path, index=False) '''
                         cont_mae_pred = 0
                     #train_pred = 2
+                _clean = os.system('cls')
                 # Lazo para activar o desactivar gráfico en tiempo real del MAE (en config.py está VISUALIZAR_MAE)
                 if visualizar_mae:
                     if 'fig' not in globals():
@@ -212,8 +220,6 @@ def loop_continuo(location, pred_norm, df_clean, visualizar_mae=True):
             'MAE': mae_anom
             }])], ignore_index=True)
             subir_mae_influxdb_v2(mae_1)
-            logger.info(f"Hora de MAE: {now}")
-            logger.info(f"Hora de MAE 2: {now_str}")
 
         except Exception as e:
             logger.error(f"Error inesperado en la ejecución continua: {e}")

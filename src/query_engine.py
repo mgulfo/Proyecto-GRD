@@ -123,8 +123,8 @@ def merge_data(dict_data, silenciar_warning=False):
         return pd.DataFrame()
     df_combined = reduce(lambda left, right: pd.merge(left, right, on="time", how="outer"), dfs)
     df_combined.drop(columns=[col for col in df_combined.columns if "time" in col and col != "time"], inplace=True, errors='ignore')
-
-    logger.info(f"DataFrames combinados en un único DataFrame con shape {df_combined.shape}")
+    #comentados para no sobrecargar app v2
+    #logger.info(f"DataFrames combinados en un único DataFrame con shape {df_combined.shape}")
     return df_combined
 ######Escribir MAE###################
 def subir_mae_influxdb_v2(df_mae):

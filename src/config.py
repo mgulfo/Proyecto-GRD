@@ -10,10 +10,10 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Configuraciones generales del proyecto
-EXECUTE_VISUALIZATION = True
-SHOW_GRAPHS = True
-SAVE_OUTPUTS = True
-
+EXECUTE_VISUALIZATION = False
+SHOW_GRAPHS = False
+SAVE_OUTPUTS = False
+EJECUTAR_CAMMESA = False
 # Directorios de salida
 OUTPUT_DIR = os.path.join("data", "raw")
 IMAGES_DIR = os.path.join("data", "images")

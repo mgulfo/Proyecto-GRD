@@ -14,10 +14,13 @@ Proyecto-GRD/
 ├── logs/                # Logs del sistema
 ├── notebooks/           # Notebooks exploratorios
 ├── src/                 # Código fuente modular
-│   ├── data_processing/ 
-│   ├── graphs/                     
-│   ├── models/                
-│   ├── utils/                         
+│   ├── data_processing/             
+│       ├── data_cleaning.py            
+│   ├── models/         
+│       └── anomaly_detection.py          
+│   ├── utils/             
+│       ├── logger.py         
+│       ├── utils.py             
 │   ├── analysis.py          
 │   ├── config.py         
 │   ├── db_connector.py         
@@ -25,7 +28,8 @@ Proyecto-GRD/
 │   ├── visualization.py          
 ├── tests/               # Pruebas automáticas
 ├── resources/           # Recursos, bibliografía, otros
-├── main.py       # Pipeline principal
+├── main_logger.py       # Pipeline principal con logging
+├── main_sin_logger.py       # Pipeline principal sin logging
 ├── requirements.txt     # Dependencias
 └── README.md
 ```
@@ -62,10 +66,10 @@ Proyecto-GRD/
 ## 🚀 Ejecución Rápida
 
 ```bash
-python main.py
+python main_logger.py
 ```
 
-Esto ejecuta todo el flujo
+Esto ejecuta todo el flujo: consulta → limpieza → visualización. Los resultados se guardan automáticamente.
 
 ---
 
@@ -73,8 +77,8 @@ Esto ejecuta todo el flujo
 
 Editar el archivo `src/config.py` para ajustar:
 - Fechas de consulta
-- Ubicación
-- Flags
+- Ubicación (`location`)
+- Flags: `SHOW_GRAPHS`, `SAVE_OUTPUTS`, `EXECUTE_VISUALIZATION`
 
 ---
 
@@ -119,4 +123,4 @@ Los manuales y papers relevantes están en la carpeta resources/.
 - [ ] Documentación extendida
 
 📌 Autor: [INTI-IoE]
-📅 Última actualización: [28/05/2025]
+📅 Última actualización: [31/03/2025]

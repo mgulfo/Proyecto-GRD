@@ -8,7 +8,7 @@ log_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'l
 os.makedirs(log_dir, exist_ok=True)
 
 # Configuración general de logging
-LOG_FILE = os.path.join(log_dir, 'app.log')
+LOG_FILE = os.path.join(log_dir, 'Appv2.log')
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s [%(levelname)s] %(name)s: %(message)s',
@@ -18,7 +18,7 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
-
+#input("Presiona Enter para salir.")
 # Acceso común desde otros módulos
 logger = logging.getLogger("GenRodApp")
 

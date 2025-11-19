@@ -61,11 +61,11 @@ def main():
     # ---------------------------------------------
     
     # Ingrese fechas en HORA ARGENTINA (lo que VOS querés)
-    fecha_inicio_arg = '2025-02-28T21:00:00'
-    fecha_fin_arg    = '2025-03-11T00:00:30'
+    fecha_inicio_arg = '2023-02-28T21:00:00'
+    fecha_fin_arg    = '2023-03-30T00:00:30'
 
     # Se convierte a UTC automáticamente
-    fecha_inicio = hora_local_a_utc(fecha_inicio_arg)
+    fecha_inicio = hora_local_a_utc(fecha_inicio_arg) 
     fecha_fin    = hora_local_a_utc(fecha_fin_arg)
 
     # Locación
@@ -135,7 +135,7 @@ def main():
     
     # Flag de control (puede centralizarse en config si se estabiliza)    
     EJECUTAR_EVALUACION = True
-    MOSTRAR_GRAFICO_PREDICCION = True
+    MOSTRAR_GRAFICO_PREDICCION = False
 
     if EJECUTAR_EVALUACION:
         mae_normal, mae_anom, pred_norm, pred_anom = evaluar_prediccion(
@@ -155,4 +155,4 @@ def main():
 
 # ESTA PARTE VA FUERA DE LA FUNCIÓN MAIN
 if __name__ == "__main__":
-    main()
+    main() 
