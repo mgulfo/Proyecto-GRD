@@ -3,15 +3,16 @@
 import os
 
 from db_connector import DBConnector
-from config import INFLUXDB2_CONFIG, INFLUXDB2_CONFIG_INTI
+from config import INFLUXDB2_CONFIG
 from data_processing.data_cleaning import clean_influx2_meta
 from influxdb_client.client.write_api import SYNCHRONOUS
 from utils.logger import logger
 import pandas as pd
 from functools import reduce
-from config import LOCAL_TIMEZONE, USE_INFLUXDB_2
+from config import LOCAL_TIMEZONE, USE_INFLUXDB_2, INFLUXDB2_CONFIG, INFLUXDB2_CONFIG_INTI
 from utils.utils import convert_df_utc_to_local
-
+from influxdb_client import Point, WritePrecision
+#from config2 import INFLUXDB2_CONFIG, INFLUXDB2_CONFIG_INTI
 
 def busqueda_influx1(fecha_inicio, fecha_fin, location):
     db = DBConnector()
@@ -106,8 +107,8 @@ def busqueda_influx(fecha_inicio, fecha_fin, location):
             logger.warning(f"[Fallback] Fallo en InfluxDB Nuevo : {e}")
             logger.info("🔁 Reintentando con InfluxDB Viejo como respaldo...")
     
-    logger.info("🔁 Ejecutando consulta directamente en InfluxDB Viejo...")
-    return busqueda_influx1(fecha_inicio, fecha_fin, location)
+            logger.info("🔁 Ejecutando consulta directamente en InfluxDB Viejo...")
+            return busqueda_influx1(fecha_inicio, fecha_fin, location)
 
 def merge_data(dict_data, silenciar_warning=False):
     def fix_time(df):
@@ -137,8 +138,90 @@ def subir_mae_influxdb_v2(df_mae):
     write_api.write(bucket, org, record=df_mae, data_frame_measurement_name="Indicador_eventos",data_frame_timestamp_column="time", data_frame_tag_columns=['device','valuetype','location','name'])
     logger.info("Datos escritos en InfluxDB 2.7 - ss_inti")
     client2.close()  
-######## Sección 2 del main ########
+######Escribir Prediccion###################
+def subir_prediccion_influxdb_v2(df_prediccion):
+    db = DBConnector()
+    client2 = db.connect_influxdb3()
+    bucket = INFLUXDB2_CONFIG_INTI["bucket"]
+    org = INFLUXDB2_CONFIG_INTI["org"]
+    df_prediccion.set_index("time")
+    write_api = client2.write_api(write_options=SYNCHRONOUS)
+    # Add a measurement ('temperature') with a field ('value') to a bucket
+    '''point = Point("Predicciones") \
+    .tag("device", "None") \
+    .tag("valuetype", "None") \
+    .tag("location", "None") \
+    .tag("Name", "None") \
+    .field("value", 0.0)
+    write_api.write(bucket, org, record=point)  '''  
+    write_api.write(bucket, org, record=df_prediccion, data_frame_measurement_name="Prediccion",data_frame_timestamp_column="time", data_frame_tag_columns=['device','valuetype','location','name'])
+    logger.info("Datos de prediccion en InfluxDB 2.7 - ss_inti")
+    client2.close()  
+###########Busqueda de ultimo valor####################
+def obtener_ultimo_dato_dataframe(locacion):
+    db = DBConnector()
+    client2 = db.connect_influxdb2()
+    query_api = client2.query_api()
+    bucket = INFLUXDB2_CONFIG["bucket"]
+    
+    fields = {
+        "Voltage": ["Vrms_L1_Ins", "Vrms_L2_Ins", "Vrms_L3_Ins", "THDV_L1_Ins", "THDV_L2_Ins", "THDV_L3_Ins"],
+        "Power": ["PowA_L1_Ins", "PowA_L2_Ins", "PowA_L3_Ins", "PowS_L1_Ins", "PowS_L2_Ins", "PowS_L3_Ins", "PowF_T_Ins"],
+        "Energy": ["EA_I_IV_T"],
+        "Frequency": ["Fre_Ins"],
+        "Current": ["Irms_L1_Ins", "Irms_L2_Ins", "Irms_L3_Ins", "THDI_L1_Ins", "THDI_L2_Ins", "THDI_L3_Ins"]
+    }
 
+    
+    # 2. Definición del Tag para el filtrado
+    tag_key = "location"             # La clave del tag (ej. "dispositivo" o "host")
+    tag_value = locacion            # El valor específico que buscas (ej. "sensor_01")
+    mediciones = ["Voltage", "Power", "Energy", "Frequency", "Current"]
+
+    # Convertimos la lista de Python a un formato de arreglo compatible con Flux: ["a", "b", "c"]
+    flux_array_measurements = ", ".join([f'"{m}"' for m in mediciones])
+    # 3. Consulta Flux para traer el último dato
+    # Usamos la función last() para obtener únicamente el registro más reciente
+    flux_query = f'''
+    from(bucket: "{bucket}")
+        |> range(start: -30m)
+        |> filter(fn: (r) => contains(value: r["_measurement"], set: [{flux_array_measurements}]))
+        |> filter(fn: (r) => r["{tag_key}"] == "{tag_value}")
+        |> last()
+    '''
+    #logger.info(f"Buscando el último dato de {len(mediciones)} mediciones...")
+    # query_data_frame devuelve directamente un DataFrame de Pandas
+    df = query_api.query_data_frame(query=flux_query)
+    #logger.info("Dataframe procesando...")
+    if not df.empty:
+        # 1. Pivotar para pasar los campos a columnas
+        df_ancho = df.pivot(index=['_time'], columns=['_measurement', '_field'], values='_value')
+        
+        # 2. Si quieres colapsar los diferentes tiempos en una sola fila (últimos valores actuales)
+        # Usamos bfill() o ffill() y tomamos la última fila válida
+        df_consolidado = df_ancho.ffill().bfill().iloc[[-1]]        
+        return df_consolidado
+    else:
+        return df
+def filtrar_dataframe_diccionario(df):
+    fields = {
+        "Voltage": ["Vrms_L1_Ins", "Vrms_L2_Ins", "Vrms_L3_Ins", "THDV_L1_Ins", "THDV_L2_Ins", "THDV_L3_Ins"],
+        "Power": ["PowA_L1_Ins", "PowA_L2_Ins", "PowA_L3_Ins", "PowS_L1_Ins", "PowS_L2_Ins", "PowS_L3_Ins", "PowF_T_Ins"],
+        "Energy": ["EA_I_IV_T"],
+        "Frequency": ["Fre_Ins"],
+        "Current": ["Irms_L1_Ins", "Irms_L2_Ins", "Irms_L3_Ins", "THDI_L1_Ins", "THDI_L2_Ins", "THDI_L3_Ins"]
+    }
+    columnas_ordenadas = [
+    campo 
+    for campos_categoria in fields.values() 
+    for campo in campos_categoria
+    ]
+    #Filtramos y reordenamos el DataFrame en un solo paso
+    columnas_validas = [col for col in columnas_ordenadas if col in df.columns]
+    df_filtrado = df[columnas_validas]
+    return df_filtrado
+
+######## Sección 2 del main ########
 def consultar_datos_influx(fecha_inicio, fecha_fin, location, output_dir=None, guardar=False):
     """
     Consulta los datos en InfluxDB, los combina y devuelve el DataFrame.
