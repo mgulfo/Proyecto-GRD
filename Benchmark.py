@@ -10,9 +10,6 @@ import calendar
 import time
 import pytz
 
-os.environ["OMP_NUM_THREADS"] = "1"
-os.environ["MKL_NUM_THREADS"] = "1"
-os.environ["OPENBLAS_NUM_THREADS"] = "1"
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 src_path = os.path.join(current_dir, "src")
@@ -29,6 +26,8 @@ from data_processing.data_cleaning import preprocess_data, normalize_all_numeric
 from utils.logger import logger
 from utils.utils import hora_local_a_utc
 from ejecucion_continua.ejecutar_loop_continuo import loop_continuo
+from models.Predictor import predictor_multi_lstm
+
 
 from config import (
     EXECUTE_VISUALIZATION,
@@ -38,14 +37,7 @@ from config import (
     IMAGES_DIR,
     EJECUTAR_ANALISIS_ANOMALIAS,
     VISUALIZAR_MAE,
-    LOCAL_TIMEZONE,
-    FECHA_INI_TEST_EVENTOS,
-    FECHA_FIN_TEST_EVENTOS,
-    SET_1,
-    SET_2,
-    SET_3,
-    SET_4,
-    MEDIA
+    LOCAL_TIMEZONE
 )
 
 # Definir zonas
@@ -71,15 +63,15 @@ def main():
     # ---------------------------------------------
     
     # Ingrese fechas en HORA ARGENTINA (lo que VOS querés)
-    fecha_inicio_arg = FECHA_INI_TEST_EVENTOS
-    fecha_fin_arg    = FECHA_FIN_TEST_EVENTOS
+    fecha_inicio_arg = '2023-02-28T21:00:00'
+    fecha_fin_arg    = '2023-03-30T00:00:30'
 
     # Se convierte a UTC automáticamente
     fecha_inicio = hora_local_a_utc(fecha_inicio_arg) 
     fecha_fin    = hora_local_a_utc(fecha_fin_arg)
 
     # Locación
-    location = MEDIA
+    location = "SET01"
 
     if SAVE_OUTPUTS:
         os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -159,7 +151,7 @@ def main():
     # Flag de control (puede centralizarse en config si se estabiliza)
     VISUALIZAR_MAE = False
 
-    loop_continuo(location, pred_norm, df_clean, visualizar_mae=VISUALIZAR_MAE)
+    predictor_multi_lstm(df_clean)
 
     logger.info("==== FIN DEL PROCESO ====")
 
