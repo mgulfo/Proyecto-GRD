@@ -180,7 +180,7 @@ def modelo_multi_lstm(x,y,nf,lp, medidor):
     mae = mean_absolute_error(actual_value, y_pred)
     print(f'RMSE de la predicción: {rmse}')
     print(f'MAE de la predicción: {mae}')
-    datos_reformados = y_pred.reshape(PASOS, NCOLUMNAS)    
+    datos_reformados = y_pred.reshape(nf, NCOLUMNAS)    
     y_future = datos_reformados
     nom = medidor + '.keras'
     model.save(nom)
@@ -208,12 +208,12 @@ def gen_prediccion(df, nfut, train_run, multi, medidor):
     if train_run: 
         if multi:
             df_y = df_x[lista_datos].copy()
-            x, y = split_train_data_multi(df_y,nfut,PASOS)
+            x, y = split_train_data_multi(df_y,nfut,nfut)
            # Verificar las dimensiones (shapes)
             print("\n--- Dimensiones Resultantes para Seq2Seq ---")
             print(f"Forma de X_data (Entrada al Encoder): {x.shape}") 
             print(f"Forma de y_data (Salida deseada del Decoder): {y.shape}") 
-            res = modelo_multi_lstm(x,y,nfut,PASOS, medidor)
+            res = modelo_multi_lstm(x,y,nfut,nfut, medidor)
             df_copy = pd.DataFrame(res, columns=lista_datos)             
         else:    
             for columns in df:
@@ -230,7 +230,7 @@ def gen_prediccion(df, nfut, train_run, multi, medidor):
                     j = j + 1
     df_res = desescalar_datos(df_copy,df)
     return df_res
-def predictor_multi_lstm(df_clean, medidor):
+def predictor_multi_lstm(df_clean, _PASOS, medidor, nombre):
     fecha = datetime.now()
     try:
         #extrae fecha ultima usando busqueda de ultimo registro
@@ -278,25 +278,36 @@ def predictor_multi_lstm(df_clean, medidor):
     ultima_med['time']=ultima_med['time']+pd.Timedelta(hours = 3)
     ultima_fecha = ultima_med['time'].iloc[-1]
     ultima_fecha = datetime.strftime(ultima_fecha, "%Y-%m-%dT%H:%M:%S+00:00")
-    logger.info(f'ultimafecha:{ultima_fecha}')    
+    logger.info(f'ultimafecha:{ultima_fecha}')        
     df_a = ultima_med[['time'] + lista_datos]
-    df_pred = df_a.tail(4*PASOS).reset_index(drop=True)    
-    df_res = gen_prediccion(df_pred,PASOS,1,1, medidor)
-    df_fin = df_pred.tail(PASOS).reset_index(drop=True)
+    df_pred = df_a.tail(4*_PASOS).reset_index(drop=True)
+    df_pred = df_pred.set_index('time')
+    if _PASOS > 360:
+        df_pred = df_pred.resample('2min').mean().reset_index()
+        pasos = _PASOS//12
+        second = 10*12
+    else:
+        pasos = _PASOS
+        second = 10    
+    df_pred = df_pred.fillna(df_pred.mean())
+    logger.info(f'longitud de resample={len(df_pred)}')
+    df_res = gen_prediccion(df_pred,pasos,1,1, medidor)
+    df_fin = df_pred.tail(pasos).reset_index(drop=True)
     rmse = sqrt(mean_squared_error(df_fin['PowA_L1_Ins'], df_res['PowA_L1_Ins']))
     mae = mean_absolute_error(df_fin['PowA_L1_Ins'], df_res['PowA_L1_Ins'])
     mape = mean_absolute_percentage_error(df_fin['PowA_L1_Ins'], df_res['PowA_L1_Ins'])*100
     print(f'RMSE de la predicción: {rmse}')
     print(f'MAE de la predicción: {mae}')
-    print(f'MAPE de la predicción: {mape}')    
-    future_dates = create_future_dates_column(ultima_fecha, PASOS, pd.Timedelta(seconds=10))
+    print(f'MAPE de la predicción: {mape}')     
+    future_dates = create_future_dates_column(ultima_fecha, pasos, pd.Timedelta(seconds=second))
     df_res['time'] = future_dates['time']
     df_res['time'] = pd.to_datetime(df_res['time']).dt.strftime('%Y-%m-%dT%H:%M:%S+00:00')
     last_col = df_res.pop(df_res.columns[-1])
     df_res.insert(0,last_col.name,last_col)
     logger.info(f'El dataframe arranca con los siguientes datos:{df_res.head(5)}')
     #df_res['time'] = df_res['time'].dt.tz_localize('UTC').dt.tz_convert('America/Argentina/Buenos_Aires')
-    subir_prediccion_influxdb_v2(df_res)
+    _nombre = nombre
+    subir_prediccion_influxdb_v2(df_res,_nombre)
     return df_res
 '''
 def usar_trends(data, periodo):

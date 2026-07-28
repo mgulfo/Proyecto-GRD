@@ -139,7 +139,7 @@ def subir_mae_influxdb_v2(df_mae):
     logger.info("Datos escritos en InfluxDB 2.7 - ss_inti")
     client2.close()  
 ######Escribir Prediccion###################
-def subir_prediccion_influxdb_v2(df_prediccion):
+def subir_prediccion_influxdb_v2(df_prediccion,_nombre):
     db = DBConnector()
     client2 = db.connect_influxdb3()
     bucket = INFLUXDB2_CONFIG_INTI["bucket"]
@@ -154,7 +154,7 @@ def subir_prediccion_influxdb_v2(df_prediccion):
     .tag("Name", "None") \
     .field("value", 0.0)
     write_api.write(bucket, org, record=point)  '''  
-    write_api.write(bucket, org, record=df_prediccion, data_frame_measurement_name="Prediccion",data_frame_timestamp_column="time", data_frame_tag_columns=['device','valuetype','location','name'])
+    write_api.write(bucket, org, record=df_prediccion, data_frame_measurement_name=_nombre,data_frame_timestamp_column="time", data_frame_tag_columns=['device','valuetype','location','name'])
     logger.info("Datos de prediccion en InfluxDB 2.7 - ss_inti")
     client2.close()  
 ###########Busqueda de ultimo valor####################

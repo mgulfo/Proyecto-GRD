@@ -8,7 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import mean_absolute_error
 import config
-from config import EJECUTAR_CAMMESA,OUTPUT_DIR, LISTA_DATOS_PREDICCION, MAX_ST, VISUALIZAR_MAE, LOCAL_TIMEZONE, LISTA_DATOS_PREDICCION, ERROR_UMBRAL, TAM_VENTANA, PASOS, SET_1, SET_2, SET_3, SET_4, MEDIA
+from config import EJECUTAR_CAMMESA,OUTPUT_DIR, LISTA_DATOS_PREDICCION, MAX_ST, VISUALIZAR_MAE, LOCAL_TIMEZONE, LISTA_DATOS_PREDICCION, ERROR_UMBRAL, TAM_VENTANA, PASOS, SET_1, SET_2, SET_3, SET_4, MEDIA, PASOS_T1, PASOS_T2, PASOS_T3
 
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -21,6 +21,23 @@ from utils.logger import logger
 import models.Predictor as predictor2
 import models.analysis as analisis1
 from models.Predictor import predictor_multi_lstm
+import dataclasses
+from dataclasses import dataclass
+########################################################################
+# Contadores y flags de estructura para distintos tiempos de prediccion
+########################################################################
+@dataclass
+class contadores:
+    contador_pasos_prediccion: int
+    contador_check_prediccion: int
+    flag_primer_prediccion: int
+    pasos: int
+    umbral: bool = False
+@dataclass
+class tiempos_prediccion:
+    t1: contadores
+    t2: contadores
+    t3: contadores
 # Definir zonas
 arg_tz = pytz.timezone(LOCAL_TIMEZONE)
 def busqueda_datos_consumo_locacion(start_time, end_time):
@@ -71,6 +88,12 @@ def loop_continuo(location, pred_norm, df_clean, visualizar_mae=True):
     flag_primer_prediccion = 0
     contador_pasos_prediccion = 0
     contador_check_prediccion = 0
+    t_pred = tiempos_prediccion(
+        t1=contadores(contador_pasos_prediccion=0, contador_check_prediccion=0, flag_primer_prediccion=0, pasos=PASOS_T1),
+        t2=contadores(contador_pasos_prediccion=0, contador_check_prediccion=0, flag_primer_prediccion=0, pasos=PASOS_T2),
+        t3=contadores(contador_pasos_prediccion=0, contador_check_prediccion=0, flag_primer_prediccion=0, pasos=PASOS_T3)
+    )   
+    lista_contadores = [t_pred.t1, t_pred.t2, t_pred.t3]
     umbral = False   
     sin_datos_consecutivos = 0
     col_list = [col.strip() for col in LISTA_DATOS_PREDICCION.split(",") if col.strip()]
@@ -195,6 +218,7 @@ def loop_continuo(location, pred_norm, df_clean, visualizar_mae=True):
             #pasos de prediccion total para poder realizar el desplazamiento
             #de ventana
             ###########################################################################
+            
             try:
                 if contador_pasos_prediccion >= TAM_VENTANA:
                     #logger.info("Primer paso logico")  
@@ -215,6 +239,46 @@ def loop_continuo(location, pred_norm, df_clean, visualizar_mae=True):
                 contador_check_prediccion = 0
                 contador_pasos_prediccion = 0
                 continue
+            '''
+            try:
+            # Iteramos directamente sobre las instancias del objeto que contiene tus contadores
+            # (Asumiendo que t_pred es una dataclass que agrupa instancias de contadores, 
+            # o una lista/iterable de instancias)
+            
+                for contador in lista_contadores: 
+                    # Si t_pred es un iterable de instancias (ej: lista de dataclasses):
+                    # for contador in t_pred:
+                    
+                    if contador.contador_pasos_prediccion >= TAM_VENTANA:
+                        # logger.info("Primer paso logico")
+                        df_temp_pred1 = df_temp_pred.tail(TAM_VENTANA).reset_index(drop=True)
+                        contador.contador_check_prediccion += 1
+                        
+                        if contador.flag_primer_prediccion > 0:
+                            logger.info(f"Estructura de cuentas:{t_pred}")
+                        
+                        contador.umbral = comparar_predicciones(df_temp_pred1, df_datos_pred, contador.contador_check_prediccion)
+                        
+                        # Verificación de umbrales
+                        if contador.contador_check_prediccion >= ((contador.pasos / TAM_VENTANA) - 1):
+                            # logger.info("Tercer paso logico")
+                            contador.contador_check_prediccion = 0
+                            contador.contador_pasos_prediccion = 0
+                            
+                            # Forma segura de vaciar un DataFrame
+                            df_temp_pred = df_temp_pred.iloc[0:0] 
+                            # logger.info("Cuarto paso logico")
+
+            except Exception as e:
+                logger.error(f"Error en logica: {e}")  # Importante: loguear el error real
+                
+                # Reinicio al encontrar un error
+                for contador in lista_contadores:
+                    contador.contador_check_prediccion = 0
+                    contador.contador_pasos_prediccion = 0
+                
+                continue
+                '''
             #######################################################################
             #Calculo de mae y anotacion en dataframe para visualizacion en InfluxDB
             #######################################################################
@@ -254,12 +318,18 @@ def loop_continuo(location, pred_norm, df_clean, visualizar_mae=True):
                         logger.info(f"MAE de la predicción: {mae_anom}")                        
                         cont_mae_pred = 0
                     
-                    now = datetime.now(timezone.utc)                                  
-                    if now.minute == 30 or umbral == True:
+                    now = datetime.now(timezone.utc)
+                    if now.hour == 1 and now.minute == 12:
+                        logger.info("Dispara predicción diaria")
+                        nom = "Prediccion_diaria"
+                        df_datos_pred = predictor_multi_lstm(df_clean, PASOS_T2, medidor=location, nombre=nom)
+                        #umbral = False #Debe retornoar el umbral para no quedar disparado constantemente                                  
+                    if now.minute == 50 or umbral == True:
                         flag_primer_prediccion = flag_primer_prediccion + 1
                         logger.info(f"Dispara predicción con valor de umbral: {umbral}")
-                        df_datos_pred = predictor_multi_lstm(df_clean, medidor=location)
-                        umbral = False #Debe retornoar el umbral para no quedar disparado constantemente
+                        nom = "Prediccion"
+                        df_datos_pred = predictor_multi_lstm(df_clean, PASOS, medidor=location, nombre=nom)
+                        umbral = False #Debe retornoar el umbral para no quedar disparado constantemente                    
                 _clean = os.system('cls')
                 ###############################################################################################################
                 # Lazo para activar o desactivar gráfico en tiempo real del MAE (en variables de entorno está VISUALIZAR_MAE
